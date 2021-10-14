@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import './Senso.scss'
-import {ActionKey, ActionKeyProps} from "./ActionKey/ActionKey";
+import {ColorButton, ColorButtonProps} from "./ColorButton/ColorButton";
 
-const actionKeys: ActionKeyProps[] = [
+const colorButtons: ColorButtonProps[] = [
     { id: 1, alignment: 'top-left' },
     { id: 2, alignment: 'top-right' },
     { id: 3, alignment: 'bottom-left' },
@@ -12,8 +12,8 @@ const actionKeys: ActionKeyProps[] = [
 export class Senso extends Component {
     render() {
         return <div className="Senso">
-            { actionKeys.map(actionKey =>
-                <ActionKey
+            { colorButtons.map(actionKey =>
+                <ColorButton
                     key={actionKey.id}
                     id={actionKey.id}
                     alignment={actionKey.alignment} />

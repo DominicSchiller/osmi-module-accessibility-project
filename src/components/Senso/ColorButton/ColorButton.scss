@@ -3,52 +3,56 @@
 $margin: 16px;
 $corner-radius: 16px;
 
-.ActionKey {
+.ColorButton {
   position: absolute;
   width: calc(100% / 2 - 4 * #{$margin});
   @include square(calc(100% / 2 - 4 * #{$margin}));
 
+  &:active {
+    background-color: white !important;
+  }
+
   &.top-left {
-    background-color: $top-left-button-bg;
+    background-color: $top-left-color-button-bg;
     border-radius: calc(100%) $corner-radius $corner-radius $corner-radius;
     top: 48px;
     left: 48px;
 
-    &:active {
-      background-color: $top-left-button-pressed-bg;
+    &:hover {
+      background-color: $top-left-color-button-hover-bg;
     }
   }
 
   &.top-right {
-    background-color: $top-right-button-bg;
+    background-color: $top-right-color-button-bg;
     border-radius: $corner-radius calc(100%) $corner-radius $corner-radius;
     top: 48px;
     left: calc(100% - (100% / 2) + #{$margin});
 
-    &:active {
-      background-color: $top-right-button-pressed-bg;
+    &:hover {
+      background-color: $top-right-color-button-hover-bg;
     }
   }
 
   &.bottom-left {
-    background-color: $bottom-left-button-bg;
+    background-color: $bottom-left-color-button-bg;
     border-radius: $corner-radius $corner-radius $corner-radius calc(100%);
     bottom: 48px;
     left: 48px;
 
-    &:active {
-      background-color: $bottom-left-button-pressed-bg;
+    &:hover {
+      background-color: $bottom-left-color-button-hover-bg;
     }
   }
 
   &.bottom-right {
-    background-color: $bottom-right-button-bg;
+    background-color: $bottom-right-color-button-bg;
     border-radius: $corner-radius $corner-radius calc(100%) $corner-radius;
     bottom: 48px;
     left: calc(100% - (100% / 2) + #{$margin});
 
-    &:active {
-      background-color: $bottom-right-button-pressed-bg;
+    &:hover {
+      background-color: $bottom-right-color-button-hover-bg;
     }
   }
 
