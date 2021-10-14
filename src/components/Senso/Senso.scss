@@ -1,0 +1,16 @@
+@import "../../common/scss/mixins";
+@import "../../common/scss/colors";
+
+.Senso {
+  @include circle(60vw);
+  @include vh_center;
+  background-color: $senso-bg;
+
+  .innerHole {
+    @include circle(15vw);
+    @include vh_center;
+    background-color: $senso-bg;
+    position: absolute;
+    z-index: 900;
+  }
+}

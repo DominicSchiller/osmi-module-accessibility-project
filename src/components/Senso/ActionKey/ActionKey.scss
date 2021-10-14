@@ -1,0 +1,55 @@
+@import "../../../common/scss/mixins";
+@import "../../../common/scss/colors";
+$margin: 16px;
+$corner-radius: 16px;
+
+.ActionKey {
+  position: absolute;
+  width: calc(100% / 2 - 4 * #{$margin});
+  @include square(calc(100% / 2 - 4 * #{$margin}));
+
+  &.top-left {
+    background-color: $top-left-button-bg;
+    border-radius: calc(100%) $corner-radius $corner-radius $corner-radius;
+    top: 48px;
+    left: 48px;
+
+    &:active {
+      background-color: $top-left-button-pressed-bg;
+    }
+  }
+
+  &.top-right {
+    background-color: $top-right-button-bg;
+    border-radius: $corner-radius calc(100%) $corner-radius $corner-radius;
+    top: 48px;
+    left: calc(100% - (100% / 2) + #{$margin});
+
+    &:active {
+      background-color: $top-right-button-pressed-bg;
+    }
+  }
+
+  &.bottom-left {
+    background-color: $bottom-left-button-bg;
+    border-radius: $corner-radius $corner-radius $corner-radius calc(100%);
+    bottom: 48px;
+    left: 48px;
+
+    &:active {
+      background-color: $bottom-left-button-pressed-bg;
+    }
+  }
+
+  &.bottom-right {
+    background-color: $bottom-right-button-bg;
+    border-radius: $corner-radius $corner-radius calc(100%) $corner-radius;
+    bottom: 48px;
+    left: calc(100% - (100% / 2) + #{$margin});
+
+    &:active {
+      background-color: $bottom-right-button-pressed-bg;
+    }
+  }
+
+}
