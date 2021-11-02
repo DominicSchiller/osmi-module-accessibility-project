@@ -1,5 +1,11 @@
 apps:
   - name: OSMI Accessible Senso
+    path : "dist/osmi-accessible-senso"
+    instances: 1
     random-route: true
-    memory: 128M
+    memory: 256M
+    disk_quota: 1G
+    domain: eu-de.mybluemix.net
+    buildpack:
+      - "https://github.com/cloudfoundry/staticfile-buildpack.git"
 
