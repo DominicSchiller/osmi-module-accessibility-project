@@ -7,6 +7,7 @@ export type ColorButtonProps = {
 }
 
 export class ColorButton extends Component<ColorButtonProps> {
+    // eslint-disable-next-line @typescript-eslint/no-useless-constructor
     constructor(props: ColorButtonProps) {
         super(props);
     }
