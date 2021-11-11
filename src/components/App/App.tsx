@@ -1,32 +1,51 @@
-import React, { Component, FunctionComponent } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import React, { Component } from "react";
+import {Routes, Route } from "react-router-dom"
 import "./App.scss";
-import { Senso } from "../Senso/Senso";
-
-export const Header: FunctionComponent = () => (
-  <aside>
-    <header>
-      <h1>Accessible Senso</h1>
-      <Box>
-        <Typography variant="body1" gutterBottom>
-          body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-          blanditiis tenetur unde suscipit, quam beatae rerum inventore
-          consectetur, neque doloribus, cupiditate numquam dignissimos laborum
-          fugiat deleniti? Eum quasi quidem quibusdam.
-        </Typography>
-      </Box>
-    </header>
-  </aside>
-);
+import {HomePage} from "../../pages/Home";
+import {ThemeProvider} from "@mui/material";
+import { createTheme } from '@mui/material/styles';
+import "@fontsource/inter"
+import {GamePage} from "../../pages/Game";
 
 export default class App extends Component {
+
+    private theme = createTheme({
+        typography: {
+            fontFamily: 'Inter',
+        },
+        palette: {
+            primary: {
+                main: '#000000',
+            },
+            contrastThreshold: 3
+        },
+        components: {
+            // Name of the component
+            MuiButton: {
+                styleOverrides: {
+                    // Name of the slot
+                    root: {
+                        // Some CSS
+                        fontSize: '1.2rem',
+                        fontWeight: 700,
+                        minHeight: 64,
+                        textTransform: "uppercase"
+                    },
+                },
+            }
+        }
+    });
+
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Senso />
-      </div>
+      <>
+        <ThemeProvider theme={this.theme}>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path={"/game"} element={<GamePage />} />
+            </Routes>
+        </ThemeProvider>
+      </>
     );
   }
 }
