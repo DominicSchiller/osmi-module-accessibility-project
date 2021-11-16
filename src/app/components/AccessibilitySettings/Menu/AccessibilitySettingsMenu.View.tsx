@@ -36,13 +36,14 @@ const AccessibilitySettingsMenuView = forwardRef(({viewModel}: AccessibilitySett
                 variant="temporary"
                 anchor={"top"}
                 open={viewModel.isMenuOpen}
-                onClose={viewModel.toggleMenu}>
+                onClose={viewModel.toggleMenu}
+                onKeyUp={viewModel.handleKeyUp}>
                 <Box className={"menuContainer"} role="presentation">
                     <AccessibilityMenuContextProvider menuContext={viewModel}>
                         {(() => {
                             switch (viewModel.selectedCategory) {
                                 case AccessibilitySettingsCategory.Hearing:
-                                    return <AccessibilityHearingSettings />
+                                    return <AccessibilityHearingSettings onKey />
                                 case AccessibilitySettingsCategory.Seeing:
                                     return <AccessibilitySeeingSettings />
                                 case AccessibilitySettingsCategory.MotorActivity:
