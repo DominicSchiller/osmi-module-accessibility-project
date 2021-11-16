@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import './Senso.scss'
 import {ColorButton, ColorButtonProps} from "./ColorButton/ColorButton";
+import {accessibilityProps} from "../../../models/AccessibilityProps";
 
 const colorButtons: ColorButtonProps[] = [
     { id: 1, alignment: 'top-left' },
@@ -11,7 +12,7 @@ const colorButtons: ColorButtonProps[] = [
 
 export class Senso extends Component {
     render() {
-        return <div className="Senso">
+        return <div className="Senso" style={{backgroundColor: accessibilityProps.color}}>
             { colorButtons.map(actionKey =>
                 <ColorButton
                     key={actionKey.id}

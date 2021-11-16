@@ -1,5 +1,4 @@
-import {Senso} from "../components/Senso/Senso";
-
+import {Senso} from "../../components/Senso/Senso";
 export const GamePage = () => {
     return (
         <>

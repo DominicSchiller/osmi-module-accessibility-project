@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import {Routes, Route } from "react-router-dom"
 import "./App.scss";
-import {HomePage} from "../../pages/Home";
 import {ThemeProvider} from "@mui/material";
 import { createTheme } from '@mui/material/styles';
 import "@fontsource/inter"
-import {GamePage} from "../../pages/Game";
+import {GamePage} from "./pages/Game/Game";
+import HomePage from "./pages/Home/Home";
 
+/**
+ * The main app component.
+ */
 export default class App extends Component {
 
     private theme = createTheme({
@@ -37,15 +40,15 @@ export default class App extends Component {
     });
 
   render() {
-    return (
-      <>
-        <ThemeProvider theme={this.theme}>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path={"/game"} element={<GamePage />} />
-            </Routes>
-        </ThemeProvider>
-      </>
-    );
+      return (
+          <>
+              <ThemeProvider theme={this.theme}>
+                  <Routes>
+                      <Route path="/*" element={<HomePage/>}/>
+                      <Route path={"/Game/*"} element={<GamePage/>}/>
+                  </Routes>
+              </ThemeProvider>
+          </>
+      );
   }
 }

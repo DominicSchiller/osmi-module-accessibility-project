@@ -1,6 +1,9 @@
 import {createStyles, makeStyles} from "@mui/styles";
 import {Theme} from "@mui/material";
 
+/**
+ * Default set of customized global styles.
+ */
 export const useGlobalStyles = makeStyles((theme: Theme) => createStyles ({
     '@global': {
         body: {
@@ -17,14 +20,14 @@ export const useGlobalStyles = makeStyles((theme: Theme) => createStyles ({
             position: 'fixed',
             bottom: 0,
             width: '100%',
-            minHeight: '160px',
+            minHeight: '128px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             textAlign: 'center',
             padding: theme.spacing('16px', '16px'),
-            color: 'white',
-            backgroundColor: 'black',
+            color: theme.palette.text.secondary,
+            backgroundColor: '#f3f3f3',
         },
     },
     brandName: {
@@ -32,3 +35,14 @@ export const useGlobalStyles = makeStyles((theme: Theme) => createStyles ({
         fontWeight: 700
     }
 }));
+
+// export const useStyles = makeStyles(theme => ({
+//     root: {
+//         // @ts-ignore
+//         background: ({color})=> color,
+//     },
+//     testMe: {
+//         // @ts-ignore
+//         background: ({color})=> color,
+//     }
+// }));
