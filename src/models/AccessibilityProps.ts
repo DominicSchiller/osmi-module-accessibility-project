@@ -13,7 +13,7 @@ export interface AccessibilityProps {
  */
 export class AccessibilityProps implements AccessibilityProps {
 
-    @observable primaryColor = "#6c14c9"
+    @observable primaryColor = "#e91e63"
     @observable fontFamily = "Atkinson-Hyperlegible"
 
     /**

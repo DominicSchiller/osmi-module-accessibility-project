@@ -99,7 +99,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(withAccessibilityMe
                                 palette
                             </Icon>
                         </ListItemIcon>
-                        <ListItemText id="switch-primary-color-label" primary="Primärfabe Website" />
+                        <ListItemText id="switch-primary-color-label" primary="Primärfarbe - Aktionselemente" />
                         <Button className={"color-swatch-button"} onClick={showColorPopover}>
                             <Paper variant={"elevation"} className={"color-swatch"} sx={{backgroundColor: accessibilityContext.primaryColor}} square />
                         </Button>
@@ -115,6 +115,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(withAccessibilityMe
                             <SwatchesPicker
                                 color={accessibilityContext.primaryColor}
                                 onChangeComplete={(color) => {
+                                    console.info(color);
                                     accessibilityContext.primaryColor = color.hex;
                                 }}
                             />
