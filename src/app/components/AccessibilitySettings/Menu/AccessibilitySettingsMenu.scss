@@ -1,6 +1,13 @@
 .menuContainer {
-  width: auto;
+  width: 384px;
   margin-top: 64px;
-  height: 75vh;
-  padding: 16px;
+}
+
+#menuBackdrop {
+  background-color: transparent;
+  z-index: 1;
+}
+
+#accessibilityMenu {
+
 }

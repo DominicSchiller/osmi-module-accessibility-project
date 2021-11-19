@@ -1,6 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
 import {AccessibilitySettingsCategory} from "../../../../models/AccessibilitySettingsCategory";
-import React from "react";
 
 /**
  * The accessibility menu's view model
@@ -36,13 +35,11 @@ export default class AccessibilitySettingsMenuViewModel {
      * Handles key up event
      * @param event
      */
-    @action handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+    @action handleKeyUp = (event: any): void => {
         switch (event.key) {
-            case "Backspace":
-                if (this.selectedCategory) {
-                    this.updateSelectedCategory();
-                    return;
-                }
+            case "m":
+            case "M":
+            case "Escape":
                 this.toggleMenu();
                 break;
         }

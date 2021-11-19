@@ -1,23 +1,25 @@
 import React from "react";
 import {Box, Button as MUIButton, Icon, Typography} from "@mui/material";
 import {styled} from "@mui/system";
-import "./AccessibilitySettingsCategoriesOverview.scss";
+import "./AccessibilityCategoriesOverview.scss";
 import {AccessibilitySettingsCategory} from "../../../../models/AccessibilitySettingsCategory";
 import {observer} from "mobx-react";
-import {withAccessibilityMenuContext} from "../Menu/AccessibilityMenuContext";
+import {withAccessibilityMenuContext} from "../../../context/AccessibilityMenuContext";
 
 /**
  * Custom styled accessibility category button.
  */
 const StyledAccessibilityCategoryButton = styled(MUIButton)`
-  color: black;
-  background-color: white;
   height: 160px;
   width: 160px;
   flex-direction: column;
+  font-weight: 500;
   span {
     margin: 4px 0;
     font-size: 36px !important;
+  }
+  &:focus-visible {
+    font-weight: 700;
   }
 `
 
@@ -42,7 +44,7 @@ const AccessibilityCategoryButton = (props: any) => {
  * Component to give an overview of accessibility categories to choose from.
  * @constructor Create new instance
  */
-const AccessibilitySettingsCategoriesOverview = withAccessibilityMenuContext((props: any) => {
+const AccessibilityCategoriesOverview = withAccessibilityMenuContext((props: any) => {
     const {menuContext} = props
 
     const categories = [
@@ -53,11 +55,13 @@ const AccessibilitySettingsCategoriesOverview = withAccessibilityMenuContext((pr
     ];
 
     return(
-        <Box className={"contentContainer"}>
+        <Box className={"overview-contentContainer"}>
             <header>
-                <Icon baseClassName="material-icons-round" className={"headerIcon"}>
-                    accessibility_new
-                </Icon>
+                <Box className={"heroIcon"}>
+                    <Icon baseClassName="material-icons-round" className={"icon"}>
+                        accessibility_new
+                    </Icon>
+                </Box>
                 <Typography variant={"h5"}>
                     Einstellungen der Barrierefreiheit
                 </Typography>
@@ -79,4 +83,4 @@ const AccessibilitySettingsCategoriesOverview = withAccessibilityMenuContext((pr
     );
 });
 
-export default observer(AccessibilitySettingsCategoriesOverview);
+export default observer(AccessibilityCategoriesOverview);

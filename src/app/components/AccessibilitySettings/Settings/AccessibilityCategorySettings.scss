@@ -1,0 +1,41 @@
+.seeing-contentContainer {
+
+  header {
+    padding: 16px;
+
+    .icon {
+      font-size: 36px;
+      margin-right: 8px;
+    }
+
+    .headline {
+      margin: 24px 0 0 0;
+      padding: 4px;
+    }
+  }
+
+  main {
+    padding: 16px;
+    margin-top: 0;
+
+    .setting-list-item {
+      margin-bottom: 16px;
+      height: 16px;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .color-swatch-button {
+        max-height: 28px !important;
+        padding: 4px;
+        min-width: 0;
+
+        .color-swatch {
+          width: 36px;
+          height: 28px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}

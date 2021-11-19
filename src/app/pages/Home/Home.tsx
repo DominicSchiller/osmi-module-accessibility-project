@@ -1,4 +1,3 @@
-import HomeViewModel from "./Home.ViewModel";
 import HomePageView from "./Home.View";
 
 /**
@@ -6,8 +5,7 @@ import HomePageView from "./Home.View";
  * @constructor Crates a new Home page instance.
  */
 const HomePage = () => {
-    const viewModel = new HomeViewModel();
-    return <HomePageView viewModel={viewModel} />
+    return <HomePageView />
 };
 
 export default HomePage;

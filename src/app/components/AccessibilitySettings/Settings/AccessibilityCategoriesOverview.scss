@@ -1,0 +1,42 @@
+.overview-contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+  padding: 16px;
+
+  header {
+    display: contents;
+    text-align: center;
+    font-size: 36px;
+
+    .heroIcon {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 88px;
+      height: 88px;
+      border-radius: 44px;
+      background-color: #f2f2f2;
+      margin-bottom: 8px;
+
+      .icon {
+        font-size: 64px;
+      }
+    }
+  }
+
+  main {
+    margin: 24px 0 0 0;
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * React context to manage the state of the accessibility settings menu
+ * React context to manage the state of the accessibility Settings menu
  */
 const AccessibilityMenuContext = React.createContext({});
 
