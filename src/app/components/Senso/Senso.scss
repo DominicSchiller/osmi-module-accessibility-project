@@ -1,26 +1,16 @@
-@import "../../../styles/scss/mixins";
-@import "../../../styles/scss/colors";
+#senso-container {
+  height: 100%;
 
-.Senso {
-  @include circle(60vh);
-  @include vh_center;
-  background-color: $senso-bg;
+  #senso {
+    border-radius: 50%;
+    padding: 32px;
+    width: 75vh;
+    height: 75vh;
+    background-color: #f4f4f4;
 
-  .innerHole {
-    @include circle(15vh);
-    @include vh_center;
-    background-color: $senso-bg;
-    position: absolute;
-    z-index: 900;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .Senso {
-    @include circle(85vw);
-
-    .innerHole {
-      @include circle(15vw);
+    .button-row {
+      height: calc(50% - 12px);
+      filter: drop-shadow(-1px 3px 5px rgba(0, 0, 0, 0.25));
     }
   }
 }

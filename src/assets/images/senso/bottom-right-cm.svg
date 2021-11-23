@@ -1,0 +1,5 @@
+<svg height="0" width="0" viewBox="0 0 256 256">
+    <clipPath id="cp-bottom-right" clipPathUnits="objectBoundingBox" transform="scale(0.00390625 0.00390625)">
+        <path d="M0,128v128h0c141.38,0,256-114.62,256-256v0H128C128,70.69,70.69,128,0,128z"/>
+    </clipPath>
+</svg>

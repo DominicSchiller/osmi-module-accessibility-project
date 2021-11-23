@@ -1,24 +1,52 @@
-import React, {Component} from "react";
+import React from "react";
 import './Senso.scss'
-import {ColorButton, ColorButtonProps} from "./ColorButton/ColorButton";
+import {SensoButtonProps, SensoButton} from "./Buttons/SensoButton";
+import {withAccessibilityContext} from "../../context/AccessibilityContext";
+import {Stack} from "@mui/material";
+import {ReactComponent as TopLeftClippingMask} from "../../../assets/images/senso/top-left-cm.svg";
+import {ReactComponent as TopRightClippingMask} from "../../../assets/images/senso/top-right-cm.svg";
+import {ReactComponent as BottomLeftClippingMask} from "../../../assets/images/senso/bottom-left-cm.svg";
+import {ReactComponent as BottomRightClippingMask} from "../../../assets/images/senso/bottom-right-cm.svg";
 
-const colorButtons: ColorButtonProps[] = [
-    { id: 1, alignment: 'top-left' },
-    { id: 2, alignment: 'top-right' },
-    { id: 3, alignment: 'bottom-left' },
-    { id: 4, alignment: 'bottom-right' }
-];
+/**
+ * The Senso game component.
+ */
+const Senso = withAccessibilityContext((props: any) => {
+    const {accessibilityContext} = props;
 
-export class Senso extends Component {
-    render() {
-        return <div className="Senso" style={{backgroundColor: "black"}}>
-            { colorButtons.map(actionKey =>
-                <ColorButton
-                    key={actionKey.id}
-                    id={actionKey.id}
-                    alignment={actionKey.alignment} />
-            )}
-            <div className="innerHole"/>
-        </div>
-    }
-}
+    // definition of all four senso buttons (two buttons each row)
+    const sensoButtons: SensoButtonProps[][] = [
+        [
+            { id: 1, alignment: 'top-left', icon: 'bedtime', color: accessibilityContext.sensoTopLeftActionButtonColor },
+            { id: 2, alignment: 'top-right', icon: 'star', color: accessibilityContext.sensoTopRightActionButtonColor}
+        ],
+        [
+            { id: 3, alignment: 'bottom-left', icon: 'wb_cloudy', color: accessibilityContext.sensoBottomLeftActionButtonColor },
+            { id: 4, alignment: 'bottom-right', icon: 'wb_sunny', color: accessibilityContext.sensoBottomRightActionButtonColor }
+        ]
+    ];
+
+    return (
+        <>
+            <Stack direction={"column"} alignItems={"center"} justifyContent={"center"} id={"senso-container"}>
+                <Stack direction={"column"} justifyContent={"space-between"} id={"senso"}>
+                    {sensoButtons.map(buttonRow => {
+                        return (
+                            <Stack direction={"row"} className={"button-row"} justifyContent={"space-between"}>
+                                {buttonRow.map(buttonProps =>
+                                    <SensoButton {...buttonProps} />
+                                )}
+                            </Stack>
+                        )
+                    })}
+                </Stack>
+            </Stack>
+            <TopLeftClippingMask />
+            <TopRightClippingMask />
+            <BottomLeftClippingMask />
+            <BottomRightClippingMask />
+        </>
+    );
+});
+
+export default Senso;

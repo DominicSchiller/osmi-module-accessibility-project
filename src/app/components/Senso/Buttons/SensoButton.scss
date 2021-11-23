@@ -1,0 +1,21 @@
+.clipped {
+  width: 18em;
+  height: 18em;
+  object-fit: cover;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+
+  &.top-left {
+    clip-path: url("#cp-top-left");
+  }
+  &.top-right {
+    clip-path: url("#cp-top-right");
+  }
+  &.bottom-left {
+    clip-path: url("#cp-bottom-left");
+  }
+  &.bottom-right{
+    clip-path: url("#cp-bottom-right");
+  }
+}
