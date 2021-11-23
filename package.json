@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "@types/react-color": "^3.0.6",
-    "react-scripts": "4.0.3"
+    "react-scripts": "4.0.3",
+    "sass": "^1.43.4"
   },
   "dependencies": {
     "@emotion/react": "11.5.0",

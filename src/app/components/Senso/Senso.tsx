@@ -30,11 +30,11 @@ const Senso = withAccessibilityContext((props: any) => {
         <>
             <Stack direction={"column"} alignItems={"center"} justifyContent={"center"} id={"senso-container"}>
                 <Stack direction={"column"} justifyContent={"space-between"} id={"senso"}>
-                    {sensoButtons.map(buttonRow => {
+                    {sensoButtons.map((buttonRow, index) => {
                         return (
-                            <Stack direction={"row"} className={"button-row"} justifyContent={"space-between"}>
+                            <Stack direction={"row"} className={"button-row"} key={index} justifyContent={"space-between"}>
                                 {buttonRow.map(buttonProps =>
-                                    <SensoButton {...buttonProps} />
+                                    <SensoButton key={buttonProps.id} {...buttonProps} />
                                 )}
                             </Stack>
                         )
