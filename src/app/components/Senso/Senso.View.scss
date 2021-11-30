@@ -1,0 +1,41 @@
+#senso-container {
+  height: 100%;
+
+  #description-box {
+    position: absolute;
+    top: calc(50% + 48px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    text-align: center;
+    width: 15%;
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+
+    #subtitle {
+      font-size: 7rem;
+      font-weight: bold;
+    }
+  }
+
+  #senso {
+    border-radius: 50%;
+    padding: 32px;
+    width: 75vh;
+    height: 75vh;
+    background-color: #f4f4f4;
+
+    .button-row {
+      z-index: 1;
+      height: calc(50% - 12px);
+      filter: drop-shadow(-1px 3px 5px rgba(0, 0, 0, 0.25));
+
+      &.selected {
+        z-index: 2;
+      }
+    }
+  }
+}
