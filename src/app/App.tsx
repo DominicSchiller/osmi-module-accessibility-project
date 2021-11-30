@@ -81,7 +81,7 @@ export default class App extends Component {
                              <HeaderBar />
                              <Routes>
                                  <Route path="/*" element={<HomePage/>}/>
-                                 <Route path={"/Game/*"} element={<GamePage/>}/>
+                                 <Route path={"/Game"} element={<GamePage/>}/>
                              </Routes>
                          </>
                       </ThemeProvider>
