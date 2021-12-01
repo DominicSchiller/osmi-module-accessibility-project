@@ -29,7 +29,8 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
       background-color: ${props.color};
       transition: all 200ms ease-in-out;
       cursor: pointer;
-      --margin: 12px;
+
+      
       
       &#${SensoButtonID.TopLeft} {
         margin-right: var(--margin);
@@ -61,13 +62,58 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
         
         span {
           color: #ffffff;
-          font-size: 5vw;
+          //font-size: 5vw;
         }
       }
       
       span {
         transition: all 150ms ease-in-out;
-        font-size: 4vw;
+        //font-size: 4vw;
+      }
+
+      ${props => props.theme.breakpoints.up("xs")} {
+        --margin: 4px;
+        span {
+          font-size: 2.7rem;
+        }
+        &.selected {
+          span {
+            font-size: 3.5rem;
+          }
+        }
+      }
+      ${props => props.theme.breakpoints.up("sm")} {
+        --margin: 4px;
+        span {
+          font-size: 5.5rem;
+        }
+        &.selected {
+          span {
+            font-size: 6.5rem;
+          }
+        }
+      }
+      ${props => props.theme.breakpoints.up("md")} {
+        --margin: 8px;
+        span {
+          font-size: 7.5rem;
+        }
+        &.selected {
+          span {
+            font-size: 8.5rem;
+          }
+        }
+      }
+      ${props => props.theme.breakpoints.up("lg")} {
+        --margin: 12px;
+        span {
+          font-size: 9.5rem;
+        }
+        &.selected {
+          span {
+            font-size: 10.5rem;
+          }
+        }
       }
     `;
 

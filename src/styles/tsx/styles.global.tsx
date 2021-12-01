@@ -14,10 +14,9 @@ export const useGlobalStyles = makeStyles((theme: Theme) => createStyles ({
             backgroundColor: 'white !important',
         },
         main: {
-            marginTop: 40
+            flex: "1"
         },
         footer: {
-            position: 'fixed',
             bottom: 0,
             width: '100%',
             minHeight: '128px',
@@ -29,6 +28,56 @@ export const useGlobalStyles = makeStyles((theme: Theme) => createStyles ({
             color: theme.palette.text.secondary,
             backgroundColor: '#f3f3f3',
         },
+        ".page-container": {
+            // position: "absolute",
+            [theme.breakpoints.up("xs")]: {
+                marginTop: "24px",
+                minHeight: "calc(100% - 80px)", // 56px of header bar + spacing of 24px
+            },
+            [theme.breakpoints.up("xs")]: {
+                marginTop: "32px",
+                minHeight: "calc(100% - 88px)", // 56px of header bar + spacing of 32px
+            },
+            [theme.breakpoints.up("md")]: {
+                marginTop: "48px",
+                minHeight: "calc(100% - 112px)", // 64px of header bar + spacing of 48px
+            },
+            [theme.breakpoints.up("xl")]: {
+                marginTop: "64px",
+                minHeight: "calc(100% - 128px)", // 64px of header bar + spacing of 64px
+            }
+        },
+        h1: {
+            [theme.breakpoints.up("xs")]: {
+               fontSize: '3rem !important'
+            },
+            [theme.breakpoints.up("md")]: {
+                fontSize: '3.75rem !important'
+            },
+            [theme.breakpoints.up("lg")]: {
+                fontSize: '5rem !important'
+            },
+            [theme.breakpoints.up("xl")]: {
+                fontSize: '6rem !important'
+            }
+        },
+        h4: {
+            [theme.breakpoints.up("xs")]: {
+                fontSize: '1rem !important'
+            },
+            [theme.breakpoints.up("sm")]: {
+                fontSize: '1.5rem !important'
+            },
+            [theme.breakpoints.up("md")]: {
+                fontSize: '2.5rem !important'
+            },
+            [theme.breakpoints.up("lg")]: {
+                fontSize: '3rem !important'
+            },
+            [theme.breakpoints.up("xl")]: {
+                fontSize: '3.5rem !important'
+            }
+        }
     },
     brandName: {
         fontSize: 24,

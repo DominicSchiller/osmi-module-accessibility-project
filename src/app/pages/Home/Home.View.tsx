@@ -21,11 +21,11 @@ const HomePageView = () => {
     const globalClasses = useGlobalStyles();
     
     return (
-        <>
+        <Grid container direction={"column"} rowGap={{xs: 6, sm: 3}} className={"page-container"}>
             <CssBaseline />
             <main>
-                <Container maxWidth="sm">
-                    <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+                <Container maxWidth="md">
+                    <Typography variant="h1" align="center" color="textPrimary" gutterBottom>
                         Willkommen zu Accessible Senso
                     </Typography>
                     <Typography variant={"h5"} align={"center"} color={"textSecondary"} paragraph>
@@ -48,7 +48,7 @@ const HomePageView = () => {
                     &copy; 2021 - 2022 Barrierefreiheit (Gruppe C) an der VFH
                 </Typography>
             </footer>
-        </>
+        </Grid>
     )
 };
 export default observer(HomePageView);

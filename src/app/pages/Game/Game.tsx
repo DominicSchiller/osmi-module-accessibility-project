@@ -3,6 +3,7 @@ import {withAccessibilityContext} from "../../context/AccessibilityContext";
 import SensoView from "../../components/Senso/Senso.View";
 import {SensoGameplaySession} from "../../../gameplay/SensoGameplaySession";
 import "./Game.scss";
+import {Grid} from "@mui/material";
 
 /**
  * The app's senso game page component.
@@ -50,8 +51,8 @@ export const GamePage = withAccessibilityContext((props: any) => {
     }, [isPlayingSequence, countDown]);
 
     return (
-        <>
+        <Grid container direction={"column"} className={"page-container"}>
             <SensoView disabled={isPlayingSequence} />
-        </>
+        </Grid>
     );
 });
