@@ -8,6 +8,16 @@
   z-index: 1;
 }
 
-#accessibilityMenu {
 
+
+@media screen and (max-width: 499px) {
+  #accessibilityMenu {
+    .MuiPaper-root {
+      width: 100%;
+    }
+  }
+
+  .menuContainer {
+    width: 100%;
+  }
 }

@@ -12,6 +12,11 @@ import {withAccessibilityMenuContext} from "../../../context/AccessibilityMenuCo
 const StyledAccessibilityCategoryButton = styled(MUIButton)`
   height: 160px;
   width: 160px;
+  
+  ${props => props.theme.breakpoints.between("xs", "sm")} {
+    height: 40vw;
+    width: 40vw;
+  }
   flex-direction: column;
   font-weight: 500;
   span {
