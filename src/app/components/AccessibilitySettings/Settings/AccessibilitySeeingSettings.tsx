@@ -42,48 +42,15 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
         <header>
-          <Stack direction={"row"} alignItems={"center"}>
-            <IconButton
-              aria-label="Zurück zum Einstellungen Menü"
-              color={"primary"}
-              sx={{
-                backgroundColor: rgbaString(
-                  accessibilityContext.primaryColor,
-                  0.1
-                ),
-                marginRight: "8px",
-              }}
+          <Button
+              variant={"text"}
+              aria-label={"Zurück zur Übersicht"}
+              startIcon={<Icon baseClassName="material-icons-round">arrow_back</Icon>}
               onClick={() => {
                 menuContext.updateSelectedCategory();
-              }}
-            >
-              <Icon baseClassName="material-icons-round">arrow_back</Icon>
-            </IconButton>
-            <Breadcrumbs
-              aria-label="breadcrumb"
-              separator={
-                <>
-                  <Icon
-                    baseClassName="material-icons-round"
-                    sx={{ fontSize: "16px" }}
-                  >
-                    arrow_forward_ios
-                  </Icon>
-                </>
-              }
-            >
-              <Link
-                underline="hover"
-                color="inherit"
-                href={"#"}
-                onClick={() => {
-                  menuContext.updateSelectedCategory();
-                }}
-              >
-                Einstellungen der Barrierefreiheit
-              </Link>
-            </Breadcrumbs>
-          </Stack>
+              }}>
+            Zurück zur Übersicht
+          </Button>
 
           <Stack direction={"row"} alignItems={"center"} className={"headline"}>
             <Icon baseClassName="material-icons-round" className={"icon"}>

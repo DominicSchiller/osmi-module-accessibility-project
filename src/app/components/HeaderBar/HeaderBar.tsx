@@ -31,7 +31,7 @@ const HeaderBar = () => {
             startIcon={
               <Icon baseClassName="material-icons">accessibility</Icon>
             }
-            aria-label="Zeige Einstellungen für Barrierefreiheit"
+            aria-label="Zeige Einstellungen für die Barrierefreiheit"
             size={"large"}
             color={"primary"}
             onClick={toggleMenu}

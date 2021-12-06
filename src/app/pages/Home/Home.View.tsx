@@ -53,6 +53,7 @@ const HomePageView = () => {
               <PrimaryButton
                 variant={"contained"}
                 size={"large"}
+                aria-label={"Starte ein neues Spiel"}
                 onClick={() => navigate("/Game")}
               >
                 Spiel starten

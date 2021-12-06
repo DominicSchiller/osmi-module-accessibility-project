@@ -46,6 +46,7 @@ const AccessibilityCategoryButton = (props: any) => {
       variant="outlined"
       startIcon={<Icon baseClassName="material-icons-round">{props.icon}</Icon>}
       sx={{ p: 0, m: 1, borderRadius: 4 }}
+      aria-label={`Zeige alle Einstellungen für ${props.title} an`}
       onClick={props.onClick}
     >
       {props.title}
@@ -92,6 +93,8 @@ const AccessibilityCategoriesOverview = withAccessibilityMenuContext(
             <Button
               variant="text"
               startIcon={<Icon baseClassName="material-icons">close</Icon>}
+              aria-label={"Barrierefreiheit-Menü schließen"}
+              onClick={menuContext.toggleMenu}
             >
               Schließen
             </Button>
