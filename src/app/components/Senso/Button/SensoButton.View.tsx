@@ -29,8 +29,6 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
       background-color: ${props.color};
       transition: all 200ms ease-in-out;
       cursor: pointer;
-
-      
       
       &#${SensoButtonID.TopLeft} {
         margin-right: var(--margin);

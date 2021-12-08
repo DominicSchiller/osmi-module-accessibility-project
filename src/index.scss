@@ -8,7 +8,7 @@
   font-family: "Atkinson-Hyperlegible";
   src: url("assets/fonts/Atkinson-Hyperlegible-Bold-102.woff");
   font-weight: bold;
-  font-style: bold;
+  font-style: normal;
 }
 
 html {
@@ -19,6 +19,10 @@ html {
     font-family: "Inter", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    &.monochrome {
+      filter: grayscale(1);
+    }
   }
 
   h3,

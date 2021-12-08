@@ -3,15 +3,15 @@ import {
   Box,
   Button as MUIButton,
   Button,
-  Divider,
   Icon,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import "./AccessibilityCategoriesOverview.scss";
-import { AccessibilitySettingsCategory } from "../../../../models/AccessibilitySettingsCategory";
+import { AccessibilitySettingsCategory } from "../../../../models/accessibility/AccessibilitySettingsCategory";
 import { observer } from "mobx-react";
 import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenuContext";
+import { withTheme } from "@mui/styles";
 
 /**
  * Custom styled accessibility category button.
@@ -58,10 +58,9 @@ const AccessibilityCategoryButton = (props: any) => {
  * Component to give an overview of accessibility categories to choose from.
  * @constructor Create new instance
  */
-const AccessibilityCategoriesOverview = withAccessibilityMenuContext(
+const AccessibilityCategoriesOverview = withTheme(withAccessibilityMenuContext(
   (props: any) => {
     const { menuContext } = props;
-
     const categories = [
       {
         title: "Sehen",
@@ -100,7 +99,7 @@ const AccessibilityCategoriesOverview = withAccessibilityMenuContext(
             </Button>
           </Box>
 
-          <Box className={"heroIcon"}>
+          <Box className={"heroIcon"} sx={{backgroundColor: props.theme.palette.surface}}>
             <Icon baseClassName="material-icons-round" className={"icon"}>
               accessibility_new
             </Icon>
@@ -125,6 +124,6 @@ const AccessibilityCategoriesOverview = withAccessibilityMenuContext(
       </Box>
     );
   }
-);
+));
 
 export default observer(AccessibilityCategoriesOverview);

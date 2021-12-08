@@ -1,26 +1,52 @@
 import React from "react";
 import {
-  Breadcrumbs,
-  Button,
-  Icon,
-  IconButton,
-  Link,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-  Paper,
-  Popover,
-  Stack,
-  Switch,
-  Typography,
+    Button,
+    Icon,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    ListSubheader,
+    Paper,
+    Popover,
+    Stack,
+    Switch,
+    ToggleButton as MUIToggleButton,
+    ToggleButtonGroup,
+    Typography,
 } from "@mui/material";
 import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenuContext";
 import { withAccessibilityContext } from "../../../context/AccessibilityContext";
 import { SwatchesPicker } from "react-color";
 import "./AccessibilityCategorySettings.scss";
-import { rgbaString } from "../../../../utils/ColorUtils";
+import {UIColorMode} from "../../../../models/accessibility/seeing/SeeingAccessibilityProps";
+import {styled} from "@mui/system";
+
+
+const PrimaryToggleButton = styled(MUIToggleButton)(({ theme }) => ({
+    overflow: 'hidden',
+    color: `${theme.palette.text.secondary}`,
+
+    '&:hover': {
+        backgroundColor: theme.palette.surface!,
+    },
+
+    '&.Mui-selected': {
+        color: `${theme.palette.primary.contrastText}`,
+        backgroundColor: `${theme.palette.primary.main}`,
+        fontSize: '0.9rem',
+        fontWeight: 'bold',
+
+        '&:hover': {
+            backgroundColor: `${theme.palette.primary.dark} !important`,
+            opacity: '1.0 !important'
+        },
+
+        '&::before': {
+            backgroundColor: `${theme.palette.primary.contrastText}`
+        }
+    }
+}));
 
 const AccessibilitySeeingSettings = withAccessibilityContext(
   withAccessibilityMenuContext((props: any) => {
@@ -29,6 +55,8 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
 
     const [popoverAnchorEl, setPopoverAnchorEl] =
       React.useState<HTMLButtonElement | null>(null);
+
+    const [currentUIMode, setCurrentUIMode] = React.useState(accessibilityContext.uiColorMode);
 
     const showColorPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
       setPopoverAnchorEl(event.currentTarget);
@@ -88,6 +116,35 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
             </ListItem>
           </List>
           <List subheader={<ListSubheader>Farben</ListSubheader>}>
+              <ToggleButtonGroup
+                  exclusive
+                  className={"toggle-group"}
+                  fullWidth={true}
+                  orientation={"horizontal"}
+                  size={"large"}
+                  value={currentUIMode}
+                  color={"primary"}
+                  sx={{marginBottom: "16px"}}
+                  onChange={(event, nextView) => {accessibilityContext.setUIColorMode(nextView); setCurrentUIMode(nextView)}}>
+                  <PrimaryToggleButton value={`${UIColorMode.Monochrome}`} aria-label="einfarbiger Modus">
+                      <Stack direction={"column"} alignContent={"center"} textAlign={"center"} alignItems={"center"}>
+                          <Icon baseClassName="material-icons-round">invert_colors</Icon>
+                          Einfarbig
+                      </Stack>
+                  </PrimaryToggleButton>
+                  <PrimaryToggleButton value={`${UIColorMode.Light}`} aria-label="heller Modus" color={"primary"}>
+                      <Stack direction={"column"} alignContent={"center"} textAlign={"center"} alignItems={"center"}>
+                          <Icon baseClassName="material-icons-round">light_mode</Icon>
+                          Hell
+                      </Stack>
+                  </PrimaryToggleButton>
+                  <PrimaryToggleButton value={`${UIColorMode.Dark}`} aria-label="dunkler Modus">
+                      <Stack direction={"column"} alignContent={"center"} textAlign={"center"} alignItems={"center"}>
+                          <Icon baseClassName="material-icons-round">dark_mode</Icon>
+                          Dunkel
+                      </Stack>
+                  </PrimaryToggleButton>
+              </ToggleButtonGroup>
             <ListItem className={"setting-list-item"}>
               <ListItemIcon>
                 <Icon baseClassName="material-icons-round">palette</Icon>
@@ -119,7 +176,6 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                 <SwatchesPicker
                   color={accessibilityContext.primaryColor}
                   onChangeComplete={(color) => {
-                    console.info(color);
                     accessibilityContext.primaryColor = color.hex;
                   }}
                 />
@@ -127,51 +183,6 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
             </ListItem>
           </List>
           <List subheader={<ListSubheader>Kontrast</ListSubheader>}>
-            <ListItem className={"setting-list-item"}>
-              <ListItemIcon>
-                <Icon baseClassName="material-icons-round">contrast</Icon>
-              </ListItemIcon>
-              <ListItemText
-                id="set-contrast-label"
-                primary="Hochkontrastmodus"
-              />
-              <Switch
-                edge="end"
-                inputProps={{
-                  "aria-labelledby":
-                    "An / Aus Switch für die Verwendung eines Darkmodes",
-                }}
-              />
-            </ListItem>
-            <ListItem className={"setting-list-item"}>
-              <ListItemIcon>
-                <Icon baseClassName="material-icons-round">dark_mode</Icon>
-              </ListItemIcon>
-              <ListItemText id="set-contrast-label" primary="Dark Mode" />
-              <Switch
-                edge="end"
-                inputProps={{
-                  "aria-labelledby":
-                    "An / Aus Switch für die Verwendung eines Darkmodes",
-                }}
-              />
-            </ListItem>
-            <ListItem className={"setting-list-item"}>
-              <ListItemIcon>
-                <Icon baseClassName="material-icons-round">format_paint</Icon>
-              </ListItemIcon>
-              <ListItemText
-                id="set-contrast-label"
-                primary="Sättigkeitsmodus"
-              />
-              <Switch
-                edge="end"
-                inputProps={{
-                  "aria-labelledby":
-                    "An / Aus Switch für die Verwendung eines Sättigkeitsmodus",
-                }}
-              />
-            </ListItem>
           </List>
         </main>
       </Stack>

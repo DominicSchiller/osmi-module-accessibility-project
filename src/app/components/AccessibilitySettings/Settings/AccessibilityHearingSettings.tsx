@@ -1,21 +1,19 @@
 import React from "react";
 import {
-    Breadcrumbs, Button,
+    Button,
     Icon,
-    IconButton,
-    Link,
     Stack,
     Typography,
 } from "@mui/material";
 import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenuContext";
 import { withAccessibilityContext } from "../../../context/AccessibilityContext";
 import "./AccessibilityCategorySettings.scss";
-import { rgbaString } from "../../../../utils/ColorUtils";
+// import { rgbaString } from "../../../../utils/ColorUtils";
 
 const AccessibilityHearingSettings = withAccessibilityContext(
   withAccessibilityMenuContext((props: any) => {
     const { menuContext } = props;
-    const { accessibilityContext } = props;
+    // const { accessibilityContext } = props;
 
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>

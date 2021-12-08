@@ -19,7 +19,7 @@ const HeaderBar = () => {
 
   return (
     <>
-      <AppBar position={"sticky"} className={"appBar"} style={{ zIndex: 1301 }}>
+      <AppBar position={"sticky"} style={{ zIndex: 1301 }}>
         <Toolbar>
           <Box display="flex" flexGrow={1}>
             <Typography variant={"h6"}>

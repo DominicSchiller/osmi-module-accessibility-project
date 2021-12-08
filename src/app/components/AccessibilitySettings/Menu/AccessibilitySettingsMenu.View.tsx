@@ -4,7 +4,7 @@ import React, {forwardRef, useEffect, useImperativeHandle} from "react";
 import AccessibilitySettingsMenuViewModel from "./AccessibilitySettingsMenu.ViewModel";
 import {observer} from "mobx-react";
 import "./AccessibilitySettingsMenu.scss"
-import {AccessibilitySettingsCategory} from "../../../../models/AccessibilitySettingsCategory";
+import {AccessibilitySettingsCategory} from "../../../../models/accessibility/AccessibilitySettingsCategory";
 import AccessibilityHearingSettings from "../Settings/AccessibilityHearingSettings";
 import AccessibilitySeeingSettings from "../Settings/AccessibilitySeeingSettings";
 import AccessibilityMotorActivitySettings from "../Settings/AccessibilityMotorActivitySettings";
@@ -54,7 +54,7 @@ const AccessibilitySettingsMenuView = forwardRef(({viewModel}: AccessibilitySett
                 onClose={viewModel.toggleMenu}
                 PaperProps={{
                     sx: {
-                        backgroundColor: '#ffffff',
+                        // backgroundColor: '#ffffff',
                         boxShadow: "0 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12)"
                     }
                 }}

@@ -11,8 +11,8 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
         backgroundColor: theme.palette.background.paper,
       },
       header: {
-        color: "black !important",
-        backgroundColor: "white !important",
+        color: `${theme.palette.text.primary} !important`,
+        backgroundColor: `${theme.palette.background.paper} !important`,
       },
       main: {
         flex: "1",
@@ -27,7 +27,8 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
         textAlign: "center",
         padding: theme.spacing("16px", "16px"),
         color: theme.palette.text.secondary,
-        backgroundColor: "#f3f3f3",
+        // backgroundColor: "#f3f3f3",
+        backgroundColor: theme.palette.footer.main
       },
 
       ".page-container": {

@@ -1,5 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
-import {AccessibilitySettingsCategory} from "../../../../models/AccessibilitySettingsCategory";
+import {AccessibilitySettingsCategory} from "../../../../models/accessibility/AccessibilitySettingsCategory";
 
 /**
  * The accessibility menu's view model
