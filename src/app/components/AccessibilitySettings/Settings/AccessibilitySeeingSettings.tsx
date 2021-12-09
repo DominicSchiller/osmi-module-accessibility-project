@@ -19,7 +19,7 @@ import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenu
 import { withAccessibilityContext } from "../../../context/AccessibilityContext";
 import { SwatchesPicker } from "react-color";
 import "./AccessibilityCategorySettings.scss";
-import {UIColorMode} from "../../../../models/accessibility/seeing/SeeingAccessibilityProps";
+import {UIColorMode} from "../../../../models/accessibility/seeing/UIColorMode";
 import {styled} from "@mui/system";
 
 
@@ -56,7 +56,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
     const [popoverAnchorEl, setPopoverAnchorEl] =
       React.useState<HTMLButtonElement | null>(null);
 
-    const [currentUIMode, setCurrentUIMode] = React.useState(accessibilityContext.uiColorMode);
+    const [currentUIMode, setCurrentUIMode] = React.useState(accessibilityContext.seeing.uiColorMode);
 
     const showColorPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
       setPopoverAnchorEl(event.currentTarget);
@@ -105,12 +105,12 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                     "An / Aus Switch für die Verwendung der Schriftart Atkinson Hyperlegible",
                 }}
                 onChange={(event, checked) => {
-                  accessibilityContext.fontFamily = checked
+                  accessibilityContext.seeing.fontFamily = checked
                     ? "Atkinson-Hyperlegible"
                     : "Inter";
                 }}
                 checked={
-                  accessibilityContext.fontFamily === "Atkinson-Hyperlegible"
+                  accessibilityContext.seeing.fontFamily === "Atkinson-Hyperlegible"
                 }
               />
             </ListItem>
@@ -125,7 +125,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                   value={currentUIMode}
                   color={"primary"}
                   sx={{marginBottom: "16px"}}
-                  onChange={(event, nextView) => {accessibilityContext.setUIColorMode(nextView); setCurrentUIMode(nextView)}}>
+                  onChange={(event, nextView) => {accessibilityContext.seeing.setUIColorMode(nextView); setCurrentUIMode(nextView)}}>
                   <PrimaryToggleButton value={`${UIColorMode.Monochrome}`} aria-label="einfarbiger Modus">
                       <Stack direction={"column"} alignContent={"center"} textAlign={"center"} alignItems={"center"}>
                           <Icon baseClassName="material-icons-round">invert_colors</Icon>
@@ -160,7 +160,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                 <Paper
                   variant={"elevation"}
                   className={"color-swatch"}
-                  sx={{ backgroundColor: accessibilityContext.primaryColor }}
+                  sx={{ backgroundColor: accessibilityContext.seeing.primaryColor }}
                   square
                 />
               </Button>
@@ -174,9 +174,9 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                 }}
               >
                 <SwatchesPicker
-                  color={accessibilityContext.primaryColor}
+                  color={accessibilityContext.seeing.primaryColor}
                   onChangeComplete={(color) => {
-                    accessibilityContext.primaryColor = color.hex;
+                    accessibilityContext.seeing.primaryColor = color.hex;
                   }}
                 />
               </Popover>

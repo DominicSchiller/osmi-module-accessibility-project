@@ -8,23 +8,24 @@ import {ReactComponent as TopRightClippingMask} from "../../../assets/images/sen
 import {ReactComponent as BottomLeftClippingMask} from "../../../assets/images/senso/bottom-left-cm.svg";
 import {ReactComponent as BottomRightClippingMask} from "../../../assets/images/senso/bottom-right-cm.svg";
 import {SensoButton, SensoButtonID} from "./Button/SensoButton.Model";
+import {withTheme} from "@mui/styles";
 
 
 /**
  * The Senso game component.
  */
-const SensoView = withAccessibilityContext((props: any) => {
-    const {accessibilityContext} = props;
+const SensoView = withTheme(withAccessibilityContext((props: any) => {
+    const {accessibilityContext, theme} = props;
 
     // definition of all four senso buttons (two buttons each row)
     const sensoButtons: SensoButton[][] = [
         [
-            new SensoButton(SensoButtonID.TopLeft, "Mond", "bedtime", accessibilityContext.sensoTopLeftActionButtonColor, props.disabled),
-            new SensoButton(SensoButtonID.TopRight, "Stern", "star",  accessibilityContext.sensoTopRightActionButtonColor, props.disabled)
+            new SensoButton(SensoButtonID.TopLeft, "Mond", "bedtime", accessibilityContext.seeing.sensoTopLeftActionButtonColor, props.disabled),
+            new SensoButton(SensoButtonID.TopRight, "Stern", "star",  accessibilityContext.seeing.sensoTopRightActionButtonColor, props.disabled)
         ],
         [
-            new SensoButton(SensoButtonID.BottomLeft, "Wolke","wb_cloudy", accessibilityContext.sensoBottomLeftActionButtonColor, props.disabled),
-            new SensoButton(SensoButtonID.BottomRight, "Sonne","wb_sunny",  accessibilityContext.sensoBottomRightActionButtonColor, props.disabled)
+            new SensoButton(SensoButtonID.BottomLeft, "Wolke","wb_cloudy", accessibilityContext.seeing.sensoBottomLeftActionButtonColor, props.disabled),
+            new SensoButton(SensoButtonID.BottomRight, "Sonne","wb_sunny",  accessibilityContext.seeing.sensoBottomRightActionButtonColor, props.disabled)
         ]
     ];
 
@@ -32,10 +33,10 @@ const SensoView = withAccessibilityContext((props: any) => {
         <>
             <Stack direction={"column"} alignItems={"center"} justifyContent={"center"} id={"senso-container"}>
                 <div id="description-box">
-                    <Typography variant={"h4"} id={"game-request-title"}>Merke dir die Reihenfolge</Typography>
-                    <Typography id={"subtitle"}></Typography>
+                    <Typography id={"game-request-title"} variant={"h4"} color={"textSecondary"}>Merke dir die Reihenfolge</Typography>
+                    <Typography id={"subtitle"} color={"textPrimary"} />
                 </div>
-                <Stack direction={"column"} justifyContent={"space-between"} id={"senso"}>
+                <Stack direction={"column"} justifyContent={"space-between"} id={"senso"} sx={{backgroundColor: theme.palette.surface}}>
                     {sensoButtons.map((buttonRow, index) => {
                         return (
                             <Stack direction={"row"} className={"button-row"} key={index} justifyContent={"space-between"}>
@@ -53,6 +54,6 @@ const SensoView = withAccessibilityContext((props: any) => {
             <BottomRightClippingMask />
         </>
     );
-});
+}));
 
 export default SensoView;

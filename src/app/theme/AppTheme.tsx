@@ -2,7 +2,7 @@ import {Theme} from "@mui/material/styles/createTheme";
 import {AccessibilityProps} from "../../models/accessibility/AccessibilityProps";
 import {Palette, PaletteOptions} from "@mui/material/styles/createPalette";
 import {TypographyOptions} from "@mui/material/styles/createTypography";
-import {UIColorMode} from "../../models/accessibility/seeing/SeeingAccessibilityProps";
+import {UIColorMode} from "../../models/accessibility/seeing/UIColorMode";
 import {Components, createTheme, lighten} from "@mui/material";
 
 /**
@@ -32,7 +32,7 @@ export default class AppTheme {
     private static createPalette(accessibilityProps: AccessibilityProps): PaletteOptions {
         const { palette } = createTheme();
 
-        switch (accessibilityProps.uiColorMode) {
+        switch (accessibilityProps.seeing.uiColorMode) {
             case UIColorMode.Dark:
                 return this.createDarkModePalette(palette, accessibilityProps)
             default:
@@ -48,9 +48,9 @@ export default class AppTheme {
      */
     private static createLightModePalette(basePalette: Palette, accessibilityProps: AccessibilityProps): PaletteOptions {
         return {
-            mode: UIColorMode.paletteMode(accessibilityProps.uiColorMode),
+            mode: UIColorMode.paletteMode(accessibilityProps.seeing.uiColorMode),
             primary: {
-                main: accessibilityProps.primaryColor,
+                main: accessibilityProps.seeing.primaryColor,
             },
             footer: {
                 main: basePalette.grey[100]
@@ -68,9 +68,9 @@ export default class AppTheme {
      */
     private static createDarkModePalette(basePalette: Palette, accessibilityProps: AccessibilityProps): PaletteOptions {
         return {
-            mode: UIColorMode.paletteMode(accessibilityProps.uiColorMode),
+            mode: UIColorMode.paletteMode(accessibilityProps.seeing.uiColorMode),
             primary: {
-                main: accessibilityProps.primaryColor,
+                main: accessibilityProps.seeing.primaryColor,
             },
             footer: {
                 main: lighten(basePalette.grey[900], 0.05)
@@ -87,7 +87,7 @@ export default class AppTheme {
      */
     private static createTypographyOptions(accessibilityProps: AccessibilityProps): TypographyOptions {
         return {
-            fontFamily: accessibilityProps.fontFamily
+            fontFamily: accessibilityProps.seeing.fontFamily
         }
     }
 
