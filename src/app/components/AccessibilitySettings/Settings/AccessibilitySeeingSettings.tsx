@@ -248,7 +248,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                                 </Stack>
                             </PrimaryToggleButton>
                         </ToggleButtonGroup>
-                        <ListItem className={"setting-list-item"}>
+                        <ListItem className={"setting-list-item"} sx={accessibilityContext.seeing.uiContrastMode === UIContrastMode.Normal ? {display: "none"} : {}}>
                            <Stack direction={"row"} sx={{width: "100%"}} columnGap={"4px"} alignItems={"center"}>
                                <ListItemIcon>
                                    <Icon baseClassName="material-icons-round">settings</Icon>
