@@ -4,6 +4,7 @@ import {Palette, PaletteOptions} from "@mui/material/styles/createPalette";
 import {TypographyOptions} from "@mui/material/styles/createTypography";
 import {UIColorMode} from "../../models/accessibility/seeing/UIColorMode";
 import {Components, createTheme, lighten} from "@mui/material";
+import {UIContrastMode} from "../../models/accessibility/seeing/UIContrastMode";
 
 /**
  * The global app's theme.
@@ -53,10 +54,23 @@ export default class AppTheme {
                 main: accessibilityProps.seeing.primaryColor,
             },
             footer: {
-                main: basePalette.grey[100]
+                main: accessibilityProps.seeing.uiContrastMode === UIContrastMode.HighContrast ? '#ffffff' : basePalette.grey[100]
             },
-            surface: basePalette.grey[100],
-            contrastThreshold: 3
+            surface: accessibilityProps.seeing.uiContrastMode === UIContrastMode.HighContrast ? '#ffffff' : basePalette.grey[100],
+            ...(accessibilityProps.seeing.uiContrastMode === UIContrastMode.HighContrast ? {
+                text: {
+                    primary: '#000000',
+                    secondary: '#000000'
+                },
+                background: {
+                    default: '#ffffff',
+                    paper: '#ffffff'
+                }
+            } : {}),
+            action: {
+                disabled: `${this.getDisabledColor(accessibilityProps)}`
+            },
+            contrastThreshold: 3,
         }
     }
 
@@ -73,11 +87,47 @@ export default class AppTheme {
                 main: accessibilityProps.seeing.primaryColor,
             },
             footer: {
-                main: lighten(basePalette.grey[900], 0.05)
+                main: accessibilityProps.seeing.uiContrastMode === UIContrastMode.HighContrast ? '#000000' : lighten(basePalette.grey[900], 0.05)
             },
-            surface: lighten(basePalette.grey[900], 0.05),
+            surface: accessibilityProps.seeing.uiContrastMode === UIContrastMode.HighContrast ? '#000000' : lighten(basePalette.grey[900], 0.05),
+            ...(accessibilityProps.seeing.uiContrastMode === UIContrastMode.HighContrast ? {
+                text: {
+                    primary: '#ffffff',
+                    secondary: '#ffffff'
+                },
+                background: {
+                    default: '#000000',
+                    paper: '#000000'
+                },
+                action: {
+                    disabled: 'rgba(0, 0, 0, 0.4)'
+                }
+            } : {}),
+            action: {
+                disabled: `${this.getDisabledColor(accessibilityProps)}`
+            },
             contrastThreshold: 3
         }
+    }
+
+    private static getDisabledColor(accessibilityProps: AccessibilityProps): string {
+        let alpha = 0
+        let color = 0
+
+        switch (accessibilityProps.seeing.uiContrastMode) {
+            case UIContrastMode.HighSaturation:
+                alpha = 0.5
+                break
+            case UIContrastMode.HighContrast:
+                alpha = 0.4
+                break
+            case UIContrastMode.LowSaturation:
+                alpha = 0.36
+                break
+            default:
+                alpha = 0.3
+        }
+        return `rgba(${color}, ${color}, ${color}, ${alpha})`
     }
 
     /**

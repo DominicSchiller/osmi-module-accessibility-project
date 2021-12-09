@@ -3,7 +3,7 @@
   width: 100%;
 
   header {
-    padding: 16px;
+    padding: 16px 16px 0 16px;
 
     .icon {
       font-size: 36px;
@@ -19,6 +19,10 @@
   main {
     padding: 16px;
     margin-top: 0;
+
+    .MuiList-root {
+      margin-bottom: 16px;
+    }
 
     .setting-list-item {
       margin-bottom: 16px;
@@ -42,6 +46,7 @@
 
     .toggle-group {
       button {
+        min-height: 100px !important;
         &:first-of-type {
           border-top-left-radius: 16px;
           border-bottom-left-radius: 16px;
@@ -66,6 +71,11 @@
             content: "";
             display: block;
           }
+        }
+
+        .toggle-button-title {
+          margin-top: 8px;
+          line-height: 1.2rem;
         }
       }
     }

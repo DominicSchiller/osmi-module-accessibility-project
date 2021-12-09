@@ -9,6 +9,7 @@ import {ReactComponent as BottomLeftClippingMask} from "../../../assets/images/s
 import {ReactComponent as BottomRightClippingMask} from "../../../assets/images/senso/bottom-right-cm.svg";
 import {SensoButton, SensoButtonID} from "./Button/SensoButton.Model";
 import {withTheme} from "@mui/styles";
+import {UIColorMode} from "../../../models/accessibility/seeing/UIColorMode";
 
 
 /**
@@ -20,12 +21,28 @@ const SensoView = withTheme(withAccessibilityContext((props: any) => {
     // definition of all four senso buttons (two buttons each row)
     const sensoButtons: SensoButton[][] = [
         [
-            new SensoButton(SensoButtonID.TopLeft, "Mond", "bedtime", accessibilityContext.seeing.sensoTopLeftActionButtonColor, props.disabled),
-            new SensoButton(SensoButtonID.TopRight, "Stern", "star",  accessibilityContext.seeing.sensoTopRightActionButtonColor, props.disabled)
+            new SensoButton(SensoButtonID.TopLeft,
+                "Mond",
+                "bedtime",
+                accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? accessibilityContext.seeing.sensoTopRightActionButtonColor : accessibilityContext.seeing.sensoTopLeftActionButtonColor,
+                props.disabled),
+            new SensoButton(SensoButtonID.TopRight,
+                "Stern",
+                "star",
+                accessibilityContext.seeing.sensoTopRightActionButtonColor,
+                props.disabled)
         ],
         [
-            new SensoButton(SensoButtonID.BottomLeft, "Wolke","wb_cloudy", accessibilityContext.seeing.sensoBottomLeftActionButtonColor, props.disabled),
-            new SensoButton(SensoButtonID.BottomRight, "Sonne","wb_sunny",  accessibilityContext.seeing.sensoBottomRightActionButtonColor, props.disabled)
+            new SensoButton(SensoButtonID.BottomLeft,
+                "Wolke",
+                "wb_cloudy",
+                accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? accessibilityContext.seeing.sensoTopRightActionButtonColor : accessibilityContext.seeing.sensoBottomLeftActionButtonColor,
+                props.disabled),
+            new SensoButton(SensoButtonID.BottomRight,
+                "Sonne",
+                "wb_sunny",
+                accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? accessibilityContext.seeing.sensoTopRightActionButtonColor : accessibilityContext.seeing.sensoBottomRightActionButtonColor,
+                props.disabled)
         ]
     ];
 

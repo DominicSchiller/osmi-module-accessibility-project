@@ -14,10 +14,10 @@
     display: flex;
     flex-direction: column;
     //justify-content: center; /* align horizontal */
-    //align-items: center; /* align vertical */
+    align-items: center; /* align vertical */
 
     #subtitle {
-      font-size: 9.5rem;
+      font-size: 8rem;
       font-weight: bold;
     }
   }

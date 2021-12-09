@@ -11,6 +11,10 @@
   font-style: normal;
 }
 
+:root {
+  --contrastValue: 0%;
+}
+
 html {
   &,
   body {
@@ -22,6 +26,35 @@ html {
 
     &.monochrome {
       filter: grayscale(1);
+    }
+
+    &.high-contrast {
+      filter: contrast(var(--contrastValue));
+
+      & * {
+        box-shadow: none !important;
+        filter: none !important;
+      }
+
+      &.monochrome {
+        filter: contrast(var(--contrastValue)) grayscale(1);
+      }
+    }
+
+    &.low-saturation {
+      filter: #{"saturate(var(--contrastValue, 0))"};
+
+      &.monochrome {
+        filter: #{"saturate(var(--contrastValue, 0))"} grayscale(1);
+      }
+    }
+
+    &.high-saturation {
+      filter: #{"saturate(var(--contrastValue, 0))"};
+
+      &.monochrome {
+        filter: #{"saturate(var(--contrastValue, 0))"} grayscale(1);
+      }
     }
   }
 

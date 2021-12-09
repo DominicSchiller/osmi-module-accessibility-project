@@ -39,7 +39,7 @@ export class SensoUIHelper {
      */
     public static toggleHighlighting(button: HTMLElement) {
         const buttonRow = button.closest(".button-row")
-        buttonRow!.classList.toggle("selected")
+        buttonRow?.classList.toggle("selected")
         button.classList.toggle("selected")
 
         const subtitleLabel = document.getElementById("subtitle")!
@@ -53,7 +53,7 @@ export class SensoUIHelper {
      * @param totalColors the total number of colors to remember
      */
     public static showRoundStatus(attempts: number, totalColors: number) {
-        document.getElementById("game-request-title")!.innerHTML = `Du hast mit nur ${attempts} Versuchen alle ${totalColors} Farben gefunden.`
+        document.getElementById("game-request-title")!.innerHTML = `${attempts} Versuche für ${totalColors} Farben benötigt`
         document.getElementById("subtitle")!.innerHTML = "Geschafft"
     }
 }
