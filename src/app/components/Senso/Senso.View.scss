@@ -43,9 +43,9 @@
 
   @media only screen and (min-width: 1201px) and (max-width: 1536px) {
     #description-box {
-      width: 36%;
+      width: 25%;
       #subtitle {
-        font-size: 8rem !important;
+        font-size: 6rem !important;
       }
     }
   }
@@ -53,8 +53,13 @@
   #senso {
     border-radius: 50%;
     padding: 32px;
+
     width: 75vh;
     height: 75vh;
+    @media (orientation: portrait) {
+      width: 75vw;
+      height: 75vw;
+    }
 
     .button-row {
       z-index: 1;
@@ -64,13 +69,6 @@
       &.selected {
         z-index: 2;
       }
-    }
-  }
-
-  @media screen and (max-width: 1536px) {
-    #senso {
-      width: 75vw;
-      height: 75vw;
     }
   }
 

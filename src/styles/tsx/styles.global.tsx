@@ -75,9 +75,6 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
         [theme.breakpoints.up("md")]: {
           fontSize: "2.5rem !important",
         },
-        [theme.breakpoints.up("lg")]: {
-          fontSize: "3rem !important",
-        },
         [theme.breakpoints.up("xl")]: {
           fontSize: "3.5rem !important",
         },

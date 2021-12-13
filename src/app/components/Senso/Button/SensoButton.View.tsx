@@ -144,6 +144,16 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
             font-size: 10.5rem;
           }
         }
+        @media (max-width: 1368px) {
+          span {
+            font-size: 7.0rem;
+          }
+          &.selected {
+            span {
+              font-size: 8.0rem;
+            }
+          }
+        }
       }
     `;
 
