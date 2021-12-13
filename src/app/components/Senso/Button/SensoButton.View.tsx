@@ -95,23 +95,31 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
             clip-path: unset;
             -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M256,128V0h0C114.61,0,0,114.61,0,256v0h128C128,185.31,185.31,128,256,128z" /></svg>');
             mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M256,128V0h0C114.61,0,0,114.61,0,256v0h128C128,185.31,185.31,128,256,128z" /></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
           }
 
           &#${SensoButtonID.TopRight} {
             clip-path: unset;
             -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,256l128,0v0C256,114.61,141.38,0,0,0l0,0l0,128C70.69,128,128,185.31,128,256z" /></svg>');
             mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,256l128,0v0C256,114.61,141.38,0,0,0l0,0l0,128C70.69,128,128,185.31,128,256z" /></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
           }
           &#${SensoButtonID.BottomLeft} {
             clip-path: unset;
             -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,0H0v0c0,141.38,114.61,256,256,256h0V128C185.31,128,128,70.69,128,0z" /></svg>');
             mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,0H0v0c0,141.38,114.61,256,256,256h0V128C185.31,128,128,70.69,128,0z" /></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
           }
 
           &#${SensoButtonID.BottomRight} {
             clip-path: unset;
             -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M0,128v128h0c141.38,0,256-114.62,256-256v0H128C128,70.69,70.69,128,0,128z" /></svg>');
             mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M0,128v128h0c141.38,0,256-114.62,256-256v0H128C128,70.69,70.69,128,0,128z" /></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
           }
         }
       }
