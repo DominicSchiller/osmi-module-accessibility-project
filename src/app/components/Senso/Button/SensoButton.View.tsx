@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import './SensoButton.View.scss'
 import {styled} from "@mui/system";
 import {Button, Icon} from "@mui/material";
 import {hexToHSL} from "../../../../utils/ColorUtils";
 import {ISensoButtonProps, SensoButtonID} from "./SensoButton.Model";
-import {SensoGameplaySession} from "../../../../gameplay/SensoGameplaySession";
+import {SensoGameplayContext} from "../../../context/SensoGameplayContext";
+
 /**
  * A Senso related action button's view
  * @param props Collection of button related attributes
@@ -13,10 +14,11 @@ import {SensoGameplaySession} from "../../../../gameplay/SensoGameplaySession";
 export const SensoButtonView = (props: ISensoButtonProps) => {
 
     const hslHoverColor = hexToHSL(props.color)
+    const context = useContext(SensoGameplayContext)
 
     const handleOnClick = () => {
-        const isCorrect = SensoGameplaySession.shared.isCorrectSelection(props.id)
-        if (!SensoGameplaySession.shared.isRoundFinished) {
+        const isCorrect = context.session.isCorrectSelection(props.id)
+        if (!context.session.isLevelCompleted) {
             document.getElementById("subtitle")!.innerText = isCorrect ? "Richtig" : "Falsch"
         }
     }

@@ -53,7 +53,7 @@ export class SensoUIHelper {
      * @param totalColors the total number of colors to remember
      */
     public static showRoundStatus(attempts: number, totalColors: number) {
-        document.getElementById("game-request-title")!.innerHTML = `${attempts} Versuche für ${totalColors} Farben benötigt`
-        document.getElementById("subtitle")!.innerHTML = "Geschafft"
+        document.getElementById("game-request-title")!.innerHTML = ""
+        document.getElementById("subtitle")!.innerHTML = "--"
     }
 }

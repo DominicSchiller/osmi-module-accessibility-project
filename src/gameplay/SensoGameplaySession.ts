@@ -1,68 +1,91 @@
 import {SensoButtonID} from "../app/components/Senso/Button/SensoButton.Model";
 import {SensoUIHelper} from "./SensoUIHelper";
 import {SensoAudioPlayer, SensoSound} from "./SensoAudioPlayer";
+import {action, computed, makeObservable, observable} from "mobx";
 
+/**
+ * The senso gameplay session
+ */
 export class SensoGameplaySession {
 
     /**
-     * The globally shared senso gameplay session
+     * Status whether a random sequence is playing and presented to the user
      */
-    public static readonly shared: SensoGameplaySession = new SensoGameplaySession()
-
+    @observable public isPlayingSequence: boolean = true
     /**
-     * Status whether the gaming session has been started or not
+     * The current level
      */
-    public get isSessionStarted(): boolean {
-        return this._randomSequence.length > 0
+    @computed public get level(): number {
+        return this._level;
     }
-
-    public get isRoundFinished(): boolean {
-        return this._refButtonIndex === this._randomSequence.length
-    }
-
     /**
-     * The current round
+     * Status whether the current level has been completed or not
+     */
+    @computed public get isLevelCompleted(): boolean {
+        return this._isLevelCompleted && this._refButtonIndex === this._randomSequence.length
+    }
+    /**
+     * The total number of required attempts to solve the sequence
+     */
+    @computed public get attempts(): number {
+        console.warn(this._clickedSequence.length)
+        return this._clickedSequence.length
+    }
+    /**
+     * The current level
      * note: this property also declares the total number of random button picks
      * @private
      */
-    private _round: number = 5
+   @observable private _level: number = 0
     /**
      * The current sequence of randomly picked buttons
      * @private
      */
-    private _randomSequence: SensoButtonID[] = []
+    @observable private _randomSequence: SensoButtonID[] = []
     /**
      * The current sequence of buttons selected by the user
      * @private
      */
-    private _clickedSequence: SensoButtonID[] = []
+    @observable private _clickedSequence: SensoButtonID[] = []
     /**
      * The current validation index
      * @private
      */
-    private _refButtonIndex: number = 0
-
+    @observable private _refButtonIndex: number = 0
     /**
-     * The current round
+     * Status whether the current level has been completed or not
+     * @private
      */
-    public get round(): number {
-        return this._round;
-    }
+    @observable private _isLevelCompleted: boolean = false
 
     /**
      * Create a new Senso gameplay session.
      * @private
      */
-    private constructor() {}
+    constructor() {
+        makeObservable(this);
+    }
+
+    /**
+     * Start new round
+     */
+    @action public start() {
+        this.setRoundStarted(false)
+        this._clickedSequence = []
+        this._randomSequence = []
+        this.setRefButtonIndex(0)
+        this.isPlayingSequence = true
+        this.countDown(3)
+    }
 
     /**
      * Generate a new sequence of random picks
      */
     public generateNewSequence() {
-        this._refButtonIndex = 0
+        this.setRefButtonIndex(0)
         this._randomSequence = []
 
-       for (let i=0; i<this.round; i++) {
+       for (let i=0; i<this.level; i++) {
            this._randomSequence.push(SensoGameplaySession.getRandomButton())
        }
     }
@@ -81,7 +104,7 @@ export class SensoGameplaySession {
      * @param clickedButton The clicked button which to evaluate against the randomly picked one
      */
     public isCorrectSelection(clickedButton: SensoButtonID): boolean {
-        if (this.isRoundFinished) {
+        if (this.isLevelCompleted) {
             return true
         }
 
@@ -90,17 +113,65 @@ export class SensoGameplaySession {
         const isCorrectSelection = refButton === clickedButton
 
         if (isCorrectSelection) {
-            this._refButtonIndex++;
+            this.setRefButtonIndex(this._refButtonIndex+1);
         }
         SensoAudioPlayer.play(isCorrectSelection ? SensoSound.CorrectSelection : SensoSound.WrongSelection)
 
-        if (this.isRoundFinished) {
-            SensoUIHelper.showRoundStatus(this._clickedSequence.length, this._round)
+        if (this.isLevelCompleted) {
+            SensoUIHelper.showRoundStatus(this._clickedSequence.length, this._level)
         }
 
         return isCorrectSelection
     }
 
+    /**
+     * trigger a countdown starting from given counter.
+     * @param counter The counter which will be counted down
+     */
+    @action private countDown(counter: number) {
+        setTimeout(() => {
+            switch (counter) {
+                case -1:
+                    this.incrementRound()
+                    this.generateNewSequence()
+                    this.presentRandomSequence().then(() => {
+                        this.setRoundStarted(true)
+                        this.setPlayingState(false)
+                        document.getElementById("game-request-title")!.innerHTML = "Und jetzt du ..."
+                        document.getElementById("subtitle")!.innerHTML = "?"
+                    });
+                    break;
+                case 0:
+                    document.getElementById("subtitle")!.innerHTML = "&nbsp;"
+                    this.countDown(-1)
+                    break;
+                default:
+                    document.getElementById("subtitle")!.innerHTML = `${counter}`
+                    this.countDown(counter-1)
+            }
+        }, counter === 3 ? 500 : 1200);
+    }
+
+    @action private setPlayingState(isPlaying: boolean) {
+        this.isPlayingSequence = isPlaying
+    }
+
+    @action private setRoundStarted(isStarted: boolean) {
+        this._isLevelCompleted = isStarted
+    }
+
+    @action private incrementRound() {
+        this._level += 1
+    }
+
+    @action private setRefButtonIndex(index: number) {
+        this._refButtonIndex = index
+    }
+
+    /**
+     * Generate a random button
+     * @private
+     */
     private static getRandomButton(): SensoButtonID {
         const random = Math.floor(Math.random() * Object.keys(SensoButtonID).length);
         return Object.values(SensoButtonID)[random] as SensoButtonID;

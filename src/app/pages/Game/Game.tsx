@@ -1,58 +1,43 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {withAccessibilityContext} from "../../context/AccessibilityContext";
 import SensoView from "../../components/Senso/Senso.View";
-import {SensoGameplaySession} from "../../../gameplay/SensoGameplaySession";
 import "./Game.scss";
 import {Grid} from "@mui/material";
+import {StartLevelDialog} from "./dialogs/StartLevelDialog";
+import {
+    GameplayContextConsumer,
+    GameplayContextProvider
+} from "../../context/SensoGameplayContext";
+import {observer} from "mobx-react";
+import {FinishedLevelDialog} from "./dialogs/FinishedLevelDialog";
 
 /**
  * The app's senso game page component.
  */
-export const GamePage = withAccessibilityContext((props: any) => {
+const GamePage = withAccessibilityContext((props: any) => {
 
-    const [isPlayingSequence, setIsPlayingSequence] = useState(true)
-
-    /**
-     * trigger a countdown starting from given counter.
-     * @param counter The counter which will be counted down
-     */
-    const countDown = useCallback((counter: number) => {
-        setTimeout(() => {
-            switch (counter) {
-                case -1:
-                    SensoGameplaySession.shared.generateNewSequence()
-                    SensoGameplaySession.shared.presentRandomSequence().then(() => {
-                        setIsPlayingSequence(false)
-                        document.getElementById("game-request-title")!.innerHTML = "Und jetzt du ..."
-                        document.getElementById("subtitle")!.innerHTML = "?"
-                    });
-                    break;
-                case 0:
-                    document.getElementById("subtitle")!.innerHTML = "&nbsp;"
-                    countDown(-1)
-                    break;
-                default:
-                    document.getElementById("subtitle")!.innerHTML = `${counter}`
-                    countDown(counter-1)
-            }
-        }, 1200);
-
-    }, []);
+    const dialogRef = React.createRef<StartLevelDialog>()
 
     useEffect(() => {
-        if (!SensoGameplaySession.shared.isSessionStarted) {
-            setIsPlayingSequence(true)
-            // start game after timeout
-            setTimeout(() => {
-                document.getElementById("game-request-title")!.innerHTML = ""
-                countDown(3)
-            }, 3000);
-        }
-    }, [isPlayingSequence, countDown]);
+        setTimeout(() => {
+            dialogRef.current?.open()
+        }, 500)
+    }, [dialogRef]);
 
     return (
-        <Grid container direction={"column"} className={"page-container"}>
-            <SensoView disabled={isPlayingSequence} />
-        </Grid>
+       <GameplayContextProvider>
+           <GameplayContextConsumer>
+               {(context: any) =>
+                   <Grid container direction={"column"} className={"page-container"}>
+                       <SensoView disabled={context.session.isPlayingSequence || context.session.isRoundFinished} />
+                       <StartLevelDialog ref={dialogRef} />
+                       <FinishedLevelDialog />
+                   </Grid>
+               }
+           </GameplayContextConsumer>
+
+       </GameplayContextProvider>
     );
 });
+
+export default observer(GamePage);

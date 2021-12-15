@@ -50,7 +50,7 @@ const SensoView = withTheme(withAccessibilityContext((props: any) => {
         <>
             <Stack direction={"column"} alignItems={"center"} justifyContent={"center"} id={"senso-container"}>
                 <div id="description-box">
-                    <Typography id={"game-request-title"} variant={"h4"} color={"textSecondary"}>Merke dir die Reihenfolge</Typography>
+                    <Typography id={"game-request-title"} variant={"h4"} color={"textSecondary"}></Typography>
                     <Typography id={"subtitle"} color={"textPrimary"} />
                 </div>
                 <Stack direction={"column"} justifyContent={"space-between"} id={"senso"} sx={{backgroundColor: theme.palette.surface}}>
