@@ -131,6 +131,48 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
 
         <main>
           <List subheader={<ListSubheader>Zeit und Tempo</ListSubheader>}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                padding: "8px 16px 8px 16px",
+                bgcolor: "#f5f5f5",
+                borderRadius: "16px",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <Icon
+                  baseClassName="material-icons-round"
+                  sx={{ fontSize: 36, color: "#0000008a" }}
+                >
+                  timer
+                </Icon>
+                <Box sx={{ typography: "body1", ml: 1 }}>
+                  Zeitdauer der Abspielung in Sekunden
+                </Box>
+              </Box>
+              <Box sx={{ px: 2, pt: 1 }}>
+                <Slider
+                  sx={{ width: 1 }}
+                  aria-label="Zeitdauer der Abspielung"
+                  defaultValue={1}
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks={marks1}
+                  min={1}
+                  max={5}
+                />
+              </Box>
+            </Box>
+          </List>
+          {/* Die Slider sollten über die gesamte Breite des ListItems gehen, nur leider gibt es mit der Ausrichtung des Icons und Sliders Probleme, da es nur im Secondary-Teil des LitItemTexts steht. Eine Flexbox eignet sich hier besser für Elemente neben- und untereinander. Sie passt sich auch dynamisch an. Das ist aktuell noch nicht sauber mit dem Styling und müsste einheitlich definiert werden. */}
+          <List subheader={<ListSubheader>Zeit und Tempo</ListSubheader>}>
             <ListItem className={"setting-list-item"}>
               <ListItemIcon>
                 <Icon baseClassName="material-icons-round">timer</Icon>
@@ -138,15 +180,17 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
               <ListItemText
                 id="switch-font-label"
                 primary="Zeitdauer der Abspielung (Sekunden)"
-              />
-              <Slider
-                aria-label="Zeitdauer der Abspielung"
-                defaultValue={1}
-                valueLabelDisplay="auto"
-                step={1}
-                marks={marks1}
-                min={1}
-                max={5}
+                secondary={
+                  <Slider
+                    aria-label="Zeitdauer der Abspielung"
+                    defaultValue={1}
+                    valueLabelDisplay="auto"
+                    step={1}
+                    marks={marks1}
+                    min={1}
+                    max={5}
+                  />
+                }
               />
             </ListItem>
             <ListItem className={"setting-list-item"}>
@@ -156,45 +200,57 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
               <ListItemText
                 id="switch-font-label"
                 primary="Zeitlimit für Eingaben"
-              />
-              <Slider
-                aria-label="Zeitlimit für Eingaben"
-                defaultValue={10}
-                valueLabelDisplay="auto"
-                step={2}
-                marks={marks2}
-                min={2}
-                max={10}
+                secondary={
+                  <Slider
+                    aria-label="Zeitlimit für Eingaben"
+                    defaultValue={10}
+                    valueLabelDisplay="auto"
+                    step={2}
+                    marks={marks2}
+                    min={2}
+                    max={10}
+                  />
+                }
               />
             </ListItem>
             <ListItem className={"setting-list-item"}>
               <ListItemIcon>
                 <Icon baseClassName="material-icons-round">favorite</Icon>
               </ListItemIcon>
-              <ListItemText id="switch-font-label" primary="Leben / Versuche" />
-              <Slider
-                aria-label="Leben / Versuche"
-                defaultValue={4}
-                valueLabelDisplay="auto"
-                step={1}
-                marks={marks3}
-                min={1}
-                max={4}
+              <ListItemText
+                id="switch-font-label"
+                primary="Leben / Versuche"
+                secondary={
+                  <Slider
+                    aria-label="Leben / Versuche"
+                    defaultValue={4}
+                    valueLabelDisplay="auto"
+                    step={1}
+                    marks={marks3}
+                    min={1}
+                    max={4}
+                  />
+                }
               />
             </ListItem>
             <ListItem className={"setting-list-item"}>
               <ListItemIcon>
                 <Icon baseClassName="material-icons-round">lightbulb</Icon>
               </ListItemIcon>
-              <ListItemText id="switch-font-label" primary="Anzahl der Tipps" />
-              <Slider
-                aria-label="Anzahl der Tipps"
-                defaultValue={0}
-                valueLabelDisplay="auto"
-                marks={marks4}
-                step={null}
-                min={0}
-                max={5}
+              <ListItemText
+                id="switch-font-label"
+                primary="Anzahl der Tipps"
+                secondary={
+                  <Slider
+                    aria-label="Anzahl der Tipps"
+                    defaultValue={0}
+                    valueLabelDisplay="auto"
+                    marks={marks4}
+                    step={null}
+                    min={0}
+                    max={5}
+                  />
+                }
               />
             </ListItem>
           </List>
