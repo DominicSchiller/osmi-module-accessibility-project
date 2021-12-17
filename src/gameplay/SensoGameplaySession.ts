@@ -28,7 +28,6 @@ export class SensoGameplaySession {
      * The total number of required attempts to solve the sequence
      */
     @computed public get attempts(): number {
-        console.warn(this._clickedSequence.length)
         return this._clickedSequence.length
     }
     /**
