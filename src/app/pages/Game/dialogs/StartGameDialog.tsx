@@ -5,7 +5,7 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    Slide,
+    Slide, Theme,
     Typography
 } from "@mui/material";
 import {TransitionProps} from "@mui/material/transitions";
@@ -13,7 +13,9 @@ import React, {Component} from "react";
 import {GameplayContextConsumer, SensoGameplayContext} from "../../../context/SensoGameplayContext";
 import "./Dialogs.scss"
 
-export interface IGameDialogProps {}
+export interface IGameDialogProps {
+    theme?: Theme
+}
 
 interface IGameDialogState {
     isOpen: boolean
@@ -22,7 +24,7 @@ interface IGameDialogState {
 /**
  * Dialog to display game related information before starting the actual level.
  */
-export class StartLevelDialog extends Component<IGameDialogProps, IGameDialogState> {
+export class StartGameDialog extends Component<IGameDialogProps, IGameDialogState> {
     static contextType = SensoGameplayContext
 
     /**
@@ -69,7 +71,7 @@ export class StartLevelDialog extends Component<IGameDialogProps, IGameDialogSta
                         aria-describedby="Information zur bevorstehenden Runde"
                         className={"game-info-dialog"}
                     >
-                        <DialogTitle className={"title"}>{`Runde ${value.session.level + 1}`}</DialogTitle>
+                        <DialogTitle className={"title"}>Bevor es losgeht ...</DialogTitle>
                         <DialogContent>
                             <Typography color={"textSecondary"}>
                                 Versuche Dir die richtige Reihenfolge der gleich aufleuchtenden Tasten zu merken.

@@ -3,9 +3,102 @@
 
   .MuiDialog-paper {
     padding: 24px;
+    border-radius: 48px;
   }
 
   .title {
     font-weight: bold;
+  }
+
+  &.score-info-dialog {
+
+    .MuiPaper-root:first-of-type {
+      overflow-y: visible !important;
+    }
+
+    .MuiDialogContent-root {
+      margin-top: 80px;
+      min-width: 480px;
+      margin-bottom: 8px;
+    }
+
+    .header-title-back {
+      top: 27px;
+      width: 36%;
+      height: 64px;
+      position: absolute;
+      background-color: yellowgreen;
+      border-radius: 20px;
+      z-index: -1;
+
+      &.left {
+        left: -28px;
+      }
+
+      &.right {
+        right: -28px;
+      }
+    }
+
+    .header {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% + 16px);
+      border-radius: 20px;
+      height: auto;
+      color: white;
+      background-color: yellowgreen;
+      padding: 8px 0;
+
+      [class*="MuiIcon-root"] {
+        font-size: 32px;
+      }
+
+      [class*="MuiStack-root"] {
+        height: 100%;
+      }
+    }
+
+    #star-score {
+      width: 100%;
+
+      .star-icon {
+        width: 80px;
+        height: auto;
+        transition: all .2s ease-in-out;
+        margin-top: 32px;
+
+        &:first-of-type {
+          transform: rotate(-22.5deg);
+        }
+
+        &:last-of-type {
+          transform: rotate(22.5deg);
+        }
+
+        &:nth-of-type(2) {
+          margin-top: 0;
+          margin-bottom: 16px;
+        }
+
+        &.scaled {
+          transform: scale(1.4);
+
+          &:first-of-type {
+            transform: rotate(-22.5deg) scale(1.4);
+          }
+
+          &:last-of-type {
+            transform: rotate(22.5deg) scale(1.4);
+          }
+        }
+      }
+    }
+
+    #points-score {
+      line-height: 3.2rem;
+    }
   }
 }

@@ -67,6 +67,10 @@ export default class AppTheme {
                     paper: '#ffffff'
                 }
             } : {}),
+            scoringStar: {
+                filled: 'gold',
+                empty: basePalette.grey[300]
+            },
             action: {
                 disabled: `${this.getDisabledColor(accessibilityProps)}`
             },
@@ -103,6 +107,10 @@ export default class AppTheme {
                     disabled: 'rgba(0, 0, 0, 0.4)'
                 }
             } : {}),
+            scoringStar: {
+                filled: 'gold',
+                empty: basePalette.grey[900]
+            },
             action: {
                 disabled: `${this.getDisabledColor(accessibilityProps)}`
             },

@@ -2,6 +2,7 @@ import {SensoButtonID} from "../app/components/Senso/Button/SensoButton.Model";
 import {SensoUIHelper} from "./SensoUIHelper";
 import {SensoAudioPlayer, SensoSound} from "./SensoAudioPlayer";
 import {action, computed, makeObservable, observable} from "mobx";
+import LevelScoreManager from "./LevelScoreCalculator";
 
 /**
  * The senso gameplay session
@@ -57,6 +58,32 @@ export class SensoGameplaySession {
      */
     @observable private _isLevelCompleted: boolean = false
 
+    /**
+     * The time needed to complete the current level
+     */
+    public get levelCompletionTime(): number {
+        return this.scoreManager.timeNeeded
+    }
+
+    /**
+     * The reached score of the currently completed level
+     */
+    public get levelScore(): number {
+        return this.scoreManager.calcScore(this._level)
+    }
+
+    /**
+     * The current level's score to reach all three stars
+     */
+    public get threeStarLevelScore(): number {
+        return this.scoreManager.calcThreeStarScore(this.level)
+    }
+
+    /**
+     * The session's game score manager
+     * @private
+     */
+    private scoreManager: LevelScoreManager = new LevelScoreManager()
     /**
      * Create a new Senso gameplay session.
      * @private
@@ -117,6 +144,7 @@ export class SensoGameplaySession {
         SensoAudioPlayer.play(isCorrectSelection ? SensoSound.CorrectSelection : SensoSound.WrongSelection)
 
         if (this.isLevelCompleted) {
+            this.scoreManager.stopTimer()
             SensoUIHelper.showRoundStatus(this._clickedSequence.length, this._level)
         }
 
@@ -134,8 +162,9 @@ export class SensoGameplaySession {
                     this.incrementRound()
                     this.generateNewSequence()
                     this.presentRandomSequence().then(() => {
+                        this.setSequencePlayingState(false)
                         this.setRoundStarted(true)
-                        this.setPlayingState(false)
+                        this.scoreManager.startTimer()
                         document.getElementById("game-request-title")!.innerHTML = "Und jetzt du ..."
                         document.getElementById("subtitle")!.innerHTML = "?"
                     });
@@ -151,7 +180,7 @@ export class SensoGameplaySession {
         }, counter === 3 ? 500 : 1200);
     }
 
-    @action private setPlayingState(isPlaying: boolean) {
+    @action private setSequencePlayingState(isPlaying: boolean) {
         this.isPlayingSequence = isPlaying
     }
 
