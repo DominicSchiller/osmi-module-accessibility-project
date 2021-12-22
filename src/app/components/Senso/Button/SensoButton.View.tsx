@@ -15,6 +15,7 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
 
     const hslHoverColor = hexToHSL(props.color)
     const context = useContext(SensoGameplayContext)
+    const isSafariBrowser = navigator.vendor.startsWith('Apple')
 
     const handleOnClick = () => {
         const isCorrect = context.session.isCorrectSelection(props.id)
@@ -31,26 +32,55 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
       background-color: ${props.color};
       transition: all 200ms ease-in-out;
       cursor: pointer;
-      
+
       &#${SensoButtonID.TopLeft} {
         margin-right: var(--margin);
-        clip-path: url("#cp-top-left");
+        ${isSafariBrowser ? `
+            clip-path: unset;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M256,128V0h0C114.61,0,0,114.61,0,256v0h128C128,185.31,185.31,128,256,128z" /></svg>');
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M256,128V0h0C114.61,0,0,114.61,0,256v0h128C128,185.31,185.31,128,256,128z" /></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;    
+        ` : `clip-path: url("#cp-top-left");`
+        }
       }
 
       &#${SensoButtonID.TopRight} {
         margin-left: var(--margin);
-        clip-path: url("#cp-top-right");
+        ${isSafariBrowser ? `
+            clip-path: unset;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,256l128,0v0C256,114.61,141.38,0,0,0l0,0l0,128C70.69,128,128,185.31,128,256z" /></svg>');
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,256l128,0v0C256,114.61,141.38,0,0,0l0,0l0,128C70.69,128,128,185.31,128,256z" /></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;    
+        ` : `clip-path: url("#cp-top-right");`
+        }
       }
+
       &#${SensoButtonID.BottomLeft} {
         margin-right: var(--margin);
-        clip-path: url("#cp-bottom-left");
+        ${isSafariBrowser ? `
+            clip-path: unset;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,0H0v0c0,141.38,114.61,256,256,256h0V128C185.31,128,128,70.69,128,0z" /></svg>');
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,0H0v0c0,141.38,114.61,256,256,256h0V128C185.31,128,128,70.69,128,0z" /></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+        ` : `clip-path: url("#cp-bottom-left");`
+        }
       }
 
       &#${SensoButtonID.BottomRight} {
         margin-left: var(--margin);
-        clip-path: url("#cp-bottom-right");
+        ${isSafariBrowser ? `
+            clip-path: unset;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M0,128v128h0c141.38,0,256-114.62,256-256v0H128C128,70.69,70.69,128,0,128z" /></svg>');
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M0,128v128h0c141.38,0,256-114.62,256-256v0H128C128,70.69,70.69,128,0,128z" /></svg>');
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+        ` : `clip-path: url("#cp-bottom-right");`
+        }
       }
-      
+
       &:hover, &:active {
         background-color: hsl(${hslHoverColor.h}, ${hslHoverColor.s}%, ${hslHoverColor.l - 15}%);
       }
@@ -59,13 +89,13 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
         z-index: 2;
         transform: scale(1.15);
         background-color: hsl(${hslHoverColor.h}, ${hslHoverColor.s}%, ${hslHoverColor.l + 10}%);
-        
+
         span {
           color: #ffffff;
           //font-size: 5vw;
         }
       }
-      
+
       span {
         transition: all 150ms ease-in-out;
         //font-size: 4vw;
@@ -73,105 +103,89 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
 
       ${props => props.theme.breakpoints.up("xs")} {
         --margin: 4px;
+
         span {
           font-size: 10vw;
         }
+
         &.selected {
           span {
             font-size: 12vw;
           }
         }
       }
+
       ${props => props.theme.breakpoints.up("sm")} {
         --margin: 4px;
+
         span {
           font-size: 5.5rem;
         }
+
         &.selected {
           span {
             font-size: 6.5rem;
           }
         }
-        @media (orientation: portrait) {
-          &#${SensoButtonID.TopLeft} {
-            clip-path: unset;
-            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M256,128V0h0C114.61,0,0,114.61,0,256v0h128C128,185.31,185.31,128,256,128z" /></svg>');
-            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M256,128V0h0C114.61,0,0,114.61,0,256v0h128C128,185.31,185.31,128,256,128z" /></svg>');
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
+
+        ${props => props.theme.breakpoints.up("md")} {
+          --margin: 8px;
+
+          span {
+            font-size: 7.5rem;
           }
 
-          &#${SensoButtonID.TopRight} {
-            clip-path: unset;
-            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,256l128,0v0C256,114.61,141.38,0,0,0l0,0l0,128C70.69,128,128,185.31,128,256z" /></svg>');
-            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,256l128,0v0C256,114.61,141.38,0,0,0l0,0l0,128C70.69,128,128,185.31,128,256z" /></svg>');
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-          }
-          &#${SensoButtonID.BottomLeft} {
-            clip-path: unset;
-            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,0H0v0c0,141.38,114.61,256,256,256h0V128C185.31,128,128,70.69,128,0z" /></svg>');
-            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M128,0H0v0c0,141.38,114.61,256,256,256h0V128C185.31,128,128,70.69,128,0z" /></svg>');
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-          }
-
-          &#${SensoButtonID.BottomRight} {
-            clip-path: unset;
-            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M0,128v128h0c141.38,0,256-114.62,256-256v0H128C128,70.69,70.69,128,0,128z" /></svg>');
-            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256"><path d="M0,128v128h0c141.38,0,256-114.62,256-256v0H128C128,70.69,70.69,128,0,128z" /></svg>');
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-          }
-        }
-      }
-      ${props => props.theme.breakpoints.up("md")} {
-        --margin: 8px;
-        span {
-          font-size: 7.5rem;
-        }
-        &.selected {
-          span {
-            font-size: 8.5rem;
-          }
-        }
-      }
-      ${props => props.theme.breakpoints.up("lg")} {
-        --margin: 12px;
-        span {
-          font-size: 8vw;
-        }
-        &.selected {
-          span {
-            font-size: 10vw;
-          }
-        }
-        @media (max-width: 1368px) {
-          span {
-            font-size: 7.0rem;
-          }
           &.selected {
             span {
-              font-size: 8.0rem;
+              font-size: 8.5rem;
             }
           }
         }
-      }
-      ${props => props.theme.breakpoints.up("xl")} {
-        --margin: 12px;
-        span {
-          font-size: 6vw;
-        }
-        &.selected {
+
+        ${props => props.theme.breakpoints.up("lg")} {
+          --margin: 12px;
+
           span {
             font-size: 8vw;
           }
+
+          &.selected {
+            span {
+              font-size: 10vw;
+            }
+          }
+
+          @media (max-width: 1368px) {
+            span {
+              font-size: 7.0rem;
+            }
+
+            &.selected {
+              span {
+                font-size: 8.0rem;
+              }
+            }
+          }
         }
-      }
+
+        ${props => props.theme.breakpoints.up("xl")} {
+          --margin: 12px;
+
+          span {
+            font-size: 6vw;
+          }
+
+          &.selected {
+            span {
+              font-size: 8vw;
+            }
+          }
+        }
     `;
 
-    return(
-        <PlayButton id={props.id} className={`clipped`} onClick={handleOnClick} disabled={props.disabled} aria-label={props.title}>
+    return (
+        <PlayButton id={props.id} className={`clipped`} onClick={handleOnClick} disabled={props.disabled}
+                    aria-label={props.title}>
             <Icon baseClassName="material-icons-round">
                 {props.icon}
             </Icon>
