@@ -74,11 +74,11 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
       ${props => props.theme.breakpoints.up("xs")} {
         --margin: 4px;
         span {
-          font-size: 2.7rem;
+          font-size: 10vw;
         }
         &.selected {
           span {
-            font-size: 3.5rem;
+            font-size: 12vw;
           }
         }
       }
@@ -139,11 +139,11 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
       ${props => props.theme.breakpoints.up("lg")} {
         --margin: 12px;
         span {
-          font-size: 9.5rem;
+          font-size: 8vw;
         }
         &.selected {
           span {
-            font-size: 10.5rem;
+            font-size: 10vw;
           }
         }
         @media (max-width: 1368px) {
@@ -154,6 +154,17 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
             span {
               font-size: 8.0rem;
             }
+          }
+        }
+      }
+      ${props => props.theme.breakpoints.up("xl")} {
+        --margin: 12px;
+        span {
+          font-size: 6vw;
+        }
+        &.selected {
+          span {
+            font-size: 8vw;
           }
         }
       }

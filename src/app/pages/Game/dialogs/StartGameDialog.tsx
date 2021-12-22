@@ -12,6 +12,8 @@ import {TransitionProps} from "@mui/material/transitions";
 import React, {Component} from "react";
 import {GameplayContextConsumer, SensoGameplayContext} from "../../../context/SensoGameplayContext";
 import "./Dialogs.scss"
+import {AccessibilityProps} from "../../../../models/accessibility/AccessibilityProps";
+import {AccessibilityContextConsumer} from "../../../context/AccessibilityContext";
 
 export interface IGameDialogProps {
     theme?: Theme
@@ -61,29 +63,35 @@ export class StartGameDialog extends Component<IGameDialogProps, IGameDialogStat
 
     render() {
         return (
-            <GameplayContextConsumer>
-                {(value: any) =>
-                    <Dialog
-                        open={this.state.isOpen}
-                        TransitionComponent={DialogTransition}
-                        keepMounted
-                        onClose={this.close}
-                        aria-describedby="Information zur bevorstehenden Runde"
-                        className={"game-info-dialog"}
-                    >
-                        <DialogTitle className={"title"}>Bevor es losgeht ...</DialogTitle>
-                        <DialogContent>
-                            <Typography color={"textSecondary"}>
-                                Versuche Dir die richtige Reihenfolge der gleich aufleuchtenden Tasten zu merken.
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions sx={{justifyContent: "center"}}>
-                            <Button variant={"contained"} onClick={this.close} aria-label={"Runde starten"}>Los geht's!</Button>
-                        </DialogActions>
-                    </Dialog>
+            <AccessibilityContextConsumer>
+                {(accessibility: AccessibilityProps) =>
+                    <GameplayContextConsumer>
+                        {(gameplay: any) =>
+                            <Dialog
+                                open={this.state.isOpen}
+                                TransitionComponent={DialogTransition}
+                                keepMounted={false}
+                                onClose={(event, reason) => {
+                                    if (reason !== 'backdropClick') {
+                                        this.close()
+                                    }
+                                }}
+                                aria-describedby="Information zur bevorstehenden Runde"
+                                className={"game-info-dialog"}>
+                                <DialogTitle className={"title"}>Bevor es losgeht ...</DialogTitle>
+                                <DialogContent>
+                                    <Typography color={"textSecondary"}>
+                                        Versuche Dir die richtige Reihenfolge der gleich aufleuchtenden Tasten zu merken.
+                                    </Typography>
+                                </DialogContent>
+                                <DialogActions sx={{justifyContent: "center"}}>
+                                    <Button variant={"contained"} onClick={this.close} aria-label={"Runde starten"}>Los geht's!</Button>
+                                </DialogActions>
+                            </Dialog>
+                        }
+                    </GameplayContextConsumer>
                 }
-            </GameplayContextConsumer>
-
+            </AccessibilityContextConsumer>
         )
     }
 }

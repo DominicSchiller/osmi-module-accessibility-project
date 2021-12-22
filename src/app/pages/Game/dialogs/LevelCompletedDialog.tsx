@@ -16,6 +16,8 @@ import {IGameDialogProps} from "./StartGameDialog";
 
 import {ReactComponent as SVGStarIcon} from "../../../../assets/images/icons/star.svg"
 import { styled } from "@mui/system";
+import {AccessibilityContextConsumer} from "../../../context/AccessibilityContext";
+import {AccessibilityProps} from "../../../../models/accessibility/AccessibilityProps";
 
 interface IGameDialogState {
     isOpen: boolean
@@ -81,7 +83,6 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, IGameDialo
         const counters = document.querySelectorAll('.counter')
         const speed = 150
         const threeStarScore = this.context.session.threeStarLevelScore
-        console.warn(threeStarScore)
 
         counters.forEach(counter => {
 
@@ -128,52 +129,59 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, IGameDialo
 
     render() {
         return (
-            <GameplayContextConsumer>
-                {(context: any) =>
-                    <Dialog
-                        open={this.state.isOpen}
-                        TransitionComponent={DialogTransition}
-                        onClose={this.close}
-                        keepMounted
-                        aria-describedby="Ergebnisse dieser Runde"
-                        className={"game-info-dialog score-info-dialog"}
-                    >
-                        <Paper className={"header-title-back left"} />
-                        <Paper className={"header-title-back right"} />
-                        <Paper elevation={6} className={"header"} >
-                            <Stack direction={"column"} justifyContent={"center"} alignItems={"center"}>
-                                <Typography color={"white"} variant={"h5"}>
-                                    Runde {`${context.session.level}`}
-                                </Typography>
-                                <Icon baseClassName="material-icons-round">
-                                    done
-                                </Icon>
-                            </Stack>
-                        </Paper>
-                        <DialogContent>
-                           <Stack direction={"column"}>
-                               <Typography id={"points-score"} variant={"h5"} color={"textPrimary"} sx={{padding: "0"}}>
-                                   Erfolgreich gemeistert
-                               </Typography>
-                               <Stack direction={"column"} rowGap={"16px"}>
-                                   <Stack id={"star-score"} direction={"row"} columnGap={"16px"} justifyContent={"center"}>
-                                       <StarIcon className={"star-icon"} />
-                                       <StarIcon className={"star-icon"} />
-                                       <StarIcon className={"star-icon"} />
-                                   </Stack>
-                                   <Typography id={"points-score"} variant={"h4"} color={"textPrimary"}>
-                                       <div className={"counter"} data-target={`${context.session.levelScore}`}>0</div>
-                                       Punkte
-                                   </Typography>
-                               </Stack>
-                           </Stack>
-                        </DialogContent>
-                        <DialogActions sx={{justifyContent: "center"}}>
-                            <Button variant={"contained"} onClick={this.close} aria-label={"Nächste Runde starten"}>Auf zu Runde {context.session.level + 1}</Button>
-                        </DialogActions>
-                    </Dialog>
+            <AccessibilityContextConsumer>
+                {(accessibility: AccessibilityProps) =>
+                    <GameplayContextConsumer>
+                        {(gameplay: any) =>
+                            <Dialog
+                                open={this.state.isOpen}
+                                TransitionComponent={DialogTransition}
+                                keepMounted={false}
+                                onClose={(event, reason) => {
+                                    if (reason !== 'backdropClick') {
+                                        this.close()
+                                    }
+                                }}
+                                aria-describedby="Ergebnisse dieser Runde"
+                                className={"game-info-dialog score-info-dialog"}>
+                                <Paper className={"header-title-back left"} />
+                                <Paper className={"header-title-back right"} />
+                                <Paper elevation={6} className={"header"} >
+                                    <Stack direction={"column"} justifyContent={"center"} alignItems={"center"}>
+                                        <Typography color={"white"} variant={"h5"}>
+                                            Runde {`${gameplay.session.level}`}
+                                        </Typography>
+                                        <Icon baseClassName="material-icons-round">
+                                            done
+                                        </Icon>
+                                    </Stack>
+                                </Paper>
+                                <DialogContent>
+                                    <Stack direction={"column"}>
+                                        <Typography id={"points-score"} variant={"h5"} color={"textPrimary"} sx={{padding: "0"}}>
+                                            Erfolgreich gemeistert
+                                        </Typography>
+                                        <Stack direction={"column"} rowGap={"16px"}>
+                                            <Stack id={"star-score"} direction={"row"} columnGap={"16px"} justifyContent={"center"}>
+                                                <StarIcon className={"star-icon"} />
+                                                <StarIcon className={"star-icon"} />
+                                                <StarIcon className={"star-icon"} />
+                                            </Stack>
+                                            <Typography id={"points-score"} variant={"h4"} color={"textPrimary"}>
+                                                <div className={"counter"} data-target={`${gameplay.session.levelScore}`}>0</div>
+                                                Punkte
+                                            </Typography>
+                                        </Stack>
+                                    </Stack>
+                                </DialogContent>
+                                <DialogActions sx={{justifyContent: "center"}}>
+                                    <Button variant={"contained"} onClick={this.close} aria-label={"Nächste Runde starten"}>Auf zu Runde {gameplay.session.level + 1}</Button>
+                                </DialogActions>
+                            </Dialog>
+                        }
+                    </GameplayContextConsumer>
                 }
-            </GameplayContextConsumer>
+            </AccessibilityContextConsumer>
 
         )
     }

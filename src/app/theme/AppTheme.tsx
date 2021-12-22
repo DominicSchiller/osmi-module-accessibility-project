@@ -68,7 +68,7 @@ export default class AppTheme {
                 }
             } : {}),
             scoringStar: {
-                filled: 'gold',
+                filled: accessibilityProps.seeing.uiColorMode === UIColorMode.Monochrome ? basePalette.grey[700] : 'gold',
                 empty: basePalette.grey[300]
             },
             action: {

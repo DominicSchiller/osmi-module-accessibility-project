@@ -67,10 +67,10 @@ export class SeeingAccessibilityProps {
         switch (newColorMode) {
             case UIColorMode.Light:
             case UIColorMode.Dark:
-                document.body.classList.remove("monochrome")
+                document.documentElement.classList.remove("monochrome")
                 break
             case UIColorMode.Monochrome:
-                document.body.classList.add("monochrome")
+                document.documentElement.classList.add("monochrome")
                 break
         }
     }
@@ -85,33 +85,33 @@ export class SeeingAccessibilityProps {
 
         switch (newContrastMode) {
             case UIContrastMode.HighContrast:
-                document.body.classList.remove("high-saturation")
-                document.body.classList.remove("low-saturation")
-                document.body.classList.add("high-contrast")
+                document.documentElement.classList.remove("high-saturation")
+                document.documentElement.classList.remove("low-saturation")
+                document.documentElement.classList.add("high-contrast")
                 this.minContrastValue = 130;
                 this.maxContrastValue = 200;
                 this.setContrastValue(135)
                 break
             case UIContrastMode.HighSaturation:
-                document.body.classList.remove("high-contrast")
-                document.body.classList.remove("low-saturation")
-                document.body.classList.add("high-saturation")
+                document.documentElement.classList.remove("high-contrast")
+                document.documentElement.classList.remove("low-saturation")
+                document.documentElement.classList.add("high-saturation")
                 this.minContrastValue = 150;
                 this.maxContrastValue = 250;
                 this.setContrastValue(200)
                 break
             case UIContrastMode.LowSaturation:
-                document.body.classList.remove("high-contrast")
-                document.body.classList.remove("high-saturation")
-                document.body.classList.add("low-saturation")
+                document.documentElement.classList.remove("high-contrast")
+                document.documentElement.classList.remove("high-saturation")
+                document.documentElement.classList.add("low-saturation")
                 this.minContrastValue = 40;
                 this.maxContrastValue = 75;
                 this.setContrastValue(60)
                 break
             default:
-                document.body.classList.remove("high-contrast")
-                document.body.classList.remove("high-saturation")
-                document.body.classList.remove("low-saturation")
+                document.documentElement.classList.remove("high-contrast")
+                document.documentElement.classList.remove("high-saturation")
+                document.documentElement.classList.remove("low-saturation")
                 this.minContrastValue = 0;
                 this.maxContrastValue = 0;
                 this.setContrastValue(0)
@@ -124,7 +124,7 @@ export class SeeingAccessibilityProps {
      */
     @action public setContrastValue(newContrastValue: number) {
         this.contrastValue = newContrastValue
-        document.body.style.setProperty("--contrastValue", `${newContrastValue}%`)
+        document.documentElement.style.setProperty("--contrastValue", `${newContrastValue}%`)
     }
 
     /**

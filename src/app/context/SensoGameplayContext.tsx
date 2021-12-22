@@ -23,7 +23,7 @@ export const GameplayContextProvider = ({children}: any) => {
     )
 }
 /**
- * The senso gameplay context provider
+ * The senso gameplay context consumer
  * @param children List of child components which will consume the gameplay context
  * @constructor
  */
