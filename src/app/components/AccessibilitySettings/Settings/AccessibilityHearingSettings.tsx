@@ -1,14 +1,58 @@
 import React from "react";
 import {
-    Button,
-    Icon,
-    Stack,
-    Typography,
+  Button,
+  Box,
+  Icon,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Slider,
+  Stack,
+  Switch,
+  Typography,
 } from "@mui/material";
 import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenuContext";
 import { withAccessibilityContext } from "../../../context/AccessibilityContext";
 import "./AccessibilityCategorySettings.scss";
+import { styled } from "@mui/system";
 // import { rgbaString } from "../../../../utils/ColorUtils";
+
+const marks1 = [
+  {
+    value: 10,
+    label: "Klein",
+  },
+  {
+    value: 16,
+    label: "Normal",
+  },
+  {
+    value: 24,
+    label: "Groß",
+  },
+];
+
+const ListItemBox = styled(Box)(({ theme }) => ({
+  color: `${theme.palette.text.secondary}`,
+  backgroundColor: `${theme.palette.surface!}`,
+  fontSize: "1.2rem",
+  padding: "16px",
+  display: "flex",
+  flexDirection: "column",
+  borderRadius: "16px",
+  marginTop: "16px",
+  marginBottom: "16px",
+
+  "&:last-of-type": {
+    marginBottom: "0",
+  },
+
+  "&:first-of-type": {
+    marginTop: "0",
+  },
+}));
 
 const AccessibilityHearingSettings = withAccessibilityContext(
   withAccessibilityMenuContext((props: any) => {
@@ -18,16 +62,19 @@ const AccessibilityHearingSettings = withAccessibilityContext(
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
         <header>
-            <Button
-                variant={"text"}
-                aria-label={"Zurück zur Übersicht"}
-                startIcon={<Icon baseClassName="material-icons-round">arrow_back</Icon>}
-                onClick={() => {
-                    menuContext.updateSelectedCategory();
-                }}>
-                Zurück zur Übersicht
-            </Button>
-            <Stack direction={"row"} alignItems={"center"} className={"headline"}>
+          <Button
+            variant={"text"}
+            aria-label={"Zurück zur Übersicht"}
+            startIcon={
+              <Icon baseClassName="material-icons-round">arrow_back</Icon>
+            }
+            onClick={() => {
+              menuContext.updateSelectedCategory();
+            }}
+          >
+            Zurück zur Übersicht
+          </Button>
+          <Stack direction={"row"} alignItems={"center"} className={"headline"}>
             <Icon baseClassName="material-icons-round" className={"icon"}>
               hearing
             </Icon>
@@ -36,9 +83,80 @@ const AccessibilityHearingSettings = withAccessibilityContext(
         </header>
 
         <main>
-          <Typography variant="body1">
-            Einstellungen werden hier bald verfügbar sein.
-          </Typography>
+          <List subheader={<ListSubheader>Untertitel</ListSubheader>}>
+            <ListItem className={"setting-list-item"}>
+              <ListItemIcon>
+                <Icon baseClassName="material-icons-round">subtitles</Icon>
+              </ListItemIcon>
+              <ListItemText id="switch-font-label" primary="Untertitel" />
+              <Switch
+                inputProps={{ "aria-label": "Untertitel ein- und ausschalten" }}
+              />
+            </ListItem>
+
+            <Box sx={{ mt: "16px" }} />
+
+            <ListItemBox>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <ListItemIcon>
+                  <Icon
+                    baseClassName="material-icons-round"
+                    sx={{ fontSize: 36 }}
+                  >
+                    text_format
+                  </Icon>
+                </ListItemIcon>
+                <Box sx={{ typography: "body1", ml: 0 }}>
+                  Schriftgröße der Untertitel
+                </Box>
+              </Box>
+              <Box sx={{ px: 2, pt: 1 }}>
+                <Slider
+                  aria-label="Schriftgröße der Unterittel"
+                  defaultValue={16}
+                  valueLabelDisplay="auto"
+                  marks={marks1}
+                  min={10}
+                  max={24}
+                />
+              </Box>
+            </ListItemBox>
+          </List>
+
+          <List subheader={<ListSubheader>Toneinstellungen</ListSubheader>}>
+            <ListItemBox>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <ListItemIcon>
+                  <Icon
+                    baseClassName="material-icons-round"
+                    sx={{ fontSize: 36 }}
+                  >
+                    volume_up
+                  </Icon>
+                </ListItemIcon>
+                <Box sx={{ typography: "body1", ml: 0 }}>Lautstärke</Box>
+              </Box>
+              <Box sx={{ px: 2, pt: 1 }}>
+                <Slider
+                  aria-label="Schriftgröße der Unterittel"
+                  defaultValue={16}
+                  valueLabelDisplay="auto"
+                />
+              </Box>
+            </ListItemBox>
+          </List>
         </main>
       </Stack>
     );
