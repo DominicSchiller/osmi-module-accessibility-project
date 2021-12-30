@@ -18,42 +18,36 @@ import { styled } from "@mui/system";
 const marks1 = [
   {
     value: 1,
-    label: "1",
+    label: "1 sek",
   },
-  {
-    value: 2,
-    label: "2",
-  },
+
   {
     value: 3,
-    label: "3",
+    label: "3 sek",
   },
-  {
-    value: 4,
-    label: "4",
-  },
+
   {
     value: 5,
-    label: "5",
+    label: "5 sek",
   },
 ];
 
 const marks2 = [
   {
     value: 2,
-    label: "2",
+    label: "2 sek",
   },
   {
     value: 4,
-    label: "4",
+    label: "4 sek",
   },
   {
     value: 6,
-    label: "6",
+    label: "6 sek",
   },
   {
     value: 8,
-    label: "8",
+    label: "8 sek",
   },
   {
     value: 10,
@@ -76,14 +70,14 @@ const marks3 = [
   },
   {
     value: 4,
-    label: "unendlich",
+    label: "beliebig",
   },
 ];
 
 const marks4 = [
   {
     value: 0,
-    label: "0",
+    label: "keine",
   },
   {
     value: 1,
@@ -170,7 +164,6 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
                   aria-label="Zeitdauer der Abspielung"
                   defaultValue={1}
                   valueLabelDisplay="auto"
-                  step={1}
                   marks={marks1}
                   min={1}
                   max={5}

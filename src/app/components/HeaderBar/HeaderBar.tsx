@@ -8,6 +8,7 @@ import { useGlobalStyles } from "../../../styles/tsx/styles.global";
  * @constructor
  */
 const HeaderBar = () => {
+  const buttonText = "Einstellungen";
   const globalClasses = useGlobalStyles();
 
   // @ts-ignore
@@ -36,7 +37,7 @@ const HeaderBar = () => {
             color={"primary"}
             onClick={toggleMenu}
           >
-            Barrierefreiheit
+            {buttonText}
           </Button>
         </Toolbar>
       </AppBar>

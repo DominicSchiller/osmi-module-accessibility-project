@@ -34,6 +34,21 @@ const marks1 = [
   },
 ];
 
+const volumeMarks = [
+  {
+    value: 0,
+    label: "Aus",
+  },
+  {
+    value: 50,
+    label: "50 %",
+  },
+  {
+    value: 100,
+    label: "100 %",
+  },
+];
+
 const ListItemBox = styled(Box)(({ theme }) => ({
   color: `${theme.palette.text.secondary}`,
   backgroundColor: `${theme.palette.surface!}`,
@@ -83,6 +98,66 @@ const AccessibilityHearingSettings = withAccessibilityContext(
         </header>
 
         <main>
+          <List subheader={<ListSubheader>Toneinstellungen</ListSubheader>}>
+            <ListItemBox>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <ListItemIcon>
+                  <Icon
+                    baseClassName="material-icons-round"
+                    sx={{ fontSize: 36 }}
+                  >
+                    record_voice_over
+                  </Icon>
+                </ListItemIcon>
+                <Box sx={{ typography: "body1", ml: 0 }}>
+                  Lautstärke der Sprache
+                </Box>
+              </Box>
+              <Box sx={{ px: 2, pt: 1 }}>
+                <Slider
+                  aria-label="Lautstärke der Sounds"
+                  defaultValue={50}
+                  valueLabelDisplay="auto"
+                  marks={volumeMarks}
+                />
+              </Box>
+            </ListItemBox>
+            <ListItemBox>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <ListItemIcon>
+                  <Icon
+                    baseClassName="material-icons-round"
+                    sx={{ fontSize: 36 }}
+                  >
+                    music_note
+                  </Icon>
+                </ListItemIcon>
+                <Box sx={{ typography: "body1", ml: 0 }}>
+                  Lautstärke der Soundeffekte
+                </Box>
+              </Box>
+              <Box sx={{ px: 2, pt: 1 }}>
+                <Slider
+                  aria-label="Lautstärke der Sounds"
+                  defaultValue={50}
+                  valueLabelDisplay="auto"
+                  marks={volumeMarks}
+                />
+              </Box>
+            </ListItemBox>
+          </List>
           <List subheader={<ListSubheader>Untertitel</ListSubheader>}>
             <ListItem className={"setting-list-item"}>
               <ListItemIcon>
@@ -124,35 +199,6 @@ const AccessibilityHearingSettings = withAccessibilityContext(
                   marks={marks1}
                   min={10}
                   max={24}
-                />
-              </Box>
-            </ListItemBox>
-          </List>
-
-          <List subheader={<ListSubheader>Toneinstellungen</ListSubheader>}>
-            <ListItemBox>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                }}
-              >
-                <ListItemIcon>
-                  <Icon
-                    baseClassName="material-icons-round"
-                    sx={{ fontSize: 36 }}
-                  >
-                    volume_up
-                  </Icon>
-                </ListItemIcon>
-                <Box sx={{ typography: "body1", ml: 0 }}>Lautstärke</Box>
-              </Box>
-              <Box sx={{ px: 2, pt: 1 }}>
-                <Slider
-                  aria-label="Schriftgröße der Unterittel"
-                  defaultValue={16}
-                  valueLabelDisplay="auto"
                 />
               </Box>
             </ListItemBox>
