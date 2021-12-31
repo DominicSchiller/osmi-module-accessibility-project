@@ -183,6 +183,21 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                 </Stack>
               </PrimaryToggleButton>
             </ToggleButtonGroup>
+            <ListItem className={"setting-list-item"}>
+              <ListItemIcon>
+                <Icon baseClassName="material-icons-round">visibility</Icon>
+              </ListItemIcon>
+              <ListItemText
+                id="show-score-label"
+                primary="Besser erkennbare Icons"
+              />
+              <Switch
+                inputProps={{
+                  "aria-label":
+                    "Besser erkennbare Icons für das Spiel aktivieren",
+                }}
+              />
+            </ListItem>
           </List>
           <List
             subheader={
