@@ -43,17 +43,6 @@ export class SensoUIHelper {
         button.classList.toggle("selected")
 
         const subtitleLabel = document.getElementById("subtitle")!
-        const isSubtitleSet = subtitleLabel.innerHTML !== "&nbsp;"
-        subtitleLabel.innerHTML = isSubtitleSet ? "&nbsp;" : button.ariaLabel
-    }
-
-    /**
-     * Shows the status when a round as been completed successfully.
-     * @param attempts The total number fo attempts
-     * @param totalColors the total number of colors to remember
-     */
-    public static showRoundStatus(attempts: number, totalColors: number) {
-        document.getElementById("game-request-title")!.innerHTML = ""
-        document.getElementById("subtitle")!.innerHTML = "--"
+        subtitleLabel.innerHTML = button.ariaLabel
     }
 }

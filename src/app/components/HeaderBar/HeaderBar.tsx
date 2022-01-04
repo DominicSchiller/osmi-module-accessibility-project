@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { AppBar, Box, Button, Icon, Toolbar, Typography } from "@mui/material";
+import {AppBar, Box, Button, Icon, Toolbar, Tooltip, Typography} from "@mui/material";
 import AccessibilitySettingsMenu from "../AccessibilitySettings/Menu/AccessibilitySettingsMenu";
 import { useGlobalStyles } from "../../../styles/tsx/styles.global";
 
@@ -27,18 +27,24 @@ const HeaderBar = () => {
               <span className={globalClasses.brandName}>Senso</span>
             </Typography>
           </Box>
-          <Button
-            variant="text"
-            startIcon={
-              <Icon baseClassName="material-icons">accessibility</Icon>
-            }
-            aria-label="Zeige Einstellungen für die Barrierefreiheit"
-            size={"large"}
-            color={"primary"}
-            onClick={toggleMenu}
-          >
-            {buttonText}
-          </Button>
+          <Tooltip arrow
+                   title={"Einstellungsmenü anzeigen"}
+                   enterDelay={500}
+                   leaveDelay={75}
+                   enterNextDelay={500}>
+            <Button
+                variant="text"
+                startIcon={
+                  <Icon baseClassName="material-icons">accessibility</Icon>
+                }
+                aria-label="Zeige Einstellungen für die Barrierefreiheit"
+                size={"large"}
+                color={"primary"}
+                onClick={toggleMenu}
+            >
+              {buttonText}
+            </Button>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       <AccessibilitySettingsMenu ref={settingsMenuRef} />

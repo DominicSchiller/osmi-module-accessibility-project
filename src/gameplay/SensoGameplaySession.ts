@@ -31,6 +31,20 @@ export class SensoGameplaySession {
     @computed public get attempts(): number {
         return this._clickedSequence.length
     }
+
+    /**
+     * The player's gained total score
+     */
+    @computed public get playerTotalScore(): number {
+        return this._playerTotalScore
+    }
+
+    /**
+     * The player's gained total score
+     * @private
+     */
+    @observable private _playerTotalScore: number = 0
+
     /**
      * The current level
      * note: this property also declares the total number of random button picks
@@ -96,6 +110,9 @@ export class SensoGameplaySession {
      * Start new round
      */
     @action public start() {
+        if (this._isLevelCompleted) {
+            this._playerTotalScore += this.levelScore
+        }
         this.setRoundStarted(false)
         this._clickedSequence = []
         this._randomSequence = []
@@ -145,9 +162,7 @@ export class SensoGameplaySession {
 
         if (this.isLevelCompleted) {
             this.scoreManager.stopTimer()
-            SensoUIHelper.showRoundStatus(this._clickedSequence.length, this._level)
         }
-
         return isCorrectSelection
     }
 
@@ -156,6 +171,9 @@ export class SensoGameplaySession {
      * @param counter The counter which will be counted down
      */
     @action private countDown(counter: number) {
+        const countdownId = "countdown"
+        const subtitleId = "subtitle"
+
         setTimeout(() => {
             switch (counter) {
                 case -1:
@@ -165,16 +183,15 @@ export class SensoGameplaySession {
                         this.setSequencePlayingState(false)
                         this.setRoundStarted(true)
                         this.scoreManager.startTimer()
-                        document.getElementById("game-request-title")!.innerHTML = "Und jetzt du ..."
-                        document.getElementById("subtitle")!.innerHTML = "?"
+                        document.getElementById(subtitleId)!.innerHTML = "Und jetzt du ..."
                     });
                     break;
                 case 0:
-                    document.getElementById("subtitle")!.innerHTML = "&nbsp;"
+                    document.getElementById(countdownId)!.innerHTML = "&nbsp;";
                     this.countDown(-1)
                     break;
                 default:
-                    document.getElementById("subtitle")!.innerHTML = `${counter}`
+                    document.getElementById(countdownId)!.innerHTML = `${counter}`
                     this.countDown(counter-1)
             }
         }, counter === 3 ? 500 : 1200);

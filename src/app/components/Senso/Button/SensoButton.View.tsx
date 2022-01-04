@@ -92,94 +92,35 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
 
         span {
           color: #ffffff;
-          //font-size: 5vw;
+          font-size: 475%;
         }
       }
 
       span {
         transition: all 150ms ease-in-out;
-        //font-size: 4vw;
+        width: 100% !important;
+        font-size: 400%;
       }
 
       ${props => props.theme.breakpoints.up("xs")} {
         --margin: 4px;
-
-        span {
-          font-size: 10vw;
-        }
-
-        &.selected {
-          span {
-            font-size: 12vw;
-          }
-        }
       }
 
       ${props => props.theme.breakpoints.up("sm")} {
         --margin: 4px;
-
-        span {
-          font-size: 5.5rem;
-        }
-
-        &.selected {
-          span {
-            font-size: 6.5rem;
-          }
-        }
+        
 
         ${props => props.theme.breakpoints.up("md")} {
           --margin: 8px;
-
-          span {
-            font-size: 7.5rem;
-          }
-
-          &.selected {
-            span {
-              font-size: 8.5rem;
-            }
-          }
         }
 
         ${props => props.theme.breakpoints.up("lg")} {
           --margin: 12px;
-
-          span {
-            font-size: 8vw;
-          }
-
-          &.selected {
-            span {
-              font-size: 10vw;
-            }
-          }
-
-          @media (max-width: 1368px) {
-            span {
-              font-size: 7.0rem;
-            }
-
-            &.selected {
-              span {
-                font-size: 8.0rem;
-              }
-            }
-          }
         }
 
         ${props => props.theme.breakpoints.up("xl")} {
           --margin: 12px;
-
-          span {
-            font-size: 6vw;
-          }
-
-          &.selected {
-            span {
-              font-size: 8vw;
-            }
-          }
+          
         }
     `;
 

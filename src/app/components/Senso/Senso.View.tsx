@@ -2,7 +2,7 @@ import React from "react";
 import './Senso.View.scss'
 import {SensoButtonView} from "./Button/SensoButton.View";
 import {withAccessibilityContext} from "../../context/AccessibilityContext";
-import {Stack, Typography} from "@mui/material";
+import {Icon, IconButton, Stack, Tooltip, Typography} from "@mui/material";
 import {ReactComponent as TopLeftClippingMask} from "../../../assets/images/senso/top-left-cm.svg";
 import {ReactComponent as TopRightClippingMask} from "../../../assets/images/senso/top-right-cm.svg";
 import {ReactComponent as BottomLeftClippingMask} from "../../../assets/images/senso/bottom-left-cm.svg";
@@ -49,10 +49,23 @@ const SensoView = withTheme(withAccessibilityContext((props: any) => {
     return (
         <>
             <Stack direction={"column"} alignItems={"center"} justifyContent={"center"} id={"senso-container"}>
-                <div id="description-box">
-                    <Typography id={"game-request-title"} variant={"h4"} color={"textSecondary"}></Typography>
-                    <Typography id={"subtitle"} color={"textPrimary"} />
-                </div>
+                <aside id="action-items-menu">
+                    <Typography id="countdown" variant={"caption"} hidden={true} />
+                    <Tooltip arrow
+                             title={"Die Reihenfolge nocheinmal wiederholen lassen."}
+                             enterDelay={500}
+                             leaveDelay={75}
+                             enterNextDelay={500}>
+                        <Stack direction={"column"} justifyContent={"center"} alignItems={"center"} alignContent={"space-around"} >
+                            <IconButton aria-label={"Reihenfolge nochmal wiederholen."} color={"primary"} className={"action-button"}>
+                                <Icon baseClassName="material-icons-round" className={"icon"}>
+                                    replay
+                                </Icon>
+                            </IconButton>
+                            <Typography variant={"body1"}>Wiederholen</Typography>
+                        </Stack>
+                    </Tooltip>
+                </aside>
                 <Stack direction={"column"} justifyContent={"space-between"} id={"senso"} sx={{backgroundColor: theme.palette.surface}}>
                     {sensoButtons.map((buttonRow, index) => {
                         return (

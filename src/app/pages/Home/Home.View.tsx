@@ -22,54 +22,58 @@ const HomePageView = () => {
   const globalClasses = useGlobalStyles();
 
   return (
-    <Grid
-      container
-      direction={"column"}
-      rowGap={{ xs: 6, sm: 3 }}
-      className={"page-container"}
-    >
-      <CssBaseline />
-      <main>
-        <Container maxWidth="md">
+      <>
+        <CssBaseline />
+        <Grid
+            container
+            component={"main"}
+            direction={"column"}
+            flexGrow={"1"}
+            rowGap={{ xs: 6, sm: 3 }}
+            sx={{
+              paddingTop: {
+                xs: "24px",
+                md: "48px",
+                xl: "64px"
+              }
+            }}>
           <Typography
-            variant="h1"
-            align="center"
-            color="textPrimary"
-            gutterBottom
-          >
+              variant="h1"
+              align="center"
+              color="textPrimary"
+              gutterBottom>
             Willkommen zu Accessible Senso
           </Typography>
           <Typography
-            variant={"h5"}
-            align={"center"}
-            color={"textSecondary"}
-            paragraph
-          >
+              variant={"h5"}
+              align={"center"}
+              color={"textSecondary"}
+              paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </Typography>
           <Grid container spacing={2} justifyContent={"center"}>
             <Grid item>
               <PrimaryButton
-                variant={"contained"}
-                size={"large"}
-                aria-label={"Starte ein neues Spiel"}
-                onClick={() => navigate("/Game")}
+                  variant={"contained"}
+                  size={"large"}
+                  aria-label={"Starte ein neues Spiel"}
+                  onClick={() => navigate("/Game")}
               >
                 Spiel starten
               </PrimaryButton>
             </Grid>
           </Grid>
-        </Container>
-      </main>
-      <footer>
-        <Typography>
-          <span className={globalClasses.brandName}>Accessible Senso</span>{" "}
-          <br />
-          &copy; 2021 – 2022 Barrierefreiheit (Gruppe C) an der VFH
-        </Typography>
-      </footer>
-    </Grid>
+        </Grid>
+        <footer>
+          <Typography>
+            <span className={globalClasses.brandName}>Accessible Senso</span>{" "}
+            <br />
+            &copy; 2021 – 2022 Barrierefreiheit (Gruppe C) an der VFH
+          </Typography>
+        </footer>
+      </>
+
   );
 };
 export default observer(HomePageView);

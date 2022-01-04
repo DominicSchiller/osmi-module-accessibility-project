@@ -31,7 +31,7 @@ export default class AppTheme {
      * @private
      */
     private static createPalette(accessibilityProps: AccessibilityProps): PaletteOptions {
-        const { palette } = createTheme();
+        const {palette} = createTheme();
 
         switch (accessibilityProps.seeing.uiColorMode) {
             case UIColorMode.Dark:
@@ -67,6 +67,10 @@ export default class AppTheme {
                     paper: '#ffffff'
                 }
             } : {}),
+            tooltip: {
+                background: basePalette.common.black,
+                text: basePalette.common.white
+            },
             scoringStar: {
                 filled: accessibilityProps.seeing.uiColorMode === UIColorMode.Monochrome ? basePalette.grey[700] : 'gold',
                 empty: basePalette.grey[300]
@@ -107,6 +111,10 @@ export default class AppTheme {
                     disabled: 'rgba(0, 0, 0, 0.4)'
                 }
             } : {}),
+            tooltip: {
+                background: basePalette.common.white,
+                text: basePalette.common.black
+            },
             scoringStar: {
                 filled: 'gold',
                 empty: basePalette.grey[900]
@@ -202,7 +210,23 @@ export default class AppTheme {
                         textTransform: "uppercase"
                     },
                 },
-            }
+            },
+            MuiTooltip: {
+                styleOverrides: {
+                    popper: {
+                        zIndex: 1400
+                    },
+                    tooltip: {
+                        backgroundColor: palette.tooltip!.background,
+                        color: palette.tooltip!.text,
+                        zIndex: "100",
+                        fontSize: "1rem"
+                    },
+                    arrow: {
+                        color: palette.tooltip!.background
+                    }
+                },
+            },
         }
     }
 }

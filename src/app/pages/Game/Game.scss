@@ -1,0 +1,32 @@
+main {
+  width: 100%;
+  margin-top: 16px !important;
+
+  #hud {
+    width: 100%;
+    padding: 0 16px;
+    margin-top: 0;
+
+    #life {
+      color: #e91e63;
+    }
+
+    .hud-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+
+    .hud-stats {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+}
+
+footer {
+    #subtitle {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+}

@@ -16,6 +16,23 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
       },
       main: {
         flex: "1",
+        flexGrow: "1",
+        [theme.breakpoints.up("xs")]: {
+          marginTop: "24px",
+          //minHeight: "calc(100% - 80px)", // 56px of header bar + spacing of 24px
+        },
+        [theme.breakpoints.up("xs")]: {
+          marginTop: "32px",
+          //minHeight: "calc(100% - 88px)", // 56px of header bar + spacing of 32px
+        },
+        [theme.breakpoints.up("md")]: {
+          marginTop: "48px",
+          //minHeight: "calc(100% - 112px)", // 64px of header bar + spacing of 48px
+        },
+        [theme.breakpoints.up("xl")]: {
+          marginTop: "64px",
+          //minHeight: "calc(100% - 128px)", // 64px of header bar + spacing of 64px
+        },
       },
       footer: {
         bottom: 0,
@@ -30,25 +47,9 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
         // backgroundColor: "#f3f3f3",
         backgroundColor: theme.palette.footer.main
       },
-
-      ".page-container": {
-        // position: "absolute",
-        [theme.breakpoints.up("xs")]: {
-          marginTop: "24px",
-          minHeight: "calc(100% - 80px)", // 56px of header bar + spacing of 24px
-        },
-        [theme.breakpoints.up("xs")]: {
-          marginTop: "32px",
-          minHeight: "calc(100% - 88px)", // 56px of header bar + spacing of 32px
-        },
-        [theme.breakpoints.up("md")]: {
-          marginTop: "48px",
-          minHeight: "calc(100% - 112px)", // 64px of header bar + spacing of 48px
-        },
-        [theme.breakpoints.up("xl")]: {
-          marginTop: "64px",
-          minHeight: "calc(100% - 128px)", // 64px of header bar + spacing of 64px
-        },
+      "#root": {
+        display: "flex",
+        flexDirection: "column"
       },
       h1: {
         [theme.breakpoints.up("xs")]: {

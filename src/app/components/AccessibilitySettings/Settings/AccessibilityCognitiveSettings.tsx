@@ -8,7 +8,7 @@ import {
   Stack,
   Slider,
   Typography,
-  ListItemIcon,
+  ListItemIcon, Tooltip,
 } from "@mui/material";
 import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenuContext";
 import { withAccessibilityContext } from "../../../context/AccessibilityContext";
@@ -116,18 +116,23 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
         <header>
-          <Button
-            variant={"text"}
-            aria-label={"Zurück zur Übersicht"}
-            startIcon={
-              <Icon baseClassName="material-icons-round">arrow_back</Icon>
-            }
-            onClick={() => {
-              menuContext.updateSelectedCategory();
-            }}
-          >
-            Zurück zur Übersicht
-          </Button>
+          <Tooltip arrow
+                   title={`Kehre zur Übersicht aller Einstellungskategorien zurück`}
+                   enterDelay={500}
+                   leaveDelay={75}
+                   enterNextDelay={500}>
+            <Button
+              variant={"text"}
+              aria-label={"Zurück zur Übersicht"}
+              startIcon={
+                <Icon baseClassName="material-icons-round">arrow_back</Icon>
+              }
+              onClick={() => {
+                menuContext.updateSelectedCategory();
+              }}>
+              Zurück zur Übersicht
+            </Button>
+          </Tooltip>
           <Stack direction={"row"} alignItems={"center"} className={"headline"}>
             <Icon baseClassName="material-icons-round" className={"icon"}>
               psychology

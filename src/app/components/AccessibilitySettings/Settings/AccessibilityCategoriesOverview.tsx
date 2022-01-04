@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  Box,
-  Button as MUIButton,
-  Button,
-  Icon,
-  Typography,
+    Box,
+    Button as MUIButton,
+    Button,
+    Icon, Tooltip,
+    Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import "./AccessibilityCategoriesOverview.scss";
@@ -42,15 +42,20 @@ const StyledAccessibilityCategoryButton = styled(MUIButton)`
  */
 const AccessibilityCategoryButton = (props: any) => {
   return (
-    <StyledAccessibilityCategoryButton
-      variant="outlined"
-      startIcon={<Icon baseClassName="material-icons-round">{props.icon}</Icon>}
-      sx={{ p: 0, m: 1, borderRadius: 4 }}
-      aria-label={`Zeige alle Einstellungen für ${props.title} an`}
-      onClick={props.onClick}
-    >
-      {props.title}
-    </StyledAccessibilityCategoryButton>
+      <Tooltip arrow
+               title={`Zeige alle ${props.title}-bezogene Einstellungen an`}
+               enterDelay={500}
+               leaveDelay={75}
+               enterNextDelay={500}>
+          <StyledAccessibilityCategoryButton
+              variant="outlined"
+              startIcon={<Icon baseClassName="material-icons-round">{props.icon}</Icon>}
+              sx={{ p: 0, m: 1, borderRadius: 4 }}
+              aria-label={`Zeige alle Einstellungen für ${props.title} an`}
+              onClick={props.onClick}>
+              {props.title}
+          </StyledAccessibilityCategoryButton>
+      </Tooltip>
   );
 };
 
@@ -89,14 +94,19 @@ const AccessibilityCategoriesOverview = withTheme(withAccessibilityMenuContext(
       <Box className={"overview-contentContainer"}>
         <header>
           <Box sx={{ mb: 2 }}>
-            <Button
-              variant="text"
-              startIcon={<Icon baseClassName="material-icons">close</Icon>}
-              aria-label={"Barrierefreiheit-Menü schließen"}
-              onClick={menuContext.toggleMenu}
-            >
-              Schließen
-            </Button>
+              <Tooltip arrow
+                       title={`Schließe das Einstellungsmenü`}
+                       enterDelay={500}
+                       leaveDelay={75}
+                       enterNextDelay={500}>
+                <Button
+                  variant="text"
+                  startIcon={<Icon baseClassName="material-icons">close</Icon>}
+                  aria-label={"Barrierefreiheit-Menü schließen"}
+                  onClick={menuContext.toggleMenu}>
+                  Schließen
+                </Button>
+              </Tooltip>
           </Box>
 
           <Box className={"heroIcon"} sx={{backgroundColor: props.theme.palette.surface}}>
