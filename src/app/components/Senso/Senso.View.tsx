@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import './Senso.View.scss'
 import {SensoButtonView} from "./Button/SensoButton.View";
 import {withAccessibilityContext} from "../../context/AccessibilityContext";
@@ -10,6 +10,8 @@ import {ReactComponent as BottomRightClippingMask} from "../../../assets/images/
 import {SensoButton, SensoButtonID} from "./Button/SensoButton.Model";
 import {withTheme} from "@mui/styles";
 import {UIColorMode} from "../../../models/accessibility/seeing/UIColorMode";
+import {SensoGameplayContext} from "../../context/SensoGameplayContext";
+import {observer} from "mobx-react";
 
 
 /**
@@ -17,6 +19,7 @@ import {UIColorMode} from "../../../models/accessibility/seeing/UIColorMode";
  */
 const SensoView = withTheme(withAccessibilityContext((props: any) => {
     const {accessibilityContext, theme} = props;
+    const gameplay = useContext(SensoGameplayContext)
 
     // definition of all four senso buttons (two buttons each row)
     const sensoButtons: SensoButton[][] = [
@@ -50,21 +53,34 @@ const SensoView = withTheme(withAccessibilityContext((props: any) => {
         <>
             <Stack direction={"column"} alignItems={"center"} justifyContent={"center"} id={"senso-container"}>
                 <aside id="action-items-menu">
-                    <Typography id="countdown" variant={"caption"} hidden={true} />
-                    <Tooltip arrow
-                             title={"Die Reihenfolge nocheinmal wiederholen lassen."}
-                             enterDelay={500}
-                             leaveDelay={75}
-                             enterNextDelay={500}>
-                        <Stack direction={"column"} justifyContent={"center"} alignItems={"center"} alignContent={"space-around"} >
-                            <IconButton aria-label={"Reihenfolge nochmal wiederholen."} color={"primary"} className={"action-button"}>
-                                <Icon baseClassName="material-icons-round" className={"icon"}>
-                                    replay
-                                </Icon>
-                            </IconButton>
-                            <Typography variant={"body1"}>Wiederholen</Typography>
-                        </Stack>
-                    </Tooltip>
+                    {gameplay.session.isCountingDown &&
+                        <Typography
+                            id="countdown"
+                            variant={"caption"} />
+                    }
+                    {gameplay.session.isLevelStarted &&
+                        <Tooltip arrow
+                                 title={"Die Reihenfolge nocheinmal wiederholen lassen."}
+                                 enterDelay={500}
+                                 leaveDelay={75}
+                                 enterNextDelay={500}>
+                            <Stack direction={"column"} justifyContent={"center"} alignItems={"center"} alignContent={"space-around"} >
+                                <IconButton
+                                    aria-label={"Reihenfolge nochmal wiederholen."}
+                                    color={"primary"}
+                                    className={"action-button"}
+                                    onClick={() => {
+                                        gameplay.session.replaySequence()
+                                    }}
+                                    disabled={gameplay.session.isPlayingSequence}>
+                                    <Icon baseClassName="material-icons-round" className={"icon"}>
+                                        replay
+                                    </Icon>
+                                </IconButton>
+                                <Typography variant={"body1"}>Wiederholen</Typography>
+                            </Stack>
+                        </Tooltip>
+                    }
                 </aside>
                 <Stack direction={"column"} justifyContent={"space-between"} id={"senso"} sx={{backgroundColor: theme.palette.surface}}>
                     {sensoButtons.map((buttonRow, index) => {
@@ -86,4 +102,4 @@ const SensoView = withTheme(withAccessibilityContext((props: any) => {
     );
 }));
 
-export default SensoView;
+export default observer(SensoView);

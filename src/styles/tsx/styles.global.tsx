@@ -47,10 +47,6 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
         // backgroundColor: "#f3f3f3",
         backgroundColor: theme.palette.footer.main
       },
-      "#root": {
-        display: "flex",
-        flexDirection: "column"
-      },
       h1: {
         [theme.breakpoints.up("xs")]: {
           fontSize: "3rem !important",
@@ -65,7 +61,6 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
           fontSize: "5rem !important",
         },
       },
-
       h4: {
         [theme.breakpoints.up("xs")]: {
           fontSize: "1rem !important",
@@ -80,7 +75,6 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
           fontSize: "3.5rem !important",
         },
       },
-
       button: {
         [theme.breakpoints.up("xs")]: {
           textTransform: "none !important",
@@ -95,6 +89,13 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
           textTransform: "none !important",
         },
       },
+      "#root": {
+        display: "flex",
+        flexDirection: "column"
+      },
+      ".hidden": {
+        display: "none"
+      }
     },
     brandName: {
       fontSize: 24,

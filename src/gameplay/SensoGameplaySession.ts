@@ -3,6 +3,7 @@ import {SensoUIHelper} from "./SensoUIHelper";
 import {SensoAudioPlayer, SensoSound} from "./SensoAudioPlayer";
 import {action, computed, makeObservable, observable} from "mobx";
 import LevelScoreManager from "./LevelScoreCalculator";
+import {wait} from "../utils/AsyncUtils";
 
 /**
  * The senso gameplay session
@@ -14,16 +15,22 @@ export class SensoGameplaySession {
      */
     @observable public isPlayingSequence: boolean = true
     /**
+     * Status the initial countdown app is counting down or not
+     */
+    @observable public isCountingDown: boolean = true
+
+    /**
      * The current level
      */
     @computed public get level(): number {
         return this._level;
     }
+
     /**
      * Status whether the current level has been completed or not
      */
     @computed public get isLevelCompleted(): boolean {
-        return this._isLevelCompleted && this._refButtonIndex === this._randomSequence.length
+        return this.isLevelStarted && this._refButtonIndex === this._randomSequence.length
     }
     /**
      * The total number of required attempts to solve the sequence
@@ -40,10 +47,24 @@ export class SensoGameplaySession {
     }
 
     /**
+     * The player's remaining life
+     */
+    @computed public get playerLife(): number {
+        return this._playerLife
+    }
+
+
+    /**
      * The player's gained total score
      * @private
      */
     @observable private _playerTotalScore: number = 0
+
+    /**
+     * The player's remaining life
+     * @private
+     */
+    @observable private _playerLife: number = 3
 
     /**
      * The current level
@@ -70,7 +91,7 @@ export class SensoGameplaySession {
      * Status whether the current level has been completed or not
      * @private
      */
-    @observable private _isLevelCompleted: boolean = false
+    @observable public isLevelStarted: boolean = false
 
     /**
      * The time needed to complete the current level
@@ -107,24 +128,53 @@ export class SensoGameplaySession {
     }
 
     /**
-     * Start new round
+     * Start new round.
      */
-    @action public start() {
-        if (this._isLevelCompleted) {
+    @action public async start() {
+        if (this.isLevelStarted) {
             this._playerTotalScore += this.levelScore
         }
-        this.setRoundStarted(false)
+        this.isCountingDown = true
+        this.isLevelStarted = false
         this._clickedSequence = []
         this._randomSequence = []
+        this.setIsPlayingSequence(true)
         this.setRefButtonIndex(0)
-        this.isPlayingSequence = true
-        this.countDown(3)
+
+        await wait(250)
+        await this.countDown(3)
+
+        this.incrementRound()
+        this.generateNewSequence()
+        this.presentRandomSequence().then(() => {
+            this.isLevelStarted = true
+            this.setIsPlayingSequence(false)
+            this.scoreManager.startTimer()
+            const subtitleId = "subtitle"
+            document.getElementById(subtitleId)!.innerHTML = "Und jetzt du ..."
+        });
+    }
+
+    /**
+     * Replay the random sequence.
+     */
+    @action public async replaySequence() {
+        if (!this.isLevelStarted) { return }
+
+        this.scoreManager.pauseTimer()
+        this.setIsPlayingSequence(true)
+        setTimeout(() => {
+            this.presentRandomSequence().then(() => {
+                this.setIsPlayingSequence(false)
+                this.scoreManager.resumeTimer()
+            })
+        }, 125)
     }
 
     /**
      * Generate a new sequence of random picks
      */
-    public generateNewSequence() {
+    private generateNewSequence() {
         this.setRefButtonIndex(0)
         this._randomSequence = []
 
@@ -136,7 +186,7 @@ export class SensoGameplaySession {
     /**
      * Present the random sequence to the user
      */
-    public async presentRandomSequence() {
+    private async presentRandomSequence() {
         for (const buttonID of this._randomSequence) {
             await SensoUIHelper.highlightButton(buttonID)
         }
@@ -157,6 +207,8 @@ export class SensoGameplaySession {
 
         if (isCorrectSelection) {
             this.setRefButtonIndex(this._refButtonIndex+1);
+        } else {
+            this._playerLife -= this._playerLife > 0 ? 1 : 0
         }
         SensoAudioPlayer.play(isCorrectSelection ? SensoSound.CorrectSelection : SensoSound.WrongSelection)
 
@@ -168,41 +220,22 @@ export class SensoGameplaySession {
 
     /**
      * trigger a countdown starting from given counter.
-     * @param counter The counter which will be counted down
+     * @param steps The steps from which the timer will be counted down
      */
-    @action private countDown(counter: number) {
+    @action private async countDown(steps: number) {
         const countdownId = "countdown"
-        const subtitleId = "subtitle"
-
-        setTimeout(() => {
-            switch (counter) {
-                case -1:
-                    this.incrementRound()
-                    this.generateNewSequence()
-                    this.presentRandomSequence().then(() => {
-                        this.setSequencePlayingState(false)
-                        this.setRoundStarted(true)
-                        this.scoreManager.startTimer()
-                        document.getElementById(subtitleId)!.innerHTML = "Und jetzt du ..."
-                    });
-                    break;
-                case 0:
-                    document.getElementById(countdownId)!.innerHTML = "&nbsp;";
-                    this.countDown(-1)
-                    break;
-                default:
-                    document.getElementById(countdownId)!.innerHTML = `${counter}`
-                    this.countDown(counter-1)
-            }
-        }, counter === 3 ? 500 : 1200);
+        this.isCountingDown = true
+        for (let counter=steps; counter>0; counter--) {
+            document.getElementById(countdownId)!.innerHTML = `${counter}`
+            await wait(1200)
+        }
+        document.getElementById(countdownId)!.innerHTML = ""
+        await wait(1000)
+        this.isCountingDown = false
     }
 
-    @action private setSequencePlayingState(isPlaying: boolean) {
+    @action private setIsPlayingSequence(isPlaying: boolean) {
         this.isPlayingSequence = isPlaying
-    }
-
-    @action private setRoundStarted(isStarted: boolean) {
-        this._isLevelCompleted = isStarted
     }
 
     @action private incrementRound() {

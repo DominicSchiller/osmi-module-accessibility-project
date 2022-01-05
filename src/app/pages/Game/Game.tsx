@@ -52,7 +52,7 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                        <Icon baseClassName="material-icons-round" className={"hud-icon"}>
                                            favorite
                                        </Icon>
-                                       <Typography color={"textPrimary"} className={"hud-stats"}>3 Leben</Typography>
+                                       <Typography color={"textPrimary"} className={"hud-stats"}>{context.session.playerLife} Leben</Typography>
                                    </Stack>
                                </Tooltip>
                                <Tooltip arrow

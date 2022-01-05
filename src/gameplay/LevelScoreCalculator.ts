@@ -24,10 +24,28 @@ class LevelScoreManager {
      */
     private endTime: number = 0
 
+    private tmpTimeNeeded: number = 0
+
     /**
      * Start the level's timer
      */
     public startTimer() {
+        this.tmpTimeNeeded = 0
+        this.startTime = performance.now()
+    }
+
+    /**
+     * Pause the level's timer
+     */
+    public pauseTimer() {
+        this.stopTimer()
+        this.tmpTimeNeeded += this.calcTimeNeeded()
+    }
+
+    /**
+     * Resume the level's timer
+     */
+    public resumeTimer() {
         this.startTime = performance.now()
     }
 
@@ -42,7 +60,7 @@ class LevelScoreManager {
      * The time needed to complete the level.
      */
     public get timeNeeded(): number {
-        return +((this.endTime - this.startTime)/1000).toFixed(2)
+        return +(this.calcTimeNeeded() + this.tmpTimeNeeded)
     }
 
     /**
@@ -62,6 +80,14 @@ class LevelScoreManager {
         let levelPoints = Math.round(level * this.defaultLevelPoints)
         let bonusPoints = Math.round((level * this.defaultBonusPoints) / this.timeNeeded)
         return levelPoints + bonusPoints
+    }
+
+    /**
+     * Calculates the time needed between recorded start and end time in seconds.
+     * @private
+     */
+    private calcTimeNeeded(): number {
+        return +((this.endTime - this.startTime)/1000).toFixed(2)
     }
 }
 
