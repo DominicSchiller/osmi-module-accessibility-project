@@ -1,24 +1,26 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {
-    Button,
     Box,
+    Button,
     Icon,
     List,
     ListItem,
     ListItemIcon,
     ListItemText,
     ListSubheader,
-    Stack,
     Slider,
+    Stack,
     Switch,
     ToggleButton as MUIToggleButton,
     ToggleButtonGroup,
-    Typography, Tooltip,
+    Tooltip,
+    Typography,
 } from "@mui/material";
 import {withAccessibilityMenuContext} from "../../../context/AccessibilityMenuContext";
 import {withAccessibilityContext} from "../../../context/AccessibilityContext";
 import {styled} from "@mui/system";
 import "./AccessibilityCategorySettings.scss";
+import {GameMode} from "../../../../models/accessibility/motor/GameMode";
 
 const volumeMarks = [
     {
@@ -82,17 +84,48 @@ const PrimaryToggleButton = styled(MUIToggleButton)(({theme}) => ({
 
 const AccessibilityMotorActivitySettings = withAccessibilityContext(
     withAccessibilityMenuContext((props: any) => {
-        const [mode, setMode] = React.useState("symbols");
 
-        const handleChange = (
-            event: React.MouseEvent<HTMLElement>,
-            newMode: string
-        ) => {
-            setMode(newMode);
+        const {menuContext, accessibilityContext} = props;
+
+        const [gameMode, setGameMode] = React.useState(
+            accessibilityContext.motor.gameMode
+        )
+
+        const [showBetterIcons, setShowBetterIcons] = React.useState(
+            accessibilityContext.motor.showBetterRecognizableIcons
+        )
+
+        const [levelCountdownDuration, setlevelCountdownDuration] = React.useState(
+            accessibilityContext.motor.levelCountdownDuration
+        )
+
+        const [showLevelScore, setShowLevelScore] = React.useState(
+            accessibilityContext.motor.showLevelScore
+        )
+
+        const onGameModeChanged = (event: React.MouseEvent<HTMLElement>, newGameMode: string) => {
+            event.preventDefault();
+            if (newGameMode) {
+                accessibilityContext.motor.setGameMode(newGameMode)
+                setGameMode(newGameMode);
+            }
         };
 
-        const {menuContext} = props;
-        // const { accessibilityContext } = props;
+        const onShowBetterIconsChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
+            accessibilityContext.motor.showBetterRecognizableIcons = isEnabled
+            setShowBetterIcons(isEnabled)
+        };
+
+        const onShowLevelScoreChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
+            accessibilityContext.motor.showLevelScore = isEnabled
+            setShowLevelScore(isEnabled)
+        };
+
+        const onLevelCountdownChanged = (event: any, newValue: any) => {
+            console.warn(newValue)
+            accessibilityContext.motor.levelCountdownDuration = newValue
+            setlevelCountdownDuration(newValue)
+        }
 
         return (
             <Stack direction={"column"} className={"seeing-contentContainer"}>
@@ -139,43 +172,40 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                             fullWidth={true}
                             orientation={"horizontal"}
                             size={"large"}
-                            value={mode}
-                            onChange={handleChange}
+                            value={gameMode}
+                            onChange={onGameModeChanged}
                             color={"primary"}
-                            sx={{marginBottom: "16px"}}
-                        >
+                            sx={{marginBottom: "16px"}}>
                             <PrimaryToggleButton
                                 aria-label="Mit Symbolen spielen"
-                                value="symbols"
-                            >
+                                value={GameMode.Symbols}
+                                disabled={gameMode === GameMode.Symbols}>
                                 <Stack
                                     direction={"column"}
                                     alignContent={"center"}
                                     textAlign={"center"}
-                                    alignItems={"center"}
-                                >
+                                    alignItems={"center"}>
                                     <Icon baseClassName="material-icons-round">star</Icon>
                                     <span className={"toggle-button-title"}>Symbole</span>
                                 </Stack>
                             </PrimaryToggleButton>
                             <PrimaryToggleButton
                                 aria-label="Mit Tiergeräuschen spielen"
-                                value="animals"
-                            >
+                                value={GameMode.Animals}
+                                disabled={gameMode === GameMode.Animals}>
                                 <Stack
                                     direction={"column"}
                                     alignContent={"center"}
                                     textAlign={"center"}
-                                    alignItems={"center"}
-                                >
+                                    alignItems={"center"}>
                                     <Icon baseClassName="material-icons-round">pets</Icon>
                                     <span className={"toggle-button-title"}>Tiere</span>
                                 </Stack>
                             </PrimaryToggleButton>
                             <PrimaryToggleButton
                                 aria-label="Mit Musikinstrumenten spielen"
-                                value="instruments"
-                            >
+                                value={GameMode.Instruments}
+                                disabled={gameMode === GameMode.Instruments}>
                                 <Stack
                                     direction={"column"}
                                     alignContent={"center"}
@@ -198,8 +228,10 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                             <Switch
                                 inputProps={{
                                     "aria-label":
-                                        "Besser erkennbare Icons für das Spiel aktivieren",
+                                        `Besser erkennbare Icons für das Spiel ${showBetterIcons ? "deaktivieren" : "aktivieren"}`,
                                 }}
+                                checked={showBetterIcons}
+                                onChange={onShowBetterIconsChanged}
                             />
                         </ListItem>
                     </List>
@@ -217,9 +249,10 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                                 primary="Punktestand pro Spielrunde"
                             />
                             <Switch
-                                defaultChecked
+                                checked={showLevelScore}
+                                onChange={onShowLevelScoreChanged}
                                 inputProps={{
-                                    "aria-label": "Punktestand pro Spielrunde anzeigen",
+                                    "aria-label": `Punktestand pro Spielrunde ${showLevelScore ? "ausblenden" : "anzeigen"}`,
                                 }}
                             />
                         </ListItem>
@@ -245,8 +278,9 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                             </Box>
                             <Box sx={{px: 2, pt: 1}}>
                                 <Slider
-                                    aria-label="Länge des Countdowns vor jeder Runde"
-                                    defaultValue={3}
+                                    aria-label="Dauer des Countdowns vor jeder Runde ändern"
+                                    value={levelCountdownDuration}
+                                    onChange={onLevelCountdownChanged}
                                     valueLabelDisplay="auto"
                                     marks={volumeMarks}
                                     max={5}

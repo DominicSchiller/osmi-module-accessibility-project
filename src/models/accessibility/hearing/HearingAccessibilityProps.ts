@@ -1,8 +1,8 @@
+import {action, observable} from "mobx";
+
 /**
  * Collection of hearing related accessibility settings.
  */
-import {action, observable} from "mobx";
-
 export class HearingAccessibilityProps {
     /**
      * Volume used for speech
