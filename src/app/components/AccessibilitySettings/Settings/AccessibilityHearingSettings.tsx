@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {
   Button,
   Box,
@@ -71,8 +71,43 @@ const ListItemBox = styled(Box)(({ theme }) => ({
 
 const AccessibilityHearingSettings = withAccessibilityContext(
   withAccessibilityMenuContext((props: any) => {
-    const { menuContext } = props;
-    // const { accessibilityContext } = props;
+    const { menuContext, accessibilityContext } = props;
+
+    const [voiceVolume, setVoiceVolume] = React.useState(
+        accessibilityContext.hearing.voiceVolume
+    );
+
+    const [soundEffectsVolume, setSoundEffectsVolume] = React.useState(
+        accessibilityContext.hearing.soundEffectsVolume
+    );
+
+    const [showSubtitles, setShowSubtitles] = React.useState(
+        accessibilityContext.hearing.showSubtitles
+    )
+
+    const [subtitleFontSize, setSubtitleFontSize] = React.useState(
+        accessibilityContext.hearing.subtitleFontSize
+    );
+
+    const onVoiceVolumeChanged = (event: any, newValue: any) => {
+      accessibilityContext.hearing.setVoiceVolume(newValue);
+      setVoiceVolume(newValue);
+    };
+
+    const onSoundEffectsVolumeChanged = (event: any, newValue: any) => {
+      accessibilityContext.hearing.setSoundEffectsVolume(newValue);
+      setSoundEffectsVolume(newValue);
+    };
+
+    const onShowSubtitlesChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
+      accessibilityContext.hearing.showSubtitles = isEnabled
+      setShowSubtitles(isEnabled)
+    };
+
+    const onSubtitleFontSizeChanged = (event: any, newValue: any) => {
+      accessibilityContext.hearing.setSubtitleFontSize(newValue);
+      setSubtitleFontSize(newValue);
+    }
 
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
@@ -126,8 +161,9 @@ const AccessibilityHearingSettings = withAccessibilityContext(
               </Box>
               <Box sx={{ px: 2, pt: 1 }}>
                 <Slider
-                  aria-label="Lautstärke der Sounds"
-                  defaultValue={50}
+                  aria-label="Lautstärke der Sprache anpassen"
+                  value={voiceVolume}
+                  onChange={onVoiceVolumeChanged}
                   valueLabelDisplay="auto"
                   marks={volumeMarks}
                 />
@@ -155,8 +191,9 @@ const AccessibilityHearingSettings = withAccessibilityContext(
               </Box>
               <Box sx={{ px: 2, pt: 1 }}>
                 <Slider
-                  aria-label="Lautstärke der Sounds"
-                  defaultValue={50}
+                  aria-label="Lautstärke der Sound Effekte anpassen"
+                  value={soundEffectsVolume}
+                  onChange={onSoundEffectsVolumeChanged}
                   valueLabelDisplay="auto"
                   marks={volumeMarks}
                 />
@@ -170,7 +207,9 @@ const AccessibilityHearingSettings = withAccessibilityContext(
               </ListItemIcon>
               <ListItemText id="switch-font-label" primary="Untertitel" />
               <Switch
-                inputProps={{ "aria-label": "Untertitel ein- und ausschalten" }}
+                inputProps={{ "aria-label": `Anzeige von Untertitel ${showSubtitles ? "ausschalten" : "einschalten"} ` }}
+                checked={showSubtitles}
+                onChange={onShowSubtitlesChanged}
               />
             </ListItem>
 
@@ -198,8 +237,9 @@ const AccessibilityHearingSettings = withAccessibilityContext(
               </Box>
               <Box sx={{ px: 2, pt: 1 }}>
                 <Slider
-                  aria-label="Schriftgröße der Unterittel"
-                  defaultValue={16}
+                  aria-label="Schriftgröße der Unterittel anpassen"
+                  value={subtitleFontSize}
+                  onChange={onSubtitleFontSizeChanged}
                   valueLabelDisplay="auto"
                   marks={marks1}
                   min={10}
