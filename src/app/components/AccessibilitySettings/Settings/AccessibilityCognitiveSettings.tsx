@@ -15,7 +15,7 @@ import { withAccessibilityContext } from "../../../context/AccessibilityContext"
 import "./AccessibilityCategorySettings.scss";
 import { styled } from "@mui/system";
 
-const marks1 = [
+const sensoButtonHighlightDurationMarks = [
   {
     value: 1,
     label: "1 sek",
@@ -32,7 +32,7 @@ const marks1 = [
   },
 ];
 
-const marks2 = [
+const playerAnswerTimeMarks = [
   {
     value: 2,
     label: "2 sek",
@@ -55,26 +55,26 @@ const marks2 = [
   },
 ];
 
-const marks3 = [
+const playerLivesMarks = [
   {
     value: 1,
     label: "1",
-  },
-  {
-    value: 2,
-    label: "2",
   },
   {
     value: 3,
     label: "3",
   },
   {
-    value: 4,
+    value: 5,
+    label: "5",
+  },
+  {
+    value: 7,
     label: "beliebig",
   },
 ];
 
-const marks4 = [
+const numberOfTipsMarks = [
   {
     value: 0,
     label: "keine",
@@ -110,8 +110,43 @@ const ListItemBox = styled(Box)(({ theme }) => ({
 
 const AccessibilityCognitiveSettings = withAccessibilityContext(
   withAccessibilityMenuContext((props: any) => {
-    const { menuContext } = props;
-    // const { accessibilityContext } = props;
+    const { menuContext, accessibilityContext } = props;
+
+    const [sensoButtonHighlightDuration, setSensoButtonHighlightDuration] = React.useState(
+        accessibilityContext.cognitive.sensoButtonHighlightingDuration
+    )
+
+    const [playerAnswerTime, setPlayerAnswerTime] = React.useState(
+        accessibilityContext.cognitive.playerAnswerTime
+    )
+
+    const [playerLives, setPlayerLives] = React.useState(
+        accessibilityContext.cognitive.playerLives
+    )
+
+    const [numberOfTips, setNumberOfTips] = React.useState(
+        accessibilityContext.cognitive.numberOfTips
+    )
+
+    const onSensoButtonHighlightingDurationChanged = (event: any, newValue: any) => {
+      accessibilityContext.cognitive.sensoButtonHighlightingDuration = newValue
+      setSensoButtonHighlightDuration(newValue)
+    }
+
+    const onPlayerAnswerTimeChanged = (event: any, newValue: any) => {
+      accessibilityContext.cognitive.playerAnswerTime = newValue
+      setPlayerAnswerTime(newValue)
+    }
+
+    const onPlayerLivesChanged = (event: any, newValue: any) => {
+      accessibilityContext.cognitive.playerLives = newValue
+      setPlayerLives(newValue)
+    }
+
+    const onNumberOfChanged = (event: any, newValue: any) => {
+      accessibilityContext.cognitive.numberOfTips = newValue
+      setNumberOfTips(newValue)
+    }
 
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
@@ -166,10 +201,11 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
               <Box sx={{ px: 2, pt: 1 }}>
                 <Slider
                   sx={{ width: 1 }}
-                  aria-label="Zeitdauer der Abspielung"
-                  defaultValue={1}
+                  aria-label="Zeitdauer der Abspielung ändern"
+                  value={sensoButtonHighlightDuration}
+                  onChange={onSensoButtonHighlightingDurationChanged}
                   valueLabelDisplay="auto"
-                  marks={marks1}
+                  marks={sensoButtonHighlightDurationMarks}
                   min={1}
                   max={5}
                 />
@@ -197,11 +233,12 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
               </Box>
               <Box sx={{ px: 2, pt: 1 }}>
                 <Slider
-                  aria-label="Zeitlimit für Eingaben"
-                  defaultValue={10}
+                  aria-label="Zeitlimit für Eingaben ändern"
+                  value={playerAnswerTime}
+                  onChange={onPlayerAnswerTimeChanged}
                   valueLabelDisplay="auto"
                   step={2}
-                  marks={marks2}
+                  marks={playerAnswerTimeMarks}
                   min={2}
                   max={10}
                 />
@@ -232,13 +269,14 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
               </Box>
               <Box sx={{ px: 2, pt: 1 }}>
                 <Slider
-                  aria-label="Leben / Versuche"
-                  defaultValue={4}
+                  aria-label="Maximale Anzahl an Leben / Versuche ändern"
+                  value={playerLives}
+                  onChange={onPlayerLivesChanged}
                   valueLabelDisplay="auto"
                   step={1}
-                  marks={marks3}
+                  marks={playerLivesMarks}
                   min={1}
-                  max={4}
+                  max={7}
                 />
               </Box>
             </ListItemBox>
@@ -262,10 +300,11 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
               </Box>
               <Box sx={{ px: 2, pt: 1 }}>
                 <Slider
-                  aria-label="Anzahl der Tipps"
-                  defaultValue={0}
+                  aria-label="Anzahl der Tipps pro Runde ändern"
+                  value={numberOfTips}
+                  onChange={onNumberOfChanged}
                   valueLabelDisplay="auto"
-                  marks={marks4}
+                  marks={numberOfTipsMarks}
                   step={null}
                   min={0}
                   max={5}

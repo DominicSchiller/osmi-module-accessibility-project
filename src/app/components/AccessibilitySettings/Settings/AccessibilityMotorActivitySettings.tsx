@@ -122,7 +122,6 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
         };
 
         const onLevelCountdownChanged = (event: any, newValue: any) => {
-            console.warn(newValue)
             accessibilityContext.motor.levelCountdownDuration = newValue
             setlevelCountdownDuration(newValue)
         }
