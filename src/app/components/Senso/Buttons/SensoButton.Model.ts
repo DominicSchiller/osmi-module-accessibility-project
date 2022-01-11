@@ -1,6 +1,8 @@
 /**
  * A senso's colored action button.
  */
+import {IButtonContent} from "../../../../repositories/SensoButtonContentRepository";
+
 export interface ISensoButtonProps {
     /**
      * The button's unique identifier
@@ -8,13 +10,9 @@ export interface ISensoButtonProps {
      */
     id: SensoButtonID
     /**
-     * The button's description title
+     * The button's actual content
      */
-    title: string
-    /**
-     * The button's icon
-     */
-    icon: string
+    content: IButtonContent
     /**
      * The button's color
      */
@@ -52,23 +50,20 @@ export enum SensoButtonID {
  */
 export class SensoButton implements ISensoButtonProps {
     public readonly id: SensoButtonID
-    public readonly title: string
-    public readonly icon: string
+    public readonly content: IButtonContent
     public readonly color: string
     public disabled: boolean
 
     /**
      * Create a new button instance
      * @param alignment The button's unique identifier
-     * @param title The button's description title
-     * @param icon The button's icon
+     * @param content The button's content
      * @param color The button's color
      * @param disabled The button's disabled status
      */
-    public constructor(alignment: SensoButtonID, title: string, icon: string, color: string, disabled?: boolean) {
+    public constructor(alignment: SensoButtonID, content: IButtonContent, color: string, disabled?: boolean) {
         this.id = alignment
-        this.title = title
-        this.icon = icon
+        this.content = content
         this.color = color
         this.disabled = disabled ?? false
     }

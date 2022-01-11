@@ -1,4 +1,4 @@
-import {SensoButtonID} from "../app/components/Senso/Button/SensoButton.Model";
+import {SensoButtonID} from "../app/components/Senso/Buttons/SensoButton.Model";
 import {SensoUIHelper} from "./SensoUIHelper";
 import {SensoAudioPlayer, SensoSound} from "./SensoAudioPlayer";
 import {action, computed, makeObservable, observable} from "mobx";
@@ -147,7 +147,7 @@ export class SensoGameplaySession {
         this.incrementRound()
         this.generateNewSequence()
         this.presentRandomSequence().then(() => {
-            this.isLevelStarted = true
+            this.setLevelStarted(true)
             this.setIsPlayingSequence(false)
             this.scoreManager.startTimer()
             const subtitleId = "subtitle"
@@ -236,6 +236,10 @@ export class SensoGameplaySession {
 
     @action private setIsPlayingSequence(isPlaying: boolean) {
         this.isPlayingSequence = isPlaying
+    }
+
+    @action private setLevelStarted(isStarted: boolean) {
+        this.isLevelStarted = isStarted
     }
 
     @action private incrementRound() {

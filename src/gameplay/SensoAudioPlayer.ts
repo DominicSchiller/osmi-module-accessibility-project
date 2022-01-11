@@ -1,6 +1,6 @@
-const correctSelectionSound = require("../assets/sounds/right_selection.m4a");
-const wrongSelectionSound = require("../assets/sounds/wrong_selection.m4a")
-const countdown = require("../assets/sounds/countdown.m4a")
+const correctSelectionSound = require("../assets/sounds/game/right_selection.m4a");
+const wrongSelectionSound = require("../assets/sounds/game/wrong_selection.m4a")
+const countdown = require("../assets/sounds/game/countdown.m4a")
 
 /**
  * A senso's sound effect.

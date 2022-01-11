@@ -1,53 +1,33 @@
 import React, {useContext} from "react";
 import './Senso.View.scss'
-import {SensoButtonView} from "./Button/SensoButton.View";
-import {withAccessibilityContext} from "../../context/AccessibilityContext";
+import {SensoButtonView} from "./Buttons/SensoButton.View";
 import {Icon, IconButton, Stack, Tooltip, Typography} from "@mui/material";
 import {ReactComponent as TopLeftClippingMask} from "../../../assets/images/senso/top-left-cm.svg";
 import {ReactComponent as TopRightClippingMask} from "../../../assets/images/senso/top-right-cm.svg";
 import {ReactComponent as BottomLeftClippingMask} from "../../../assets/images/senso/bottom-left-cm.svg";
 import {ReactComponent as BottomRightClippingMask} from "../../../assets/images/senso/bottom-right-cm.svg";
-import {SensoButton, SensoButtonID} from "./Button/SensoButton.Model";
+import {SensoButton, SensoButtonID} from "./Buttons/SensoButton.Model";
 import {withTheme} from "@mui/styles";
-import {UIColorMode} from "../../../models/accessibility/seeing/UIColorMode";
 import {SensoGameplayContext} from "../../context/SensoGameplayContext";
 import {observer} from "mobx-react";
-
+import {SensoButtonContentRepository} from "../../../repositories/SensoButtonContentRepository";
+import {SensoButtonColorRepository} from "../../../repositories/SensoButtonColorRepository";
+import {} from "../../../utils/ArrayChunks"
 
 /**
  * The Senso game component.
  */
-const SensoView = withTheme(withAccessibilityContext((props: any) => {
-    const {accessibilityContext, theme} = props;
+const SensoView = withTheme((props: any) => {
+    const {theme, gameMode, colorMode} = props;
     const gameplay = useContext(SensoGameplayContext)
 
     // definition of all four senso buttons (two buttons each row)
-    const sensoButtons: SensoButton[][] = [
-        [
-            new SensoButton(SensoButtonID.TopLeft,
-                "Mond",
-                "bedtime",
-                accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? accessibilityContext.seeing.sensoTopRightActionButtonColor : accessibilityContext.seeing.sensoTopLeftActionButtonColor,
-                props.disabled),
-            new SensoButton(SensoButtonID.TopRight,
-                "Stern",
-                "star",
-                accessibilityContext.seeing.sensoTopRightActionButtonColor,
-                props.disabled)
-        ],
-        [
-            new SensoButton(SensoButtonID.BottomLeft,
-                "Wolke",
-                "wb_cloudy",
-                accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? accessibilityContext.seeing.sensoTopRightActionButtonColor : accessibilityContext.seeing.sensoBottomLeftActionButtonColor,
-                props.disabled),
-            new SensoButton(SensoButtonID.BottomRight,
-                "Sonne",
-                "wb_sunny",
-                accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? accessibilityContext.seeing.sensoTopRightActionButtonColor : accessibilityContext.seeing.sensoBottomRightActionButtonColor,
-                props.disabled)
-        ]
-    ];
+    const sensoButtons = Object.values(SensoButtonID).map(id => {
+        return new SensoButton(id,
+            SensoButtonContentRepository.getContent(id, gameMode),
+            SensoButtonColorRepository.getColor(id, colorMode),
+            props.disabled)
+    }).chunked(2);
 
     return (
         <>
@@ -100,6 +80,6 @@ const SensoView = withTheme(withAccessibilityContext((props: any) => {
             <BottomRightClippingMask />
         </>
     );
-}));
+});
 
 export default observer(SensoView);

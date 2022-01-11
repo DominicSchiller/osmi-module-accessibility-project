@@ -209,8 +209,7 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                                     direction={"column"}
                                     alignContent={"center"}
                                     textAlign={"center"}
-                                    alignItems={"center"}
-                                >
+                                    alignItems={"center"}>
                                     <Icon baseClassName="material-icons-round">piano</Icon>
                                     <span className={"toggle-button-title"}>Instrumente</span>
                                 </Stack>
@@ -236,24 +235,20 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                     </List>
                     <List
                         subheader={
-                            <ListSubheader>Anzeigen während des Spiels</ListSubheader>
-                        }
-                    >
+                            <ListSubheader>Anzeigen während des Spiels</ListSubheader>}>
                         <ListItem className={"setting-list-item"}>
                             <ListItemIcon>
                                 <Icon baseClassName="material-icons-round">assessment</Icon>
                             </ListItemIcon>
                             <ListItemText
                                 id="show-score-label"
-                                primary="Punktestand pro Spielrunde"
-                            />
+                                primary="Punktestand pro Spielrunde"/>
                             <Switch
                                 checked={showLevelScore}
                                 onChange={onShowLevelScoreChanged}
                                 inputProps={{
                                     "aria-label": `Punktestand pro Spielrunde ${showLevelScore ? "ausblenden" : "anzeigen"}`,
-                                }}
-                            />
+                                }}/>
                         </ListItem>
                         <ListItemBox>
                             <Box
@@ -261,13 +256,11 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                                     display: "flex",
                                     justifyContent: "flex-start",
                                     alignItems: "center",
-                                }}
-                            >
+                                }}>
                                 <ListItemIcon>
                                     <Icon
                                         baseClassName="material-icons-round"
-                                        sx={{fontSize: 36}}
-                                    >
+                                        sx={{fontSize: 36}}>
                                         timer
                                     </Icon>
                                 </ListItemIcon>

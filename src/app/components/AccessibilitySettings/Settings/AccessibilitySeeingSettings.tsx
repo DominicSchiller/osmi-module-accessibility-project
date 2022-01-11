@@ -75,10 +75,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
       setPopoverAnchorEl(null);
     };
 
-    const handleColorModeSelection = (
-      event: React.MouseEvent<HTMLElement>,
-      newColorMode: UIColorMode
-    ) => {
+    const handleColorModeSelection = (event: React.MouseEvent<HTMLElement>, newColorMode: UIColorMode) => {
       event.preventDefault();
       if (newColorMode) {
         accessibilityContext.seeing.setUIColorMode(newColorMode);
@@ -172,22 +169,19 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
               value={currentColorMode}
               color={"primary"}
               sx={{ marginBottom: "16px" }}
-              onChange={handleColorModeSelection}
-            >
+              onChange={handleColorModeSelection}>
               <PrimaryToggleButton
                 value={`${UIColorMode.Monochrome}`}
                 disabled={
                   accessibilityContext.seeing.uiColorMode ===
                   UIColorMode.Monochrome
                 }
-                aria-label="Einfarbigen Modus einschalten"
-              >
+                aria-label="Einfarbigen Modus einschalten">
                 <Stack
                   direction={"column"}
                   alignContent={"center"}
                   textAlign={"center"}
-                  alignItems={"center"}
-                >
+                  alignItems={"center"}>
                   <Icon baseClassName="material-icons-round">
                     invert_colors
                   </Icon>

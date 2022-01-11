@@ -8,7 +8,6 @@ import {
     GameplayContextConsumer,
     GameplayContextProvider
 } from "../../context/SensoGameplayContext";
-import {observer} from "mobx-react";
 import {LevelCompletedDialog} from "./dialogs/LevelCompletedDialog";
 import {withTheme} from "@mui/styles";
 import {useDidMount} from "../../../utils/Hooks";
@@ -18,10 +17,9 @@ import {ReactComponent as CoinIcon} from "../../../assets/images/icons/coin.svg"
  * The app's senso game page component.
  */
 const GamePage = withTheme(withAccessibilityContext((props: any) => {
-
     const didMount = useDidMount()
     const dialogRef = React.createRef<StartGameDialog>()
-    const {theme} = props
+    const {theme, accessibilityContext} = props
 
     useEffect(() => {
         if (didMount()) { return }
@@ -52,7 +50,7 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                        <Icon baseClassName="material-icons-round" className={"hud-icon"}>
                                            favorite
                                        </Icon>
-                                       <Typography color={"textPrimary"} className={"hud-stats"}>{context.session.playerLife} Leben</Typography>
+                                       <Typography color={"textPrimary"} className={"hud-stats"}>{accessibilityContext.cognitive.playerLives} Leben</Typography>
                                    </Stack>
                                </Tooltip>
                                <Tooltip arrow
@@ -66,7 +64,9 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                </Stack>
                                </Tooltip>
                            </Stack>
-                           <SensoView disabled={context.session.isPlayingSequence || context.session.isRoundFinished} />
+                           <SensoView gameMode={accessibilityContext.motor.gameMode}
+                                      colorMode={accessibilityContext.seeing.uiColorMode}
+                                      disabled={context.session.isPlayingSequence || context.session.isRoundFinished} />
                            <StartGameDialog ref={dialogRef} />
                            { context.session.isLevelCompleted ?
                                <LevelCompletedDialog theme={theme} /> : <></>
@@ -81,9 +81,8 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                    </>
                }
            </GameplayContextConsumer>
-
        </GameplayContextProvider>
     );
 }));
 
-export default observer(GamePage);
+export default GamePage;
