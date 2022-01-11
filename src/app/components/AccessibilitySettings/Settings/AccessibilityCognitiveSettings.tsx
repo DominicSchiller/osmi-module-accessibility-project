@@ -129,22 +129,22 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
     )
 
     const onSensoButtonHighlightingDurationChanged = (event: any, newValue: any) => {
-      accessibilityContext.cognitive.sensoButtonHighlightingDuration = newValue
+      accessibilityContext.cognitive.setSensoButtonHighlightingDuration(newValue)
       setSensoButtonHighlightDuration(newValue)
     }
 
     const onPlayerAnswerTimeChanged = (event: any, newValue: any) => {
-      accessibilityContext.cognitive.playerAnswerTime = newValue
+      accessibilityContext.cognitive.setPlayerAnswerTime(newValue)
       setPlayerAnswerTime(newValue)
     }
 
     const onPlayerLivesChanged = (event: any, newValue: any) => {
-      accessibilityContext.cognitive.playerLives = newValue
+      accessibilityContext.cognitive.setPlayerLives(newValue)
       setPlayerLives(newValue)
     }
 
-    const onNumberOfChanged = (event: any, newValue: any) => {
-      accessibilityContext.cognitive.numberOfTips = newValue
+    const onNumberOfTipsChanged = (event: any, newValue: any) => {
+      accessibilityContext.cognitive.setNumberOfTips(newValue)
       setNumberOfTips(newValue)
     }
 
@@ -302,7 +302,7 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
                 <Slider
                   aria-label="Anzahl der Tipps pro Runde ändern"
                   value={numberOfTips}
-                  onChange={onNumberOfChanged}
+                  onChange={onNumberOfTipsChanged}
                   valueLabelDisplay="auto"
                   marks={numberOfTipsMarks}
                   step={null}

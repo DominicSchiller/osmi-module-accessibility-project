@@ -44,7 +44,7 @@ export class HearingAccessibilityProps {
      * Update the subtitle font size.
      * @param newFontSize The new font size
      */
-    public setSubtitleFontSize(newFontSize: number) {
+    @action public setSubtitleFontSize(newFontSize: number) {
         this.subtitleFontSize = newFontSize
     }
 

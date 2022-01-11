@@ -58,6 +58,18 @@ export class SeeingAccessibilityProps {
         }
     }
 
+    @action public setFontFamily(fontFamily: string) {
+        this.fontFamily = fontFamily
+    }
+
+    /**
+     * Update the primary color used for all interaction components.
+     * @param hexString The color's hex string
+     */
+    @action public setPrimaryColor(hexString: string) {
+        this.primaryColor = hexString
+    }
+
     /**
      * Update the UI contrast mode.
      * @param newContrastMode The new contrast mode to switch to

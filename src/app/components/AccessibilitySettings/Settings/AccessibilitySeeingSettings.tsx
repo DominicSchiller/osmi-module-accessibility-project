@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {
   Button,
   Icon,
@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenuContext";
 import { withAccessibilityContext } from "../../../context/AccessibilityContext";
-import { SwatchesPicker } from "react-color";
+import {ColorResult, SwatchesPicker} from "react-color";
 import "./AccessibilityCategorySettings.scss";
 import { UIColorMode } from "../../../../models/accessibility/seeing/UIColorMode";
 import { styled } from "@mui/system";
@@ -56,15 +56,27 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
     const [popoverAnchorEl, setPopoverAnchorEl] =
       React.useState<HTMLButtonElement | null>(null);
 
+    const [isReadableFont, setIsReadableFont] = React.useState(
+        accessibilityContext.seeing.fontFamily === "Atkinson-Hyperlegible"
+    )
+
     const [currentColorMode, setCurrentColorMode] = React.useState(
       accessibilityContext.seeing.uiColorMode
     );
+
+    const [primaryColor, setPrimaryColor] = React.useState(
+        accessibilityContext.seeing.primaryColor
+    );
+
     const [currentContrastMode, setCurrentContrastMode] = React.useState(
       accessibilityContext.seeing.uiContrastMode
     );
     const [contrastValue, setContrastValue] = React.useState(
       accessibilityContext.seeing.contrastValue
     );
+
+
+
     const isColorPopoverOpen = Boolean(popoverAnchorEl);
 
     const showColorPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -75,27 +87,32 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
       setPopoverAnchorEl(null);
     };
 
-    const handleColorModeSelection = (event: React.MouseEvent<HTMLElement>, newColorMode: UIColorMode) => {
+    const onReadableFontChanged = (event: ChangeEvent<HTMLInputElement>, isSelected: boolean) => {
+      setIsReadableFont(isSelected)
+      accessibilityContext.seeing.setFontFamily(isSelected ? "Atkinson-Hyperlegible" : "Inter");
+    }
+
+    const onColorModeChanged = (event: React.MouseEvent<HTMLElement>, newColorMode: UIColorMode) => {
       event.preventDefault();
       if (newColorMode) {
-        accessibilityContext.seeing.setUIColorMode(newColorMode);
         setCurrentColorMode(newColorMode);
+        accessibilityContext.seeing.setUIColorMode(newColorMode);
       }
     };
 
-    const handleContrastModeSelection = (
-      event: React.MouseEvent<HTMLElement>,
-      newContrastMode: UIContrastMode
-    ) => {
-      accessibilityContext.seeing.setUIContrastMode(
-        newContrastMode ?? UIContrastMode.Normal
-      );
+    const onPrimaryColorChanged = (color: ColorResult) => {
+      setPrimaryColor(color.hex)
+      accessibilityContext.seeing.setPrimaryColor(color.hex);
+    }
+
+    const onContrastModeChanged = (event: React.MouseEvent<HTMLElement>, newContrastMode: UIContrastMode) => {
       setCurrentContrastMode(newContrastMode ?? UIContrastMode.Normal);
+      accessibilityContext.seeing.setUIContrastMode(newContrastMode ?? UIContrastMode.Normal);
     };
 
     const onContrastValueChanged = (event: any, newValue: any) => {
-      accessibilityContext.seeing.setContrastValue(newValue);
       setContrastValue(newValue);
+      accessibilityContext.seeing.setContrastValue(newValue);
     };
 
     return (
@@ -141,21 +158,11 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                 edge="end"
                 inputProps={{
                   "aria-labelledby": `Verwendung der lesbaren Schriftart "Atkinson Hyperlegible" ${
-                    accessibilityContext.seeing.fontFamily ===
-                    "Atkinson-Hyperlegible"
-                      ? "ausschalten"
-                      : "einschalten"
+                    isReadableFont ? "ausschalten" : "einschalten"
                   }`,
                 }}
-                onChange={(event, checked) => {
-                  accessibilityContext.seeing.fontFamily = checked
-                    ? "Atkinson-Hyperlegible"
-                    : "Inter";
-                }}
-                checked={
-                  accessibilityContext.seeing.fontFamily ===
-                  "Atkinson-Hyperlegible"
-                }
+                onChange={onReadableFontChanged}
+                checked={isReadableFont}
               />
             </ListItem>
           </List>
@@ -169,7 +176,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
               value={currentColorMode}
               color={"primary"}
               sx={{ marginBottom: "16px" }}
-              onChange={handleColorModeSelection}>
+              onChange={onColorModeChanged}>
               <PrimaryToggleButton
                 value={`${UIColorMode.Monochrome}`}
                 disabled={
@@ -255,10 +262,8 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                 }}
               >
                 <SwatchesPicker
-                  color={accessibilityContext.seeing.primaryColor}
-                  onChangeComplete={(color) => {
-                    accessibilityContext.seeing.primaryColor = color.hex;
-                  }}
+                  color={primaryColor}
+                  onChangeComplete={onPrimaryColorChanged}
                 />
               </Popover>
             </ListItem>
@@ -273,7 +278,7 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
               value={currentContrastMode}
               color={"primary"}
               sx={{ marginBottom: "16px" }}
-              onChange={handleContrastModeSelection}
+              onChange={onContrastModeChanged}
             >
               <PrimaryToggleButton
                 value={`${UIContrastMode.HighContrast}`}
