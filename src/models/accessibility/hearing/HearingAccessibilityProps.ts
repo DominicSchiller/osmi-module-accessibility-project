@@ -1,4 +1,4 @@
-import {action, observable} from "mobx";
+import {action, makeObservable, observable} from "mobx";
 
 /**
  * Collection of hearing related accessibility settings.
@@ -46,5 +46,12 @@ export class HearingAccessibilityProps {
      */
     public setSubtitleFontSize(newFontSize: number) {
         this.subtitleFontSize = newFontSize
+    }
+
+    /**
+     * Create a new set of hearing related accessibility settings.
+     */
+    public constructor() {
+        makeObservable(this);
     }
 }

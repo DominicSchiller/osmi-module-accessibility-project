@@ -1,4 +1,4 @@
-import {action, observable} from "mobx";
+import {action, makeObservable, observable} from "mobx";
 
 /**
  * Collection of motor cognitive related accessibility settings.
@@ -54,5 +54,12 @@ export class CognitiveAccessibilityProps {
      */
     @action public setNumberOfTips(newNumberOfTips: number) {
         this.numberOfTips = newNumberOfTips
+    }
+
+    /**
+     * Create a new set of cognitive related accessibility settings.
+     */
+    public constructor() {
+        makeObservable(this);
     }
 }

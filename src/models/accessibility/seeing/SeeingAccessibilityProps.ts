@@ -38,23 +38,6 @@ export class SeeingAccessibilityProps {
     @observable fontFamily = "Atkinson-Hyperlegible"
 
     /**
-     * The color of the senso's top left action button
-     */
-    @observable sensoTopLeftActionButtonColor = "#c72b00";
-    /**
-     * The color of the senso's top right action button
-     */
-    @observable sensoTopRightActionButtonColor = "#ebb800";
-    /**
-     * The color of the senso's bottom left action button
-     */
-    @observable sensoBottomLeftActionButtonColor = "#8dad00";
-    /**
-     * The color of the senso's bottom right action button
-     */
-    @observable sensoBottomRightActionButtonColor = "#09639c";
-
-    /**
      * Update the color mode
      * @param newColorMode The new color mode to switch to
      */

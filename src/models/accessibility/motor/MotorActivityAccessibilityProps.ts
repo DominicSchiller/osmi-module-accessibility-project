@@ -1,4 +1,4 @@
-import {action, observable} from "mobx";
+import {action, makeObservable, observable} from "mobx";
 import {GameMode} from "./GameMode";
 
 /**
@@ -9,7 +9,7 @@ export class MotorActivityAccessibilityProps {
     /**
      * The current game's mode
      */
-    @observable public gameMode: GameMode = GameMode.Instruments
+    @observable public gameMode: GameMode = GameMode.Symbols
 
     /**
      * Status whether to show better recognizable icons
@@ -56,6 +56,13 @@ export class MotorActivityAccessibilityProps {
      */
     @action public setLevelCountdownDuration(newDuration: number) {
         this.levelCountdownDuration = newDuration
+    }
+
+    /**
+     * Create a new set of motor activity related accessibility settings.
+     */
+    public constructor() {
+        makeObservable(this);
     }
 
 }
