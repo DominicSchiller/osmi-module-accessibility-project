@@ -214,6 +214,7 @@ export class SensoGameplaySession {
 
         if (this.isLevelCompleted) {
             this.scoreManager.stopTimer()
+            SensoAudioPlayer.play(SensoSound.LevelCompleted)
         }
         return isCorrectSelection
     }
@@ -227,10 +228,12 @@ export class SensoGameplaySession {
         this.isCountingDown = true
         for (let counter=steps; counter>0; counter--) {
             document.getElementById(countdownId)!.innerHTML = `${counter}`
+            SensoAudioPlayer.play(SensoSound.Countdown)
             await wait(1200)
         }
+        SensoAudioPlayer.play(SensoSound.LevelStarted)
         document.getElementById(countdownId)!.innerHTML = ""
-        await wait(1000)
+        await wait(1400)
         this.isCountingDown = false
     }
 

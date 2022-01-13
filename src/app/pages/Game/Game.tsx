@@ -40,6 +40,7 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                            direction={"column"}
                            rowGap={"8px"}
                            sx={{overflowY: "hidden"}}>
+                           <audio controls id="audio-player" hidden={true} />
                            <Stack direction={"row"} justifyContent={"space-between"} id="hud">
                                <Tooltip arrow
                                         title={"Anzeige wie viele Leben du noch hast"}

@@ -1,6 +1,8 @@
-const correctSelectionSound = require("../assets/sounds/game/right_selection.m4a");
-const wrongSelectionSound = require("../assets/sounds/game/wrong_selection.m4a")
+const correctSelectionSound = require("../assets/sounds/game/correct.m4a");
+const wrongSelectionSound = require("../assets/sounds/game/wrong.m4a")
 const countdown = require("../assets/sounds/game/countdown.m4a")
+const levelStarted = require("../assets/sounds/game/level_started.m4a")
+const levelCompleted = require("../assets/sounds/game/level_completed.m4a")
 
 /**
  * A senso's sound effect.
@@ -14,7 +16,9 @@ export enum SensoSound {
      * Sound effect for a wronly picked button
      */
     WrongSelection,
-    Countdown
+    Countdown,
+    LevelStarted,
+    LevelCompleted
 }
 
 /**
@@ -28,8 +32,11 @@ export class SensoAudioPlayer {
      * @private
      */
     public static play(sound: SensoSound) {
-        const audio = new Audio(this.getSoundFileUrl(sound))
-        audio.play().then()
+        // const audio = new Audio(this.getSoundFileUrl(sound))
+        // audio.play().then()
+        const audio = document.getElementById("audio-player") as HTMLAudioElement
+        audio.autoplay = true
+        audio.src = this.getSoundFileUrl(sound)
     }
 
     /**
@@ -45,6 +52,10 @@ export class SensoAudioPlayer {
                 return wrongSelectionSound.default
             case SensoSound.Countdown:
                 return countdown.default
+            case SensoSound.LevelStarted:
+                return levelStarted.default
+            case SensoSound.LevelCompleted:
+                return levelCompleted.default
         }
     }
 }
