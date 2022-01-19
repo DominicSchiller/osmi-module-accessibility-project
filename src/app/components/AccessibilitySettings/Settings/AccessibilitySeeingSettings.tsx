@@ -183,7 +183,10 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                   accessibilityContext.seeing.uiColorMode ===
                   UIColorMode.Monochrome
                 }
-                aria-label="Einfarbigen Modus einschalten">
+                title={
+                    `${accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? "Einfarbiger" : "Einfarbigen"} Farbmodus ${accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? "eingeschaltet" : "einschalten"}`}
+                aria-label={
+                    `${accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? "Einfarbiger" : "Einfarbigen"} Farbmodus ${accessibilityContext.seeing.uiColorMode === UIColorMode.Monochrome ? "eingeschaltet" : "einschalten"}`}>
                 <Stack
                   direction={"column"}
                   alignContent={"center"}
@@ -200,14 +203,16 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                 disabled={
                   accessibilityContext.seeing.uiColorMode === UIColorMode.Light
                 }
-                aria-label="Hellen Farbmodus einschalten"
-              >
-                <Stack
+                title={
+                    `${accessibilityContext.seeing.uiColorMode === UIColorMode.Light ? "Heller" : "Hellen"} Farbmodus ${accessibilityContext.seeing.uiColorMode === UIColorMode.Light ? "eingeschaltet" : "einschalten"}`}
+
+              aria-label={
+                  `${accessibilityContext.seeing.uiColorMode === UIColorMode.Light ? "Heller" : "Hellen"} Farbmodus ${accessibilityContext.seeing.uiColorMode === UIColorMode.Light ? "eingeschaltet" : "einschalten"}`}>
+                    <Stack
                   direction={"column"}
                   alignContent={"center"}
                   textAlign={"center"}
-                  alignItems={"center"}
-                >
+                  alignItems={"center"}>
                   <Icon baseClassName="material-icons-round">light_mode</Icon>
                   <span className={"toggle-button-title"}>Hell</span>
                 </Stack>
@@ -217,8 +222,10 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
                 disabled={
                   accessibilityContext.seeing.uiColorMode === UIColorMode.Dark
                 }
-                aria-label="Dunklen Farbmodus einschalten"
-              >
+                title={
+                    `${accessibilityContext.seeing.uiColorMode === UIColorMode.Dark ? "Dunkler" : "Dunklen"} Farbmodus ${accessibilityContext.seeing.uiColorMode === UIColorMode.Dark ? "eingeschaltet" : "einschalten"}`}
+                aria-label={
+                    `${accessibilityContext.seeing.uiColorMode === UIColorMode.Dark ? "Dunkler" : "Dunklen"} Farbmodus ${accessibilityContext.seeing.uiColorMode === UIColorMode.Dark ? "eingeschaltet" : "einschalten"}`}>
                 <Stack
                   direction={"column"}
                   alignContent={"center"}
