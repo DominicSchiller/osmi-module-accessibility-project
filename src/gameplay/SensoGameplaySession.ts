@@ -152,7 +152,7 @@ export class SensoGameplaySession {
             this.scoreManager.startTimer()
             const subtitleLabel = document.getElementById("subtitle")
             if (subtitleLabel) {
-                subtitleLabel!.innerHTML = "Und jetzt du ..."
+                subtitleLabel!.innerHTML = ""
             }
         });
     }
