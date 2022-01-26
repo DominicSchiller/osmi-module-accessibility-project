@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {
   Button,
   Icon,
@@ -11,7 +11,6 @@ import {
   Popover,
   Slider,
   Stack,
-  Switch,
   ToggleButton as MUIToggleButton,
   ToggleButtonGroup, Tooltip,
   Typography,
@@ -56,9 +55,9 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
     const [popoverAnchorEl, setPopoverAnchorEl] =
       React.useState<HTMLButtonElement | null>(null);
 
-    const [isReadableFont, setIsReadableFont] = React.useState(
-        accessibilityContext.seeing.fontFamily === "Atkinson-Hyperlegible"
-    )
+    // const [isReadableFont, setIsReadableFont] = React.useState(
+    //     accessibilityContext.seeing.fontFamily === "Atkinson-Hyperlegible"
+    // )
 
     const [currentColorMode, setCurrentColorMode] = React.useState(
       accessibilityContext.seeing.uiColorMode
@@ -75,8 +74,6 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
       accessibilityContext.seeing.contrastValue
     );
 
-
-
     const isColorPopoverOpen = Boolean(popoverAnchorEl);
 
     const showColorPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -87,10 +84,10 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
       setPopoverAnchorEl(null);
     };
 
-    const onReadableFontChanged = (event: ChangeEvent<HTMLInputElement>, isSelected: boolean) => {
-      setIsReadableFont(isSelected)
-      accessibilityContext.seeing.setFontFamily(isSelected ? "Atkinson-Hyperlegible" : "Inter");
-    }
+    // const onReadableFontChanged = (event: ChangeEvent<HTMLInputElement>, isSelected: boolean) => {
+    //   setIsReadableFont(isSelected)
+    //   accessibilityContext.seeing.setFontFamily(isSelected ? "Atkinson-Hyperlegible" : "Inter");
+    // }
 
     const onColorModeChanged = (event: React.MouseEvent<HTMLElement>, newColorMode: UIColorMode) => {
       event.preventDefault();

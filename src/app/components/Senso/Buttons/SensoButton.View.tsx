@@ -156,6 +156,7 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
     return (
         <PlayButton
             id={props.id}
+            data-sound={props.content.soundFXPath}
             className={`clipped`}
             onClick={handleOnClick}
             disabled={props.disabled}

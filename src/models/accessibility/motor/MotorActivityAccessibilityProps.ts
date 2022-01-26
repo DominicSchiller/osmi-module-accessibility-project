@@ -9,7 +9,7 @@ export class MotorActivityAccessibilityProps {
     /**
      * The current game's mode
      */
-    @observable public gameMode: GameMode = GameMode.Symbols
+    @observable public gameMode: GameMode = GameMode.Animals
 
     /**
      * Status whether to show better recognizable icons

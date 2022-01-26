@@ -47,7 +47,7 @@ export class SensoButtonContentRepository {
                 return {
                     title: "Mond",
                     iconPath: `${gameMode}/moon`,
-                    soundFXPath: "simonSound2.mp3",
+                    soundFXPath: `${gameMode}/simonSound2.mp3`,
                 }
             case SensoButtonID.BottomLeft:
                 return {

@@ -1,6 +1,8 @@
 /**
  * Utility class to manage UI related components and actions of a senso game.
  */
+import {SensoAudioPlayer} from "./SensoAudioPlayer";
+
 export class SensoUIHelper {
     /**
      * Duration constant how long a randomly selected button is displayed to the user
@@ -24,6 +26,7 @@ export class SensoUIHelper {
         return new Promise<void>( resolve => {
             const button = document.getElementById(buttonID)!
             SensoUIHelper.toggleHighlighting(button)
+            SensoAudioPlayer.playButtonSound(button.dataset.sound)
             setTimeout(() => {
                 SensoUIHelper.toggleHighlighting(button)
                 setTimeout(() => {

@@ -32,11 +32,21 @@ export class SensoAudioPlayer {
      * @private
      */
     public static play(sound: SensoSound) {
-        // const audio = new Audio(this.getSoundFileUrl(sound))
-        // audio.play().then()
+        let src = this.getSoundFileUrl(sound);
+        this.playAudio(src);
+    }
+
+    public static playButtonSound(soundPath?: string) {
+        if (soundPath) {
+            let src = require(`../assets/sounds/${soundPath}`).default
+            this.playAudio(src)
+        }
+    }
+
+    private static playAudio(src: string, autoPlay: boolean = true) {
         const audio = document.getElementById("audio-player") as HTMLAudioElement
-        audio.autoplay = true
-        audio.src = this.getSoundFileUrl(sound)
+        audio.autoplay = autoPlay
+        audio.src = src
     }
 
     /**

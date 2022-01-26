@@ -43,11 +43,11 @@ export class SensoButtonColorRepository {
             case SensoButtonID.TopLeft:
                 return this.topLeftColor
             case SensoButtonID.TopRight:
-                return this.topRightColor
+                return this.bottomRightColor
             case SensoButtonID.BottomLeft:
                 return this.bottomLeftColor
             case SensoButtonID.BottomRight:
-                return this.bottomRightColor
+                return this.topRightColor
         }
     }
 }
