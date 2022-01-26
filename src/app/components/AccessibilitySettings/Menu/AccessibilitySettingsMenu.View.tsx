@@ -31,7 +31,6 @@ const AccessibilitySettingsMenuView = forwardRef(({viewModel}: AccessibilitySett
 
     useEffect(() => {
         const handleKeyUp = (e: any) => {
-            console.log(e);
         }
         window.document.addEventListener('keyup', viewModel.handleKeyUp);
         return () => {

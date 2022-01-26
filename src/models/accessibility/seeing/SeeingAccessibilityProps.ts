@@ -31,7 +31,7 @@ export class SeeingAccessibilityProps {
     /**
      * The primary color for all interactive controls
      */
-    @observable primaryColor = "#e91e63"
+    @observable primaryColor = "#2196f3"
     /**
      * The font family used to display text content
      */
