@@ -49,6 +49,14 @@ export class HearingAccessibilityProps {
     }
 
     /**
+     * Update status whether to show subtitles or not.
+     * @param show The show status
+     */
+    @action public setShowSubtitles(show: boolean) {
+        this.showSubtitles = show
+    }
+
+    /**
      * Create a new set of hearing related accessibility settings.
      */
     public constructor() {

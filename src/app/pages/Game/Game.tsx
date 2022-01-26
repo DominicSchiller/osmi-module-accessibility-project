@@ -73,12 +73,14 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                <LevelCompletedDialog theme={theme} /> : <></>
                            }
                        </Grid>
-                       <footer>
-                           <Typography variant={"h6"}>Untertitel</Typography>
-                           <div id="description-box">
-                               <Typography id={"subtitle"} color={"textPrimary"} />
-                           </div>
-                       </footer>
+                       { accessibilityContext.hearing.showSubtitles &&
+                           <footer>
+                               <Typography variant={"h6"}>Untertitel</Typography>
+                               <div id="description-box">
+                                   <Typography id={"subtitle"} color={"textPrimary"} />
+                               </div>
+                           </footer>
+                       }
                    </>
                }
            </GameplayContextConsumer>

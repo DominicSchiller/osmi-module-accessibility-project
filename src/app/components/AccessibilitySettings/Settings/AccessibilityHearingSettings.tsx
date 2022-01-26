@@ -100,7 +100,7 @@ const AccessibilityHearingSettings = withAccessibilityContext(
     };
 
     const onShowSubtitlesChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
-      accessibilityContext.hearing.showSubtitles = isEnabled
+      accessibilityContext.hearing.setShowSubtitles(isEnabled);
       setShowSubtitles(isEnabled)
     };
 

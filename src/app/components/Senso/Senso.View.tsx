@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import './Senso.View.scss'
 import {SensoButtonView} from "./Buttons/SensoButton.View";
 import {Icon, IconButton, Stack, Tooltip, Typography} from "@mui/material";
@@ -28,6 +28,14 @@ const SensoView = withTheme((props: any) => {
             SensoButtonColorRepository.getColor(id, colorMode),
             props.disabled)
     }).chunked(2);
+
+    useEffect(() => {
+        setTimeout(() => {
+            document.getElementById("senso")!
+                .classList
+                .add("equal-width-aspect-ratio")
+        }, 1)
+    }, [])
 
     return (
         <>

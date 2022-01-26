@@ -69,6 +69,11 @@ html {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
       monospace;
   }
+
+  .equal-width-aspect-ratio {
+    width: auto !important;
+    aspect-ratio: 1 / 1;
+  }
 }
 //
 //*::-webkit-scrollbar {

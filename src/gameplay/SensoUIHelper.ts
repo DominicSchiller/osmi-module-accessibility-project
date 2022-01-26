@@ -42,7 +42,9 @@ export class SensoUIHelper {
         buttonRow?.classList.toggle("selected")
         button.classList.toggle("selected")
 
-        const subtitleLabel = document.getElementById("subtitle")!
-        subtitleLabel.innerHTML = button.ariaLabel
+        const subtitleLabel = document.getElementById("subtitle")
+        if (subtitleLabel) {
+            subtitleLabel!.innerHTML = button.ariaLabel
+        }
     }
 }

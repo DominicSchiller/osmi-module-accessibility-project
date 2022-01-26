@@ -150,8 +150,10 @@ export class SensoGameplaySession {
             this.setLevelStarted(true)
             this.setIsPlayingSequence(false)
             this.scoreManager.startTimer()
-            const subtitleId = "subtitle"
-            document.getElementById(subtitleId)!.innerHTML = "Und jetzt du ..."
+            const subtitleLabel = document.getElementById("subtitle")
+            if (subtitleLabel) {
+                subtitleLabel!.innerHTML = "Und jetzt du ..."
+            }
         });
     }
 
