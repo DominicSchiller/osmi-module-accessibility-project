@@ -51,17 +51,23 @@ const HomePageView = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </Typography>
-          <Grid container spacing={2} justifyContent={"center"}>
-            <Grid item>
+          <Grid container
+                spacing={2}
+                justifyContent={"center"}
+                alignItems={"end"}
+                columnGap={"24px"}
+          sx={{marginBottom: "32px"}}>
+              <iframe width="640" height="360"
+                      src="https://www.youtube.com/embed/57RP_ztLU68?autoplay=1&controls=1"
+                      title="Tutorial-Video: So spielst du Senso"
+                      allow="autoplay" allowFullScreen />
               <PrimaryButton
                   variant={"contained"}
                   size={"large"}
                   aria-label={"Starte ein neues Spiel"}
-                  onClick={() => navigate("/Game")}
-              >
-                Spiel starten
+                  onClick={() => navigate("/Game")}>
+                  Spiel starten
               </PrimaryButton>
-            </Grid>
           </Grid>
         </Grid>
         <footer>

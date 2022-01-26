@@ -74,6 +74,10 @@ html {
     width: auto !important;
     aspect-ratio: 1 / 1;
   }
+
+  iframe {
+    border-style: none;
+  }
 }
 //
 //*::-webkit-scrollbar {
