@@ -188,19 +188,19 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
         </header>
 
         <main>
-          <List subheader={<ListSubheader>Extreme Modus</ListSubheader>}>
+          <List subheader={<ListSubheader>Abfolge</ListSubheader>}>
             <ListItem className={"setting-list-item"}>
               <ListItemIcon>
                 <Icon baseClassName="material-icons-round">sports_esports</Icon>
               </ListItemIcon>
               <ListItemText
                   id="show-score-label"
-                  primary="Neue Reihenfolge pro Runde"
+                  primary="Neue Abfolge pro Runde"
               />
               <Switch
                   inputProps={{
                     "aria-label":
-                        `${isExtremeMode ? "Deaktivieren" : "Aktivieren"}, dass jede Runde eine neue Reihenfolge generiert wird.`,
+                        `${isExtremeMode ? "Deaktivieren" : "Aktivieren"}, dass jede Runde eine neue Abfolge generiert wird.`,
                   }}
                   checked={isExtremeMode}
                   onChange={onExtremeModeChanged}
