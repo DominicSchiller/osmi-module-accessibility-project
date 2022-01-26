@@ -91,10 +91,6 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
             accessibilityContext.motor.gameMode
         )
 
-        const [showBetterIcons, setShowBetterIcons] = React.useState(
-            accessibilityContext.motor.showBetterRecognizableIcons
-        )
-
         const [levelCountdownDuration, setlevelCountdownDuration] = React.useState(
             accessibilityContext.motor.levelCountdownDuration
         )
@@ -109,11 +105,6 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                 accessibilityContext.motor.setGameMode(newGameMode)
                 setGameMode(newGameMode);
             }
-        };
-
-        const onShowBetterIconsChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
-            accessibilityContext.motor.showBetterRecognizableIcons = isEnabled
-            setShowBetterIcons(isEnabled)
         };
 
         const onShowLevelScoreChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
@@ -215,23 +206,7 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                                 </Stack>
                             </PrimaryToggleButton>
                         </ToggleButtonGroup>
-                        <ListItem className={"setting-list-item"}>
-                            <ListItemIcon>
-                                <Icon baseClassName="material-icons-round">visibility</Icon>
-                            </ListItemIcon>
-                            <ListItemText
-                                id="show-score-label"
-                                primary="Besser erkennbare Icons"
-                            />
-                            <Switch
-                                inputProps={{
-                                    "aria-label":
-                                        `Besser erkennbare Icons für das Spiel ${showBetterIcons ? "deaktivieren" : "aktivieren"}`,
-                                }}
-                                checked={showBetterIcons}
-                                onChange={onShowBetterIconsChanged}
-                            />
-                        </ListItem>
+
                     </List>
                     <List
                         subheader={

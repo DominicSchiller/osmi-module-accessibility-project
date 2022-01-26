@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {
   Button,
   Box,
@@ -8,12 +8,13 @@ import {
   Stack,
   Slider,
   Typography,
-  ListItemIcon, Tooltip,
+  ListItemIcon, Tooltip, ListItemText, Switch, ListItem,
 } from "@mui/material";
 import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenuContext";
 import { withAccessibilityContext } from "../../../context/AccessibilityContext";
 import "./AccessibilityCategorySettings.scss";
 import { styled } from "@mui/system";
+import {GameplaySession} from "../../../context/SensoGameplayContext";
 
 const sensoButtonHighlightDurationMarks = [
   {
@@ -112,6 +113,10 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
   withAccessibilityMenuContext((props: any) => {
     const { menuContext, accessibilityContext } = props;
 
+    const [isExtremeMode, setExtremeMode] = React.useState(
+        accessibilityContext.cognitive.isExtremeMode
+    )
+
     const [sensoButtonHighlightDuration, setSensoButtonHighlightDuration] = React.useState(
         accessibilityContext.cognitive.sensoButtonHighlightingDuration
     )
@@ -127,6 +132,12 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
     const [numberOfTips, setNumberOfTips] = React.useState(
         accessibilityContext.cognitive.numberOfTips
     )
+
+    const onExtremeModeChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
+      accessibilityContext.cognitive.setExtremeMode(isEnabled)
+      GameplaySession.isExtremeMode = isEnabled
+      setExtremeMode(isEnabled)
+    };
 
     const onSensoButtonHighlightingDurationChanged = (event: any, newValue: any) => {
       accessibilityContext.cognitive.setSensoButtonHighlightingDuration(newValue)
@@ -177,6 +188,25 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
         </header>
 
         <main>
+          <List subheader={<ListSubheader>Extreme Modus</ListSubheader>}>
+            <ListItem className={"setting-list-item"}>
+              <ListItemIcon>
+                <Icon baseClassName="material-icons-round">sports_esports</Icon>
+              </ListItemIcon>
+              <ListItemText
+                  id="show-score-label"
+                  primary="Neue Reihenfolge pro Runde"
+              />
+              <Switch
+                  inputProps={{
+                    "aria-label":
+                        `${isExtremeMode ? "Deaktivieren" : "Aktivieren"}, dass jede Runde eine neue Reihenfolge generiert wird.`,
+                  }}
+                  checked={isExtremeMode}
+                  onChange={onExtremeModeChanged}
+              />
+            </ListItem>
+          </List>
           <List subheader={<ListSubheader>Zeit und Tempo</ListSubheader>}>
             <ListItemBox>
               <Box

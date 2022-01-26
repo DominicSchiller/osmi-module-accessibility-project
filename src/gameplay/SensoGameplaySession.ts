@@ -20,6 +20,11 @@ export class SensoGameplaySession {
     @observable public isCountingDown: boolean = true
 
     /**
+     * Status whether the extreme mode is set or ot
+     */
+    @observable public isExtremeMode: boolean = false
+
+    /**
      * The current level
      */
     @computed public get level(): number {
@@ -52,7 +57,6 @@ export class SensoGameplaySession {
     @computed public get playerLife(): number {
         return this._playerLife
     }
-
 
     /**
      * The player's gained total score
@@ -137,7 +141,9 @@ export class SensoGameplaySession {
         this.isCountingDown = true
         this.isLevelStarted = false
         this._clickedSequence = []
-        this._randomSequence = []
+        if (this.isExtremeMode) {
+            this._randomSequence = []
+        }
         this.setIsPlayingSequence(true)
         this.setRefButtonIndex(0)
 
@@ -178,11 +184,15 @@ export class SensoGameplaySession {
      */
     private generateNewSequence() {
         this.setRefButtonIndex(0)
-        this._randomSequence = []
 
-       for (let i=0; i<this.level; i++) {
-           this._randomSequence.push(SensoGameplaySession.getRandomButton())
-       }
+        if (this.isExtremeMode) {
+            this._randomSequence = []
+            for (let i=0; i<this.level; i++) {
+                this._randomSequence.push(SensoGameplaySession.getRandomButton())
+            }
+        } else {
+            this._randomSequence.push(SensoGameplaySession.getRandomButton())
+        }
     }
 
     /**

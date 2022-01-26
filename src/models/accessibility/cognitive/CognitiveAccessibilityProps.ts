@@ -25,6 +25,11 @@ export class CognitiveAccessibilityProps {
     @observable public numberOfTips: number = 0
 
     /**
+     * Status whether extreme mode is activated or not
+     */
+    @observable public isExtremeMode: boolean = false
+
+    /**
      * Update the duration of highlighting a senso button from a randomly generated sequence
      * @param newDuration the new duration
      */
@@ -54,6 +59,14 @@ export class CognitiveAccessibilityProps {
      */
     @action public setNumberOfTips(newNumberOfTips: number) {
         this.numberOfTips = newNumberOfTips
+    }
+
+    /**
+     * Update the status whether extreme mode is activated or not
+     * @param isEnabled The new status
+     */
+    @action public setExtremeMode(isEnabled: boolean) {
+        this.isExtremeMode = isEnabled
     }
 
     /**
