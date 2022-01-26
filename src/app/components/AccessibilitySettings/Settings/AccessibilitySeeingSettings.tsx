@@ -145,27 +145,6 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
         </header>
 
         <main>
-          <List subheader={<ListSubheader>Schriftart</ListSubheader>}>
-            <ListItem className={"setting-list-item"}>
-              <ListItemIcon>
-                <Icon baseClassName="material-icons-round">text_fields</Icon>
-              </ListItemIcon>
-              <ListItemText
-                id="switch-font-label"
-                primary="Lesbare Schriftart"
-              />
-              <Switch
-                edge="end"
-                inputProps={{
-                  "aria-labelledby": `Verwendung der lesbaren Schriftart "Atkinson Hyperlegible" ${
-                    isReadableFont ? "ausschalten" : "einschalten"
-                  }`,
-                }}
-                onChange={onReadableFontChanged}
-                checked={isReadableFont}
-              />
-            </ListItem>
-          </List>
           <List subheader={<ListSubheader>Farben</ListSubheader>}>
             <ToggleButtonGroup
               exclusive
