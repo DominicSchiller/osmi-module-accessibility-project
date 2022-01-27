@@ -5,11 +5,6 @@ import {action, makeObservable, observable} from "mobx";
  */
 export class HearingAccessibilityProps {
     /**
-     * Volume used for speech
-     */
-    @observable public voiceVolume: number = 50
-
-    /**
      * Volume used for sound effects
      */
     @observable public soundEffectsVolume: number = 50
@@ -23,14 +18,6 @@ export class HearingAccessibilityProps {
      * The font size used for subtitles
      */
     @observable public subtitleFontSize: number = 16
-
-    /**
-     * Update voice volume.
-     * @param newVolume The new voice volume
-     */
-    @action public setVoiceVolume(newVolume: number) {
-        this.voiceVolume = newVolume
-    }
 
     /**
      * Update the sound effect's volume

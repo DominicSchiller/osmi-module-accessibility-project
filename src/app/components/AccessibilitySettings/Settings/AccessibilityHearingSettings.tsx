@@ -17,7 +17,6 @@ import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenu
 import { withAccessibilityContext } from "../../../context/AccessibilityContext";
 import "./AccessibilityCategorySettings.scss";
 import { styled } from "@mui/system";
-// import { rgbaString } from "../../../../utils/ColorUtils";
 
 const marks1 = [
   {
@@ -73,10 +72,6 @@ const AccessibilityHearingSettings = withAccessibilityContext(
   withAccessibilityMenuContext((props: any) => {
     const { menuContext, accessibilityContext } = props;
 
-    const [voiceVolume, setVoiceVolume] = React.useState(
-        accessibilityContext.hearing.voiceVolume
-    );
-
     const [soundEffectsVolume, setSoundEffectsVolume] = React.useState(
         accessibilityContext.hearing.soundEffectsVolume
     );
@@ -88,11 +83,6 @@ const AccessibilityHearingSettings = withAccessibilityContext(
     const [subtitleFontSize, setSubtitleFontSize] = React.useState(
         accessibilityContext.hearing.subtitleFontSize
     );
-
-    const onVoiceVolumeChanged = (event: any, newValue: any) => {
-      accessibilityContext.hearing.setVoiceVolume(newValue);
-      setVoiceVolume(newValue);
-    };
 
     const onSoundEffectsVolumeChanged = (event: any, newValue: any) => {
       accessibilityContext.hearing.setSoundEffectsVolume(newValue);
@@ -139,36 +129,6 @@ const AccessibilityHearingSettings = withAccessibilityContext(
 
         <main>
           <List subheader={<ListSubheader>Toneinstellungen</ListSubheader>}>
-            <ListItemBox>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                }}
-              >
-                <ListItemIcon>
-                  <Icon
-                    baseClassName="material-icons-round"
-                    sx={{ fontSize: 36 }}
-                  >
-                    record_voice_over
-                  </Icon>
-                </ListItemIcon>
-                <Box sx={{ typography: "body1", ml: 0 }}>
-                  Lautstärke der Sprache
-                </Box>
-              </Box>
-              <Box sx={{ px: 2, pt: 1 }}>
-                <Slider
-                  aria-label="Lautstärke der Sprache anpassen"
-                  value={voiceVolume}
-                  onChange={onVoiceVolumeChanged}
-                  valueLabelDisplay="auto"
-                  marks={volumeMarks}
-                />
-              </Box>
-            </ListItemBox>
             <ListItemBox>
               <Box
                 sx={{
