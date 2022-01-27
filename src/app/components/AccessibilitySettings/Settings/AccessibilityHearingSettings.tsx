@@ -20,15 +20,15 @@ import { styled } from "@mui/system";
 
 const marks1 = [
   {
-    value: 10,
+    value: 24,
     label: "Klein",
   },
   {
-    value: 16,
+    value: 36,
     label: "Normal",
   },
   {
-    value: 24,
+    value: 48,
     label: "Groß",
   },
 ];
@@ -202,8 +202,8 @@ const AccessibilityHearingSettings = withAccessibilityContext(
                   onChange={onSubtitleFontSizeChanged}
                   valueLabelDisplay="auto"
                   marks={marks1}
-                  min={10}
-                  max={24}
+                  min={24}
+                  max={48}
                 />
               </Box>
             </ListItemBox>

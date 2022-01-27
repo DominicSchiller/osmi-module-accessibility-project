@@ -4,8 +4,7 @@ import "./App.scss";
 import {ThemeProvider} from "@mui/material";
 import "@fontsource/inter"
 import HomePage from "./pages/Home/Home";
-import {AccessibilityContextProvider} from "./context/AccessibilityContext";
-import {AccessibilityProps} from "../models/accessibility/AccessibilityProps";
+import {Accessibility, AccessibilityContextProvider} from "./context/AccessibilityContext";
 import {observer} from "mobx-react";
 import HeaderBar from "./components/HeaderBar/HeaderBar";
 import AppTheme from "./theme/AppTheme";
@@ -18,13 +17,13 @@ import GamePage from "./pages/Game/Game";
 @observer
 export default class App extends Component {
 
-    private accessibilityProps: AccessibilityProps = new AccessibilityProps();
+    // private accessibilityProps: AccessibilityProps = new AccessibilityProps();
 
     render() {
-        const theme = AppTheme.create(this.accessibilityProps)
+        const theme = AppTheme.create(Accessibility)
 
         return (
-            <AccessibilityContextProvider accessibilityContext={this.accessibilityProps}>
+            <AccessibilityContextProvider accessibilityContext={Accessibility}>
                 <ThemeProvider theme={theme}>
                     <>
                         <HeaderBar/>

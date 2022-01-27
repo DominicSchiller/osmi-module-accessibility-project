@@ -109,7 +109,7 @@ export class SensoButtonContentRepository {
                 return {
                     title: "Chor",
                     iconPath: `${gameMode}/choir`,
-                    soundFXPath: "choir.m4a",
+                    soundFXPath: `${gameMode}/choir.m4a`,
                 }
             case SensoButtonID.TopRight:
                 return {

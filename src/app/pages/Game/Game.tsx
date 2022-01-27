@@ -77,7 +77,7 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                            <footer>
                                <Typography variant={"h6"}>Untertitel</Typography>
                                <div id="description-box">
-                                   <Typography id={"subtitle"} color={"textPrimary"} />
+                                   <Typography id={"subtitle"} color={"textPrimary"} sx={{fontSize: `${accessibilityContext.hearing.subtitleFontSize}px !important`}} />
                                </div>
                            </footer>
                        }

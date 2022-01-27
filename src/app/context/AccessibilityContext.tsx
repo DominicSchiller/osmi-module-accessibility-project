@@ -1,10 +1,13 @@
 import React from "react";
 import {Observer} from "mobx-react";
+import {AccessibilityProps} from "../../models/accessibility/AccessibilityProps";
+
+export const Accessibility: AccessibilityProps = new AccessibilityProps();
 
 /**
  * React context to manage the state of global accessibility Settings
  */
-const AccessibilityContext = React.createContext({});
+const AccessibilityContext = React.createContext<AccessibilityProps>(Accessibility)
 
 /**
  * The global accessibility context provider

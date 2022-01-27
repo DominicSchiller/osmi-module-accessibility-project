@@ -1,3 +1,5 @@
+import {Accessibility} from "../app/context/AccessibilityContext";
+
 const correctSelectionSound = require("../assets/sounds/game/correct.m4a");
 const wrongSelectionSound = require("../assets/sounds/game/wrong.m4a")
 const countdown = require("../assets/sounds/game/countdown.m4a")
@@ -36,6 +38,13 @@ export class SensoAudioPlayer {
         this.playAudio(src);
     }
 
+    public static setVolume(newVolume: number) {
+        const audio = document.getElementById("audio-player") as HTMLAudioElement
+        if (audio) {
+            audio.volume = newVolume > 1.0 ? newVolume/100 : newVolume
+        }
+    }
+
     public static playButtonSound(soundPath?: string) {
         if (soundPath) {
             let src = require(`../assets/sounds/${soundPath}`).default
@@ -45,8 +54,11 @@ export class SensoAudioPlayer {
 
     private static playAudio(src: string, autoPlay: boolean = true) {
         const audio = document.getElementById("audio-player") as HTMLAudioElement
-        audio.autoplay = autoPlay
-        audio.src = src
+        if (audio) {
+            audio.autoplay = autoPlay
+            audio.volume = Accessibility.hearing.soundEffectsVolume/100
+            audio.src = src
+        }
     }
 
     /**

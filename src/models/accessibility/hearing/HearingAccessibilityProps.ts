@@ -1,4 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
+import {SensoAudioPlayer} from "../../../gameplay/SensoAudioPlayer";
 
 /**
  * Collection of hearing related accessibility settings.
@@ -17,7 +18,7 @@ export class HearingAccessibilityProps {
     /**
      * The font size used for subtitles
      */
-    @observable public subtitleFontSize: number = 16
+    @observable public subtitleFontSize: number = 36
 
     /**
      * Update the sound effect's volume
@@ -25,6 +26,7 @@ export class HearingAccessibilityProps {
      */
     @action public setSoundEffectsVolume(newVolume: number) {
         this.soundEffectsVolume = newVolume
+        SensoAudioPlayer.setVolume(newVolume)
     }
 
     /**
