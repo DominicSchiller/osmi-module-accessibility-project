@@ -95,8 +95,8 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
             accessibilityContext.motor.levelCountdownDuration
         )
 
-        const [showLevelScore, setShowLevelScore] = React.useState(
-            accessibilityContext.motor.showLevelScore
+        const [showTotalScore, setShowTotalScore] = React.useState(
+            accessibilityContext.motor.showTotalScore
         )
 
         const onGameModeChanged = (event: React.MouseEvent<HTMLElement>, newGameMode: string) => {
@@ -107,9 +107,9 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
             }
         };
 
-        const onShowLevelScoreChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
-            accessibilityContext.motor.showLevelScore = isEnabled
-            setShowLevelScore(isEnabled)
+        const onShowTotalScoreChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
+            accessibilityContext.motor.setShowTotalScore(isEnabled)
+            setShowTotalScore(isEnabled)
         };
 
         const onLevelCountdownChanged = (event: any, newValue: any) => {
@@ -217,12 +217,12 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                             </ListItemIcon>
                             <ListItemText
                                 id="show-score-label"
-                                primary="Punktestand pro Spielrunde"/>
+                                primary="Punktestand anzeigen"/>
                             <Switch
-                                checked={showLevelScore}
-                                onChange={onShowLevelScoreChanged}
+                                checked={showTotalScore}
+                                onChange={onShowTotalScoreChanged}
                                 inputProps={{
-                                    "aria-label": `Punktestand pro Spielrunde ${showLevelScore ? "ausblenden" : "anzeigen"}`,
+                                    "aria-label": `Punktestand pro Spielrunde ${showTotalScore ? "ausblenden" : "anzeigen"}`,
                                 }}/>
                         </ListItem>
                         <ListItemBox>

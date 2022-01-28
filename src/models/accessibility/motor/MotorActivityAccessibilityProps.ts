@@ -17,9 +17,9 @@ export class MotorActivityAccessibilityProps {
     @observable public showBetterRecognizableIcons: boolean = true
 
     /**
-     * Status whether to show a gained score per level after completion or not
+     * Status whether to show the gained total score
      */
-    @observable public showLevelScore: boolean = false
+    @observable public showTotalScore: boolean = true
 
     /**
      * The level's starting countdown duration
@@ -43,11 +43,11 @@ export class MotorActivityAccessibilityProps {
     }
 
     /**
-     * Update status of showing the level completion score.
+     * Update status of showing the gained total score
      * @param show new the show status
      */
-    @action public setShowLevelScore(show: boolean) {
-        this.showLevelScore = show
+    @action public setShowTotalScore(show: boolean) {
+        this.showTotalScore = show
     }
 
     /**

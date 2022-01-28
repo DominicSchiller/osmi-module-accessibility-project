@@ -56,16 +56,18 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                        </Typography>
                                    </Stack>
                                </Tooltip>
-                               <Tooltip arrow
-                                        title={"Anzeige wie viele Punkte du bereits gewonnen hast"}
-                                        enterDelay={500}
-                                        leaveDelay={75}
-                                        enterNextDelay={500}>
-                                   <Stack id="points" direction={"row"} alignItems={"center"} columnGap={"8px"}>
-                                   <Typography color={"textPrimary"} className={"hud-stats"}>{gameplayContext.session.playerTotalScore} Punkte</Typography>
-                                   <CoinIcon className={"hud-icon"} />
-                               </Stack>
-                               </Tooltip>
+                               {accessibilityContext.motor.showTotalScore &&
+                                   <Tooltip arrow
+                                            title={"Anzeige wie viele Punkte du bereits gewonnen hast"}
+                                            enterDelay={500}
+                                            leaveDelay={75}
+                                            enterNextDelay={500}>
+                                       <Stack id="points" direction={"row"} alignItems={"center"} columnGap={"8px"}>
+                                           <Typography color={"textPrimary"} className={"hud-stats"}>{gameplayContext.session.playerTotalScore} Punkte</Typography>
+                                           <CoinIcon className={"hud-icon"} />
+                                       </Stack>
+                                   </Tooltip>
+                               }
                            </Stack>
                            <SensoView gameMode={accessibilityContext.motor.gameMode}
                                       colorMode={accessibilityContext.seeing.uiColorMode}
