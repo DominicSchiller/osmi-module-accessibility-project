@@ -4,6 +4,7 @@ import {SensoAudioPlayer, SensoSound} from "./SensoAudioPlayer";
 import {action, computed, makeObservable, observable} from "mobx";
 import LevelScoreManager from "./LevelScoreCalculator";
 import {wait} from "../utils/AsyncUtils";
+import {Accessibility} from "../app/context/AccessibilityContext";
 
 /**
  * The senso gameplay session
@@ -148,7 +149,7 @@ export class SensoGameplaySession {
         this.setRefButtonIndex(0)
 
         await wait(250)
-        await this.countDown(3)
+        await this.countDown(Accessibility.motor.levelCountdownDuration)
 
         this.incrementRound()
         this.generateNewSequence()

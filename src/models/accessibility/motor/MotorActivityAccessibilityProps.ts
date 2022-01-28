@@ -24,7 +24,7 @@ export class MotorActivityAccessibilityProps {
     /**
      * The level's starting countdown duration
      */
-    @observable public levelCountdownDuration = 5
+    @observable public levelCountdownDuration = 3
 
     /**
      * Update the game mode.
