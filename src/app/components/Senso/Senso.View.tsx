@@ -13,6 +13,7 @@ import {observer} from "mobx-react";
 import {SensoButtonContentRepository} from "../../../repositories/SensoButtonContentRepository";
 import {SensoButtonColorRepository} from "../../../repositories/SensoButtonColorRepository";
 import {} from "../../../utils/ArrayChunks"
+import {fixSensoAspectRatio} from "../../../utils/UIWorkarounds";
 
 /**
  * The Senso game component.
@@ -30,11 +31,7 @@ const SensoView = withTheme((props: any) => {
     }).chunked(2);
 
     useEffect(() => {
-        setTimeout(() => {
-            document.getElementById("senso")!
-                .classList
-                .add("equal-width-aspect-ratio")
-        }, 1)
+        fixSensoAspectRatio()
     }, [])
 
     return (

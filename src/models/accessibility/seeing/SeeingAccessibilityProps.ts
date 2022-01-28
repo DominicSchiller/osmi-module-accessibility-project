@@ -1,6 +1,7 @@
 import {action, makeObservable, observable} from "mobx";
 import {UIColorMode} from "./UIColorMode";
 import {UIContrastMode} from "./UIContrastMode";
+import {fixSensoAspectRatio} from "../../../utils/UIWorkarounds";
 
 /**
  * Collection of seeing / visual related accessibility settings.
@@ -56,6 +57,7 @@ export class SeeingAccessibilityProps {
                 document.documentElement.classList.add("monochrome")
                 break
         }
+        fixSensoAspectRatio()
     }
 
     @action public setFontFamily(fontFamily: string) {
@@ -112,6 +114,7 @@ export class SeeingAccessibilityProps {
                 this.maxContrastValue = 0;
                 this.setContrastValue(0)
         }
+        fixSensoAspectRatio()
     }
 
     /**
