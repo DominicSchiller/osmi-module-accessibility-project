@@ -69,7 +69,13 @@ export class SensoGameplaySession {
      * The player's remaining life
      * @private
      */
-    @observable private _playerLife: number = 3
+    @observable private _playerLife: number = 5
+
+    /**
+     * Sum of already lost player lives
+     * @private
+     */
+    @observable private lostPlayerLives: number = 0
 
     /**
      * The current level
@@ -77,6 +83,7 @@ export class SensoGameplaySession {
      * @private
      */
    @observable private _level: number = 0
+
     /**
      * The current sequence of randomly picked buttons
      * @private
@@ -221,7 +228,7 @@ export class SensoGameplaySession {
         if (isCorrectSelection) {
             this.setRefButtonIndex(this._refButtonIndex+1);
         } else {
-            this._playerLife -= this._playerLife > 0 ? 1 : 0
+            this.recalcPlayerLives()
         }
         SensoAudioPlayer.play(isCorrectSelection ? SensoSound.CorrectSelection : SensoSound.WrongSelection)
 
@@ -264,6 +271,18 @@ export class SensoGameplaySession {
 
     @action private setRefButtonIndex(index: number) {
         this._refButtonIndex = index
+    }
+
+    @action public updatePlayerLives(newPlayerLives: number) {
+        let newLives = newPlayerLives - this.lostPlayerLives
+        this._playerLife = newLives >= 0 ? newLives : 0
+    }
+
+    private recalcPlayerLives(wasWrongDecision: boolean = true) {
+       if (wasWrongDecision && Accessibility.cognitive.playerLives !== 7) {
+           this._playerLife -= this._playerLife > 0 ? 1 : 0
+           this.lostPlayerLives++;
+       }
     }
 
     /**

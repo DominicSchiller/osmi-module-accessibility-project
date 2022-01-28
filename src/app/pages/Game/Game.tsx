@@ -31,7 +31,7 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
     return (
        <GameplayContextProvider>
            <GameplayContextConsumer>
-               {(context: any) =>
+               {(gameplayContext: any) =>
                    <>
                        <CssBaseline />
                        <Grid
@@ -51,7 +51,9 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                        <Icon baseClassName="material-icons-round" className={"hud-icon"}>
                                            favorite
                                        </Icon>
-                                       <Typography color={"textPrimary"} className={"hud-stats"}>{accessibilityContext.cognitive.playerLives} Leben</Typography>
+                                       <Typography color={"textPrimary"} className={"hud-stats"}>
+                                           {accessibilityContext.cognitive.playerLives === 7 ? "Unendlich Leben" : `${gameplayContext.session.playerLife} Leben`}
+                                       </Typography>
                                    </Stack>
                                </Tooltip>
                                <Tooltip arrow
@@ -60,16 +62,16 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                         leaveDelay={75}
                                         enterNextDelay={500}>
                                    <Stack id="points" direction={"row"} alignItems={"center"} columnGap={"8px"}>
-                                   <Typography color={"textPrimary"} className={"hud-stats"}>{context.session.playerTotalScore} Punkte</Typography>
+                                   <Typography color={"textPrimary"} className={"hud-stats"}>{gameplayContext.session.playerTotalScore} Punkte</Typography>
                                    <CoinIcon className={"hud-icon"} />
                                </Stack>
                                </Tooltip>
                            </Stack>
                            <SensoView gameMode={accessibilityContext.motor.gameMode}
                                       colorMode={accessibilityContext.seeing.uiColorMode}
-                                      disabled={context.session.isPlayingSequence || context.session.isRoundFinished} />
+                                      disabled={gameplayContext.session.isPlayingSequence || gameplayContext.session.isRoundFinished} />
                            <StartGameDialog ref={dialogRef} />
-                           { context.session.isLevelCompleted ?
+                           { gameplayContext.session.isLevelCompleted ?
                                <LevelCompletedDialog theme={theme} /> : <></>
                            }
                        </Grid>

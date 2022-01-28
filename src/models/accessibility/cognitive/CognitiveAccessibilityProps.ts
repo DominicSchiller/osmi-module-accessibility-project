@@ -1,4 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
+import {GameplaySession} from "../../../app/context/SensoGameplayContext";
 
 /**
  * Collection of motor cognitive related accessibility settings.
@@ -51,6 +52,7 @@ export class CognitiveAccessibilityProps {
      */
     @action setPlayerLives(newPlayerLives: number) {
         this.playerLives = newPlayerLives
+        GameplaySession.updatePlayerLives(newPlayerLives)
     }
 
     /**
