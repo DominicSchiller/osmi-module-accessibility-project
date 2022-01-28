@@ -32,24 +32,30 @@ const HomePageView = () => {
             sx={{
               paddingTop: {
                 xs: "24px",
-                md: "48px",
-                xl: "64px"
+                md: "32px",
+                xl: "40px"
               }
             }}>
           <Typography
               variant="h1"
               align="center"
-              color="textPrimary"
-              gutterBottom>
-            Willkommen zu Accessible Senso
+              color="textPrimary">
+            Willkommen bei Senso
           </Typography>
           <Typography
-              variant={"h5"}
+              variant={"body1"}
               align={"center"}
               color={"textSecondary"}
+              sx={{fontSize: "1.2rem"}}
               paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Versuche Dir die Reihenfolge der angezeigten Symbole oder Farben zu merken.<br />
+              ... na, aufgepasst?! ... Konntest Du Dir alle merken?<br />
+              Dann wiederhole die Reihenfolge der Farben und Symbole.<br />
+              <br />
+              Geschafft? Dann auf zur nächsten Runde.<br />
+              <br />
+              Wenn Du die Spieloberfläche nach deinen Bedürfnissen anpassen möchtest, <br />
+              findest du oben rechts Deine Einstellungsmöglichkeiten.
           </Typography>
           <Grid container
                 spacing={2}
