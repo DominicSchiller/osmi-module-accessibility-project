@@ -150,8 +150,8 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                         subheader={
                             <ListSubheader component="div">
                                 <Box sx={{display: "flex", alignItems: "center"}}>
-                                    <Box sx={{flexGrow: 1}}>Spielemodus</Box>
-                                    <Icon baseClassName="material-icons-outlined">info</Icon>
+                                    <Box sx={{flexGrow: 1}}>Spielmodus</Box>
+                                    {/*<Icon baseClassName="material-icons-outlined">info</Icon>*/}
                                 </Box>
                             </ListSubheader>
                         }
