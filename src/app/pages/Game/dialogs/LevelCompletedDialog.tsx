@@ -9,7 +9,7 @@ import {
     Typography
 } from "@mui/material";
 import {TransitionProps} from "@mui/material/transitions";
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import {GameplayContextConsumer, SensoGameplayContext} from "../../../context/SensoGameplayContext";
 import "./Dialogs.scss"
 import {IGameDialogProps} from "./StartGameDialog";
@@ -21,6 +21,10 @@ import {AccessibilityProps} from "../../../../models/accessibility/Accessibility
 
 interface IGameDialogState {
     isOpen: boolean
+}
+
+interface ILevelCompletedDialogState extends IGameDialogState {
+    starScoreARIADescription: string
 }
 
 const StarIcon = styled(SVGStarIcon)(({theme}) => ({
@@ -38,7 +42,7 @@ const StarIcon = styled(SVGStarIcon)(({theme}) => ({
 /**
  * Dialog to display game related information on a finished level.
  */
-export class LevelCompletedDialog extends Component<IGameDialogProps, IGameDialogState> {
+export class LevelCompletedDialog extends Component<IGameDialogProps, ILevelCompletedDialogState> {
     static contextType = SensoGameplayContext
 
     /**
@@ -51,7 +55,8 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, IGameDialo
         this.open = this.open.bind(this);
 
         this.state = {
-            isOpen: true
+            isOpen: true,
+            starScoreARIADescription: "0 von 3 Sternen erreicht."
         }
         setTimeout(() => {
             this.startCounter()
@@ -93,6 +98,10 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, IGameDialo
                     starIcon.classList.add('scaled')
                     setTimeout(() => {
                         starIcon.classList.remove('scaled')
+                        // this.starARIADescription = `${waitIndex + 1} von 3 Sternen erreicht`
+                        this.setState({
+                            starScoreARIADescription: `${waitIndex + 1} von 3 Sternen erreicht`
+                        })
                     }, 250)
                 }, 250 + (waitIndex * 500))
             }
@@ -101,6 +110,7 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, IGameDialo
                 const starIcons = document.querySelectorAll('.star-icon');
                 if (countedScore >= Math.round(threeStarScore*0.3)) {
                     setStarReached(starIcons[0], 0)
+
                 }
                 if (countedScore >= Math.round(threeStarScore * 0.6)) {
                     setStarReached(starIcons[1], 1)
@@ -162,10 +172,15 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, IGameDialo
                                             Erfolgreich gemeistert
                                         </Typography>
                                         <Stack direction={"column"} rowGap={"16px"}>
-                                            <Stack id={"star-score"} direction={"row"} columnGap={"16px"} justifyContent={"center"}>
-                                                <StarIcon className={"star-icon"} />
-                                                <StarIcon className={"star-icon"} />
-                                                <StarIcon className={"star-icon"} />
+                                            <Stack
+                                                id={"star-score"}
+                                                direction={"row"}
+                                                columnGap={"16px"}
+                                                justifyContent={"center"}
+                                                aria-label={this.state.starScoreARIADescription}>
+                                                <StarIcon className={"star-icon"} aria-hidden="true" />
+                                                <StarIcon className={"star-icon"} aria-hidden="true" />
+                                                <StarIcon className={"star-icon"} aria-hidden="true" />
                                             </Stack>
                                             <Typography id={"points-score"} variant={"h4"} color={"textPrimary"}>
                                                 <div className={"counter"} data-target={`${gameplay.session.levelScore}`}>0</div>
