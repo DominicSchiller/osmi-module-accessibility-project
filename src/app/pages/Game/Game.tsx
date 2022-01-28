@@ -38,24 +38,35 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                            container
                            component={"main"}
                            direction={"column"}
+                           alignItems={"end"}
                            rowGap={"8px"}
                            sx={{overflowY: "hidden"}}>
                            <audio controls id="audio-player" hidden={true} />
-                           <Stack direction={"row"} justifyContent={"space-between"} id="hud">
-                               <Tooltip arrow
-                                        title={"Anzeige wie viele Leben du noch hast"}
-                                        enterDelay={500}
-                                        leaveDelay={75}
-                                        enterNextDelay={500}>
-                                   <Stack id="life" direction={"row"} alignItems={"center"} columnGap={"8px"}>
-                                       <Icon baseClassName="material-icons-round" className={"hud-icon"}>
-                                           favorite
-                                       </Icon>
-                                       <Typography color={"textPrimary"} className={"hud-stats"}>
-                                           {accessibilityContext.cognitive.playerLives === 7 ? "Unendlich Leben" : `${gameplayContext.session.playerLife} Leben`}
-                                       </Typography>
-                                   </Stack>
-                               </Tooltip>
+                           <Stack
+                               direction={"row"}
+                               justifyContent={
+                                accessibilityContext.motor.showPlayerLives
+                                    ? "space-between"
+                                    : "end"
+                               }
+                               id="hud">
+                               { accessibilityContext.motor.showPlayerLives &&
+                                   <Tooltip arrow
+                                            title={"Anzeige wie viele Leben du noch hast"}
+                                            enterDelay={500}
+                                            leaveDelay={75}
+                                            enterNextDelay={500}>
+                                       <Stack id="life" direction={"row"} alignItems={"center"} columnGap={"8px"}>
+                                           <Icon baseClassName="material-icons-round" className={"hud-icon"}>
+                                               favorite
+                                           </Icon>
+                                           <Typography color={"textPrimary"} className={"hud-stats"}>
+                                               {accessibilityContext.cognitive.playerLives === 7 ? "Unendlich Leben" : `${gameplayContext.session.playerLife} Leben`}
+                                           </Typography>
+                                       </Stack>
+                                   </Tooltip>
+                               }
+                               <></>
                                {accessibilityContext.motor.showTotalScore &&
                                    <Tooltip arrow
                                             title={"Anzeige wie viele Punkte du bereits gewonnen hast"}

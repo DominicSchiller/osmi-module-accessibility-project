@@ -17,6 +17,11 @@ export class MotorActivityAccessibilityProps {
     @observable public showBetterRecognizableIcons: boolean = true
 
     /**
+     * Status whether to show or hide the player's remaining lives
+     */
+    @observable public showPlayerLives: boolean = true
+
+    /**
      * Status whether to show the gained total score
      */
     @observable public showTotalScore: boolean = true
@@ -48,6 +53,14 @@ export class MotorActivityAccessibilityProps {
      */
     @action public setShowTotalScore(show: boolean) {
         this.showTotalScore = show
+    }
+
+    /**
+     * Update status of showing the player's remaining lives
+     * @param show new the show status
+     */
+    @action public setShowPlayerLives(show: boolean) {
+        this.showPlayerLives = show
     }
 
     /**

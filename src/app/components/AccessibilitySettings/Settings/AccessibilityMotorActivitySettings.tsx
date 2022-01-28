@@ -95,6 +95,10 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
             accessibilityContext.motor.levelCountdownDuration
         )
 
+        const [showPlayerLives, setShowPlayerLives] = React.useState(
+            accessibilityContext.motor.showPlayerLives
+        )
+
         const [showTotalScore, setShowTotalScore] = React.useState(
             accessibilityContext.motor.showTotalScore
         )
@@ -110,6 +114,11 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
         const onShowTotalScoreChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
             accessibilityContext.motor.setShowTotalScore(isEnabled)
             setShowTotalScore(isEnabled)
+        };
+
+        const onShowPlayerLivesChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
+            accessibilityContext.motor.setShowPlayerLives(isEnabled)
+            setShowPlayerLives(isEnabled)
         };
 
         const onLevelCountdownChanged = (event: any, newValue: any) => {
@@ -213,6 +222,20 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                             <ListSubheader>Anzeigen während des Spiels</ListSubheader>}>
                         <ListItem className={"setting-list-item"}>
                             <ListItemIcon>
+                                <Icon baseClassName="material-icons-round">favorite</Icon>
+                            </ListItemIcon>
+                            <ListItemText
+                                id="show-lives-label"
+                                primary="Leben anzeigen"/>
+                            <Switch
+                                checked={showPlayerLives}
+                                onChange={onShowPlayerLivesChanged}
+                                inputProps={{
+                                    "aria-label": `Noch verfügbare Leben ${showPlayerLives ? "ausblenden" : "anzeigen"}`,
+                                }}/>
+                        </ListItem>
+                        <ListItem className={"setting-list-item"}>
+                            <ListItemIcon>
                                 <Icon baseClassName="material-icons-round">assessment</Icon>
                             </ListItemIcon>
                             <ListItemText
@@ -222,7 +245,7 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                                 checked={showTotalScore}
                                 onChange={onShowTotalScoreChanged}
                                 inputProps={{
-                                    "aria-label": `Punktestand pro Spielrunde ${showTotalScore ? "ausblenden" : "anzeigen"}`,
+                                    "aria-label": `Punktestand ${showTotalScore ? "ausblenden" : "anzeigen"}`,
                                 }}/>
                         </ListItem>
                         <ListItemBox>
