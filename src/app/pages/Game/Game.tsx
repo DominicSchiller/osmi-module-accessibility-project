@@ -64,7 +64,7 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                                    favorite
                                                </Icon>
                                                <Typography color={"textPrimary"} className={"hud-stats"}>
-                                                   {accessibilityContext.cognitive.playerLives === 7 ? "beliebig Leben" : `${gameplayContext.session.playerLife} Leben`}
+                                                   {accessibilityContext.cognitive.playerLives === 7 ? "unendlich Leben" : `${gameplayContext.session.playerLife} Leben`}
                                                </Typography>
                                            </Stack>
                                        </Tooltip>
