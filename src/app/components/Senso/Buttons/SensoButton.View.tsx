@@ -3,7 +3,7 @@ import './SensoButton.View.scss'
 import {styled} from "@mui/system";
 import {Button} from "@mui/material";
 import {hexToHSL} from "../../../../utils/ColorUtils";
-import {ISensoButtonProps, SensoButtonID} from "./SensoButton.Model";
+import {SensoButtonID} from "./SensoButton.Model";
 import {SensoGameplayContext} from "../../../context/SensoGameplayContext";
 
 import SVG from 'react-inlinesvg';
@@ -13,7 +13,7 @@ import SVG from 'react-inlinesvg';
  * @param props Collection of button related attributes
  * @constructor Create a new senso button.
  */
-export const SensoButtonView = (props: ISensoButtonProps) => {
+const SensoButtonView = (props: any) => {
 
     const hslHoverColor = hexToHSL(props.color)
     const context = useContext(SensoGameplayContext)
@@ -34,6 +34,10 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
       background-color: ${props.color};
       transition: all 200ms ease-in-out;
       cursor: pointer;
+
+      .MuiTouchRipple-rippleVisible {
+        color: black !important;
+      }
 
       &#${SensoButtonID.TopLeft} {
         margin-right: var(--margin);
@@ -165,3 +169,5 @@ export const SensoButtonView = (props: ISensoButtonProps) => {
         </PlayButton>
     );
 };
+
+export default SensoButtonView;

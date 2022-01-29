@@ -9,14 +9,14 @@ import {
     Typography
 } from "@mui/material";
 import {TransitionProps} from "@mui/material/transitions";
-import React, {Component, useState} from "react";
+import React, {Component} from "react";
 import {GameplayContextConsumer, SensoGameplayContext} from "../../../context/SensoGameplayContext";
 import "./Dialogs.scss"
 import {IGameDialogProps} from "./StartGameDialog";
 
 import {ReactComponent as SVGStarIcon} from "../../../../assets/images/icons/star.svg"
 import { styled } from "@mui/system";
-import {AccessibilityContextConsumer} from "../../../context/AccessibilityContext";
+import {Accessibility, AccessibilityContextConsumer} from "../../../context/AccessibilityContext";
 import {AccessibilityProps} from "../../../../models/accessibility/AccessibilityProps";
 
 interface IGameDialogState {
@@ -60,7 +60,7 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, ILevelComp
         }
         setTimeout(() => {
             this.startCounter()
-        }, 200)
+        }, Accessibility.seeing.showAnimations ? 200 : 0)
     }
 
     /**
@@ -89,6 +89,10 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, ILevelComp
         const speed = 150
         const threeStarScore = this.context.session.threeStarLevelScore
 
+        const showAnimations = Accessibility.seeing.showAnimations
+        const stepDelay = showAnimations ? 250 : 0
+        const waitDelay = showAnimations ? 500 : 0
+
         counters.forEach(counter => {
 
             const setStarReached = (starIcon: Element, waitIndex: number) => {
@@ -102,8 +106,8 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, ILevelComp
                         this.setState({
                             starScoreARIADescription: `${waitIndex + 1} von 3 Sternen erreicht`
                         })
-                    }, 250)
-                }, 250 + (waitIndex * 500))
+                    }, stepDelay)
+                }, stepDelay + (waitIndex * waitDelay))
             }
 
             const verifyReachedStars = (countedScore: number) => {
@@ -124,7 +128,7 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, ILevelComp
                 const target =  +(counter.getAttribute('data-target') ?? 0)
                 const count = +(counter.innerHTML ?? 0)
                 const increment = Math.round(target / speed)
-                if (count < target) {
+                if (Accessibility.seeing.showAnimations && count < target) {
                     const sum = count + increment
                     counter.innerHTML = `${sum}`;
                     setTimeout(update, 0.5)
@@ -197,7 +201,6 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, ILevelComp
                     </GameplayContextConsumer>
                 }
             </AccessibilityContextConsumer>
-
         )
     }
 }

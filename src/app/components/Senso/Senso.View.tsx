@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from "react";
 import './Senso.View.scss'
-import {SensoButtonView} from "./Buttons/SensoButton.View";
 import {Icon, IconButton, Stack, Tooltip, Typography} from "@mui/material";
 import {ReactComponent as TopLeftClippingMask} from "../../../assets/images/senso/top-left-cm.svg";
 import {ReactComponent as TopRightClippingMask} from "../../../assets/images/senso/top-right-cm.svg";
@@ -14,6 +13,7 @@ import {SensoButtonContentRepository} from "../../../repositories/SensoButtonCon
 import {SensoButtonColorRepository} from "../../../repositories/SensoButtonColorRepository";
 import {} from "../../../utils/ArrayChunks"
 import {fixSensoAspectRatio} from "../../../utils/UIWorkarounds";
+import SensoButtonView from "./Buttons/SensoButton.View";
 
 /**
  * The Senso game component.

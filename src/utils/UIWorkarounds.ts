@@ -1,10 +1,8 @@
-import {remove} from "mobx";
-
 export function fixSensoAspectRatio() {
-    updateEqualAspectRatioClass(true)
+    updateEqualAspectRatioClass()
 }
 
-function updateEqualAspectRatioClass(remove: boolean = false) {
+function updateEqualAspectRatioClass() {
     let cssClass = "equal-width-aspect-ratio"
     setTimeout(() => {
         let senso = document.getElementById("senso")

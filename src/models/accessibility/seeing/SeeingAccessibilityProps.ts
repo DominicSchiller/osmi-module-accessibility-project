@@ -30,6 +30,11 @@ export class SeeingAccessibilityProps {
     @observable public contrastValue: number = 0
 
     /**
+     * Status whether to show animations or not
+     */
+    @observable public showAnimations: boolean = true
+
+    /**
      * The primary color for all interactive controls
      */
     @observable primaryColor = "#e31e60"
@@ -70,7 +75,6 @@ export class SeeingAccessibilityProps {
      */
     @action public setPrimaryColor(hexString: string) {
         this.primaryColor = hexString
-        console.warn(hexString)
     }
 
     /**
@@ -124,6 +128,14 @@ export class SeeingAccessibilityProps {
     @action public setContrastValue(newContrastValue: number) {
         this.contrastValue = newContrastValue
         document.documentElement.style.setProperty("--contrastValue", `${newContrastValue}%`)
+    }
+
+    /**
+     * Update status whether to show animations or not
+     * @param show The show status
+     */
+    @action public setShowAnimations(show: boolean) {
+        this.showAnimations = show
     }
 
     /**

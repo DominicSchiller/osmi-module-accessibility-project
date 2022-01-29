@@ -21,7 +21,7 @@ export default class AppTheme {
         return createTheme({
             typography: {...this.createTypographyOptions(accessibilityProps)},
             palette: {...palette},
-            components: {...this.createComponentOverrides(palette)}
+            components: {...this.createComponentOverrides(palette, accessibilityProps)}
         });
     }
 
@@ -127,8 +127,8 @@ export default class AppTheme {
     }
 
     private static getDisabledColor(accessibilityProps: AccessibilityProps): string {
-        let alpha = 0
-        let color = 0
+        let alpha: number
+        let color: number = 0
 
         switch (accessibilityProps.seeing.uiContrastMode) {
             case UIContrastMode.HighSaturation:
@@ -160,10 +160,21 @@ export default class AppTheme {
     /**
      * Create custom MUI component overrides.
      * @param palette The current color palette options which to use for component overrides.
+     * @param accessibilityProps The set of accessibility properties to create the theme based on
      * @private
      */
-    private static createComponentOverrides(palette: PaletteOptions): Components {
+    private static createComponentOverrides(palette: PaletteOptions, accessibilityProps: AccessibilityProps): Components {
         return {
+            MuiCssBaseline: {
+                styleOverrides: {
+                    ...(!accessibilityProps.seeing.showAnimations ? {
+                        '*, *::before, *::after': {
+                            transition: 'none !important',
+                            animation: 'none !important',
+                        },
+                    } : {}),
+                },
+            },
             MuiListSubheader: {
                 styleOverrides: {
                     root: {

@@ -7,7 +7,7 @@ export const Accessibility: AccessibilityProps = new AccessibilityProps();
 /**
  * React context to manage the state of global accessibility Settings
  */
-const AccessibilityContext = React.createContext<AccessibilityProps>(Accessibility)
+export const AccessibilityContext = React.createContext<AccessibilityProps>(Accessibility)
 
 /**
  * The global accessibility context provider

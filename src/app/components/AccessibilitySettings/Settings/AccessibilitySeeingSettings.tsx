@@ -1,27 +1,30 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {
-  Button,
-  Icon,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader,
-  Paper,
-  Popover,
-  Slider,
-  Stack,
-  ToggleButton as MUIToggleButton,
-  ToggleButtonGroup, Tooltip,
-  Typography,
+    Box,
+    Button,
+    Icon,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    ListSubheader,
+    Paper,
+    Popover,
+    Slider,
+    Stack,
+    Switch,
+    ToggleButton as MUIToggleButton,
+    ToggleButtonGroup,
+    Tooltip,
+    Typography,
 } from "@mui/material";
-import { withAccessibilityMenuContext } from "../../../context/AccessibilityMenuContext";
-import { withAccessibilityContext } from "../../../context/AccessibilityContext";
+import {withAccessibilityMenuContext} from "../../../context/AccessibilityMenuContext";
+import {withAccessibilityContext} from "../../../context/AccessibilityContext";
 import {ColorResult, SwatchesPicker} from "react-color";
 import "./AccessibilityCategorySettings.scss";
-import { UIColorMode } from "../../../../models/accessibility/seeing/UIColorMode";
-import { styled } from "@mui/system";
-import { UIContrastMode } from "../../../../models/accessibility/seeing/UIContrastMode";
+import {UIColorMode} from "../../../../models/accessibility/seeing/UIColorMode";
+import {styled} from "@mui/system";
+import {UIContrastMode} from "../../../../models/accessibility/seeing/UIContrastMode";
 
 const PrimaryToggleButton = styled(MUIToggleButton)(({ theme }) => ({
   overflow: "hidden",
@@ -55,10 +58,6 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
     const [popoverAnchorEl, setPopoverAnchorEl] =
       React.useState<HTMLButtonElement | null>(null);
 
-    // const [isReadableFont, setIsReadableFont] = React.useState(
-    //     accessibilityContext.seeing.fontFamily === "Atkinson-Hyperlegible"
-    // )
-
     const [currentColorMode, setCurrentColorMode] = React.useState(
       accessibilityContext.seeing.uiColorMode
     );
@@ -74,6 +73,10 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
       accessibilityContext.seeing.contrastValue
     );
 
+      const [showAnimations, setShowAnimations] = React.useState(
+          accessibilityContext.seeing.showAnimations
+      )
+
     const isColorPopoverOpen = Boolean(popoverAnchorEl);
 
     const showColorPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -83,11 +86,6 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
     const closeColorPopover = () => {
       setPopoverAnchorEl(null);
     };
-
-    // const onReadableFontChanged = (event: ChangeEvent<HTMLInputElement>, isSelected: boolean) => {
-    //   setIsReadableFont(isSelected)
-    //   accessibilityContext.seeing.setFontFamily(isSelected ? "Atkinson-Hyperlegible" : "Inter");
-    // }
 
     const onColorModeChanged = (event: React.MouseEvent<HTMLElement>, newColorMode: UIColorMode) => {
       event.preventDefault();
@@ -111,6 +109,11 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
       setContrastValue(newValue);
       accessibilityContext.seeing.setContrastValue(newValue);
     };
+
+      const onShowAnimationsChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
+          accessibilityContext.seeing.setShowAnimations(isEnabled)
+          setShowAnimations(isEnabled)
+      };
 
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
@@ -260,7 +263,11 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
               size={"large"}
               value={currentContrastMode}
               color={"primary"}
-              sx={{ marginBottom: "16px" }}
+              sx={{
+                  marginBottom: accessibilityContext.seeing.uiContrastMode === UIContrastMode.Normal
+                    ? "0"
+                    : "16px"
+            }}
               onChange={onContrastModeChanged}
             >
               <PrimaryToggleButton
@@ -370,6 +377,21 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
               </Stack>
             </ListItem>
           </List>
+            <List subheader={<ListSubheader>Animationen</ListSubheader>}>
+                <ListItem className={"setting-list-item"}>
+                    <ListItemIcon>
+                        <Icon baseClassName="material-icons-round">auto_awesome_motion</Icon>
+                    </ListItemIcon>
+                    <ListItemText id="switch-font-label" primary="Animationen anzeigen" />
+                    <Switch
+                        inputProps={{ "aria-label": `Animationen ${showAnimations ? "ausschalten" : "einschalten"} ` }}
+                        checked={showAnimations}
+                        onChange={onShowAnimationsChanged}
+                    />
+                </ListItem>
+
+                <Box sx={{ mt: "16px" }} />
+            </List>
         </main>
       </Stack>
     );
