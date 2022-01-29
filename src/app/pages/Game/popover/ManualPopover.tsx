@@ -1,7 +1,7 @@
 import React from "react";
 import {Fab, Icon, Popover, Stack, Tooltip, Typography} from "@mui/material";
 
-import "./ManualPopover.scss";
+import "./Popover.scss";
 
 export default function ManualPopover() {
     const [anchorEl, setAnchorEl] = React.useState(null);

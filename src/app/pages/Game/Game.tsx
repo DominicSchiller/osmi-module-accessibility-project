@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {withAccessibilityContext} from "../../context/AccessibilityContext";
 import SensoView from "../../components/Senso/Senso.View";
 import "./Game.scss";
-import {CssBaseline, Fab, Grid, Icon, Stack, Tooltip, Typography} from "@mui/material";
+import {CssBaseline, Grid, Icon, Stack, Tooltip, Typography} from "@mui/material";
 import {StartGameDialog} from "./dialogs/StartGameDialog";
 import {
     GameplayContextConsumer,

@@ -59,6 +59,32 @@ export class SensoGameplaySession {
         return this._playerLife
     }
 
+    public nextTip(): string[] {
+        if (this._randomSequence.length === 0 || this._randomSequence.length === this._refButtonIndex) {
+            return []
+        }
+        let nextButtonID = this._randomSequence[this._refButtonIndex]
+        let buttonLocation = ""
+
+        switch (nextButtonID) {
+            case SensoButtonID.TopLeft:
+                buttonLocation = "(oben links)"
+                break
+            case SensoButtonID.TopRight:
+                buttonLocation = "(oben rechts)"
+                break
+            case SensoButtonID.BottomLeft:
+                buttonLocation = "(unten links)"
+                break
+            case SensoButtonID.BottomRight:
+                buttonLocation = "(unten rechts)"
+                break
+        }
+
+        let button = document.getElementById(nextButtonID)
+        return [`${button?.ariaLabel ?? ""}`, buttonLocation]
+    }
+
     /**
      * The player's gained total score
      * @private
@@ -150,7 +176,7 @@ export class SensoGameplaySession {
         this.isLevelStarted = false
         this._clickedSequence = []
         if (this.isExtremeMode) {
-            this._randomSequence = []
+            this.resetRandomSequence()
         }
         this.setIsPlayingSequence(true)
         this.setRefButtonIndex(0)
@@ -194,12 +220,12 @@ export class SensoGameplaySession {
         this.setRefButtonIndex(0)
 
         if (this.isExtremeMode) {
-            this._randomSequence = []
+            this.resetRandomSequence()
             for (let i=0; i<this.level; i++) {
-                this._randomSequence.push(SensoGameplaySession.getRandomButton())
+                this.addToRandomSequence(SensoGameplaySession.getRandomButton())
             }
         } else {
-            this._randomSequence.push(SensoGameplaySession.getRandomButton())
+            this.addToRandomSequence(SensoGameplaySession.getRandomButton())
         }
     }
 
@@ -278,9 +304,21 @@ export class SensoGameplaySession {
         this._playerLife = newLives >= 0 ? newLives : 0
     }
 
+    @action private resetRandomSequence() {
+        this._randomSequence = []
+    }
+
+    @action private addToRandomSequence(buttonID: SensoButtonID) {
+        this._randomSequence.push(buttonID)
+    }
+
+    @action private decrementPlayerLife() {
+        this._playerLife -= this._playerLife > 0 ? 1 : 0
+    }
+
     private recalcPlayerLives(wasWrongDecision: boolean = true) {
        if (wasWrongDecision && Accessibility.cognitive.playerLives !== 7) {
-           this._playerLife -= this._playerLife > 0 ? 1 : 0
+           this.decrementPlayerLife()
            this.lostPlayerLives++;
        }
     }

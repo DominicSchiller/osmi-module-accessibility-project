@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import './Senso.View.scss'
-import {Fab, Icon, IconButton, Stack, Tooltip, Typography} from "@mui/material";
+import {Icon, IconButton, Stack, Tooltip, Typography} from "@mui/material";
 import {ReactComponent as TopLeftClippingMask} from "../../../assets/images/senso/top-left-cm.svg";
 import {ReactComponent as TopRightClippingMask} from "../../../assets/images/senso/top-right-cm.svg";
 import {ReactComponent as BottomLeftClippingMask} from "../../../assets/images/senso/bottom-left-cm.svg";
@@ -15,6 +15,7 @@ import {} from "../../../utils/ArrayChunks"
 import {fixSensoAspectRatio} from "../../../utils/UIWorkarounds";
 import SensoButtonView from "./Buttons/SensoButton.View";
 import ManualPopover from "../../pages/Game/popover/ManualPopover";
+import TipsPopover from "../../pages/Game/popover/TipsPopover";
 
 /**
  * The Senso game component.
@@ -42,6 +43,7 @@ const SensoView = withTheme((props: any) => {
                     direction={"column"}
                     rowGap={"16px"}
                     sx={{position: "absolute", bottom: 0, right: "24px"}}>
+                    <TipsPopover />
                     <ManualPopover />
                 </Stack>
                 <aside id="action-items-menu">
