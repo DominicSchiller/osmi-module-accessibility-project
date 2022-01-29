@@ -103,6 +103,10 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
             accessibilityContext.motor.showTotalScore
         )
 
+        const [showNumberOfTips, setShowNumberOfTips] = React.useState(
+            accessibilityContext.motor.showNumberOfTips
+        )
+
         const onGameModeChanged = (event: React.MouseEvent<HTMLElement>, newGameMode: string) => {
             event.preventDefault();
             if (newGameMode) {
@@ -119,6 +123,11 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
         const onShowPlayerLivesChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
             accessibilityContext.motor.setShowPlayerLives(isEnabled)
             setShowPlayerLives(isEnabled)
+        };
+
+        const onShowNumberOfTipsChanged = (event: ChangeEvent<HTMLInputElement>, isEnabled: boolean) => {
+            accessibilityContext.motor.setShowNumberOfTips(isEnabled)
+            setShowNumberOfTips(isEnabled)
         };
 
         const onLevelCountdownChanged = (event: any, newValue: any) => {
@@ -231,7 +240,21 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                                 checked={showPlayerLives}
                                 onChange={onShowPlayerLivesChanged}
                                 inputProps={{
-                                    "aria-label": `Noch verfügbare Leben ${showPlayerLives ? "ausblenden" : "anzeigen"}`,
+                                    "aria-label": `Anzeige der noch verfügbaren Leben ${showPlayerLives ? "ausblenden" : "anzeigen"}`,
+                                }}/>
+                        </ListItem>
+                        <ListItem className={"setting-list-item"}>
+                            <ListItemIcon>
+                                <Icon baseClassName="material-icons-round">lightbulb</Icon>
+                            </ListItemIcon>
+                            <ListItemText
+                                id="show-number-of-tips-label"
+                                primary="Anzahl an Tipps anzeigen"/>
+                            <Switch
+                                checked={showNumberOfTips}
+                                onChange={onShowNumberOfTipsChanged}
+                                inputProps={{
+                                    "aria-label": `Anzeige der noch erhaltbaren Tipps ${showNumberOfTips ? "ausblenden" : "anzeigen"}`,
                                 }}/>
                         </ListItem>
                         <ListItem className={"setting-list-item"}>
@@ -245,7 +268,7 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                                 checked={showTotalScore}
                                 onChange={onShowTotalScoreChanged}
                                 inputProps={{
-                                    "aria-label": `Punktestand ${showTotalScore ? "ausblenden" : "anzeigen"}`,
+                                    "aria-label": `Anzeige des Punktestands ${showTotalScore ? "ausblenden" : "anzeigen"}`,
                                 }}/>
                         </ListItem>
                         <ListItemBox>

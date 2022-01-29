@@ -17,6 +17,11 @@ export class MotorActivityAccessibilityProps {
     @observable public showBetterRecognizableIcons: boolean = true
 
     /**
+     * Status whether to show the remaining number of tips or not
+     */
+    @observable public showNumberOfTips: boolean = true
+
+    /**
      * Status whether to show or hide the player's remaining lives
      */
     @observable public showPlayerLives: boolean = true
@@ -61,6 +66,14 @@ export class MotorActivityAccessibilityProps {
      */
     @action public setShowPlayerLives(show: boolean) {
         this.showPlayerLives = show
+    }
+
+    /**
+     * Update the Status whether to show the remaining number of tips or not
+     * @param show new the show status
+     */
+    @action public setShowNumberOfTips(show: boolean) {
+        this.showNumberOfTips = show
     }
 
     /**

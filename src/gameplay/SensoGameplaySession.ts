@@ -59,6 +59,11 @@ export class SensoGameplaySession {
         return this._playerLife
     }
 
+    @computed public get numberOfTips(): number {
+        let maxTips = Accessibility.cognitive.numberOfTips
+        return maxTips - this.takenTips
+    }
+
     public nextTip(): string[] {
         if (this._randomSequence.length === 0 || this._randomSequence.length === this._refButtonIndex) {
             return []
@@ -102,6 +107,12 @@ export class SensoGameplaySession {
      * @private
      */
     @observable private lostPlayerLives: number = 0
+
+    /**
+     * Sum of already taken tips
+     * @private
+     */
+    @observable private takenTips: number = 0
 
     /**
      * The current level
@@ -302,6 +313,13 @@ export class SensoGameplaySession {
     @action public updatePlayerLives(newPlayerLives: number) {
         let newLives = newPlayerLives - this.lostPlayerLives
         this._playerLife = newLives >= 0 ? newLives : 0
+    }
+
+    @action public incrementTakenTips() {
+        let maxNumberOfTips = Accessibility.cognitive.numberOfTips
+        if (maxNumberOfTips !== 0 && maxNumberOfTips !== 7) {
+            this.takenTips++
+        }
     }
 
     @action private resetRandomSequence() {

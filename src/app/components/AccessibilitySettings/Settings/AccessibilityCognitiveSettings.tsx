@@ -81,16 +81,16 @@ const numberOfTipsMarks = [
     label: "keine",
   },
   {
-    value: 1,
-    label: "1",
-  },
-  {
     value: 3,
     label: "3",
   },
   {
     value: 5,
     label: "5",
+  },
+  {
+    value: 7,
+    label: "beliebig",
   },
 ];
 
@@ -337,7 +337,7 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
                   marks={numberOfTipsMarks}
                   step={null}
                   min={0}
-                  max={5}
+                  max={7}
                 />
               </Box>
             </ListItemBox>

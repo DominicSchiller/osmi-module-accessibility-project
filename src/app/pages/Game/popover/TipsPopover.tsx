@@ -2,13 +2,14 @@ import React from "react";
 import {Fab, Icon, Popover, Stack, Tooltip, Typography} from "@mui/material";
 
 import "./Popover.scss";
-import {GameplayContextConsumer} from "../../../context/SensoGameplayContext";
+import {GameplayContextConsumer, GameplaySession} from "../../../context/SensoGameplayContext";
 
 export default function TipsPopover() {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
+        GameplaySession.incrementTakenTips()
     };
 
     const handleClose = () => {
@@ -56,7 +57,7 @@ export default function TipsPopover() {
                         <Fab
                             size="large"
                             color="primary"
-                            disabled={gameplay.session.isPlayingSequence}
+                            disabled={gameplay.session.isPlayingSequence || gameplay.session.numberOfTips === 0}
                             onClick={handleClick}
                             aria-label="Einen Tip für den nächsten Spielzug erhalten">
                             <Icon baseClassName="material-icons-round">

@@ -18,12 +18,12 @@ export class CognitiveAccessibilityProps {
     /**
      * The total number of lives the player has (~ number of allowed failed attempts)
      */
-    @observable public playerLives: number = 5
+    @observable public playerLives: number = 7
 
     /**
      * The total number of tips that can be given per level
      */
-    @observable public numberOfTips: number = 0
+    @observable public numberOfTips: number = 7
 
     /**
      * Status whether extreme mode is activated or not
