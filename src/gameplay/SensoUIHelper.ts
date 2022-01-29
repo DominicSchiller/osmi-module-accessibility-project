@@ -38,6 +38,8 @@ export class SensoUIHelper {
 
     public static showSensoTapFeedback(isCorrect: boolean = true) {
         let repeatControl = document.getElementById("repeat-sequence-stack")
+        document.getElementById("correct-tap-feedback")?.classList.add("hidden")
+        document.getElementById("wrong-tap-feedback")?.classList.add("hidden")
         let feedbackContainer = document.getElementById(`${isCorrect ? "correct" : "wrong"}-tap-feedback`)
 
         if (repeatControl) {
