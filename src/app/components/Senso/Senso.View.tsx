@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import './Senso.View.scss'
-import {Icon, IconButton, Stack, Tooltip, Typography} from "@mui/material";
+import {Fab, Icon, IconButton, Stack, Tooltip, Typography} from "@mui/material";
 import {ReactComponent as TopLeftClippingMask} from "../../../assets/images/senso/top-left-cm.svg";
 import {ReactComponent as TopRightClippingMask} from "../../../assets/images/senso/top-right-cm.svg";
 import {ReactComponent as BottomLeftClippingMask} from "../../../assets/images/senso/bottom-left-cm.svg";
@@ -14,6 +14,7 @@ import {SensoButtonColorRepository} from "../../../repositories/SensoButtonColor
 import {} from "../../../utils/ArrayChunks"
 import {fixSensoAspectRatio} from "../../../utils/UIWorkarounds";
 import SensoButtonView from "./Buttons/SensoButton.View";
+import ManualPopover from "../../pages/Game/popover/ManualPopover";
 
 /**
  * The Senso game component.
@@ -37,6 +38,12 @@ const SensoView = withTheme((props: any) => {
     return (
         <>
             <Stack direction={"column"} alignItems={"center"} justifyContent={"center"} id={"senso-container"}>
+                <Stack
+                    direction={"column"}
+                    rowGap={"16px"}
+                    sx={{position: "absolute", bottom: 0, right: "24px"}}>
+                    <ManualPopover />
+                </Stack>
                 <aside id="action-items-menu">
                     {gameplay.session.isCountingDown &&
                         <Typography
@@ -49,7 +56,7 @@ const SensoView = withTheme((props: any) => {
                                  enterDelay={500}
                                  leaveDelay={75}
                                  enterNextDelay={500}>
-                            <Stack direction={"column"} justifyContent={"center"} alignItems={"center"} alignContent={"space-around"} >
+                            <Stack direction={"column"} justifyContent={"center"} alignItems={"center"} alignContent={"space-around"}>
                                 <IconButton
                                     aria-label={"Reihenfolge nochmal wiederholen."}
                                     color={"primary"}

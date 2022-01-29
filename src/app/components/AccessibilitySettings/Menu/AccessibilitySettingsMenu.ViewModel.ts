@@ -39,7 +39,7 @@ export default class AccessibilitySettingsMenuViewModel {
         switch (event.key) {
             case "m":
             case "M":
-            case "Escape":
+            // case "Escape":
                 this.toggleMenu();
                 break;
         }

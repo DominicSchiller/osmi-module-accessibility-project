@@ -64,7 +64,7 @@ const HomePageView = () => {
                 columnGap={"24px"}
           sx={{marginBottom: "32px"}}>
               <iframe width="640" height="360"
-                      src="https://www.youtube.com/embed/57RP_ztLU68?autoplay=1&controls=1"
+                      src="https://www.youtube.com/embed/57RP_ztLU68?rel=0&showinfo=0&autoplay=1&controls=1"
                       title="Tutorial-Video: So spielst du Senso"
                       allow="autoplay" allowFullScreen />
               <PrimaryButton
