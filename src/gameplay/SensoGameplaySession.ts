@@ -261,7 +261,7 @@ export class SensoGameplaySession {
         this._clickedSequence.push(clickedButton)
         const refButton = this._randomSequence[this._refButtonIndex];
         const isCorrectSelection = refButton === clickedButton
-
+        SensoUIHelper.showSensoTapFeedback(isCorrectSelection)
         if (isCorrectSelection) {
             this.setRefButtonIndex(this._refButtonIndex+1);
         } else {

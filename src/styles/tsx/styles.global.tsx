@@ -93,9 +93,6 @@ export const useGlobalStyles = makeStyles((theme: Theme) =>
         display: "flex",
         flexDirection: "column"
       },
-      ".hidden": {
-        display: "none"
-      }
     },
     brandName: {
       fontSize: 24,

@@ -78,6 +78,10 @@ html {
   iframe {
     border-style: none;
   }
+
+  .hidden {
+    display: none !important;
+  }
 }
 //
 //*::-webkit-scrollbar {

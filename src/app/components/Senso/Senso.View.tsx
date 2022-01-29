@@ -16,6 +16,8 @@ import {fixSensoAspectRatio} from "../../../utils/UIWorkarounds";
 import SensoButtonView from "./Buttons/SensoButton.View";
 import ManualPopover from "../../pages/Game/popover/ManualPopover";
 import TipsPopover from "../../pages/Game/popover/TipsPopover";
+import {ReactComponent as CorrectTap} from "../../../assets/images/icons/correct.svg";
+import {ReactComponent as WrongTap} from "../../../assets/images/icons/wrong.svg";
 
 /**
  * The Senso game component.
@@ -58,7 +60,11 @@ const SensoView = withTheme((props: any) => {
                                  enterDelay={500}
                                  leaveDelay={75}
                                  enterNextDelay={500}>
-                            <Stack direction={"column"} justifyContent={"center"} alignItems={"center"} alignContent={"space-around"}>
+                            <Stack direction={"column"}
+                                   justifyContent={"center"}
+                                   alignItems={"center"}
+                                   alignContent={"space-around"}
+                                   id="repeat-sequence-stack">
                                 <IconButton
                                     aria-label={"Reihenfolge nochmal wiederholen."}
                                     color={"primary"}
@@ -75,6 +81,8 @@ const SensoView = withTheme((props: any) => {
                             </Stack>
                         </Tooltip>
                     }
+                    <CorrectTap id={"correct-tap-feedback"} className={"feedback-icon hidden"} />
+                    <WrongTap id={"wrong-tap-feedback"} className={"feedback-icon hidden"} />
                 </aside>
                 <Stack direction={"column"} justifyContent={"space-between"} id={"senso"} sx={{backgroundColor: theme.palette.surface}}>
                     {sensoButtons.map((buttonRow, index) => {

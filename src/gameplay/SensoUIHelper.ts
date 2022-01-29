@@ -36,6 +36,26 @@ export class SensoUIHelper {
         });
     }
 
+    public static showSensoTapFeedback(isCorrect: boolean = true) {
+        let repeatControl = document.getElementById("repeat-sequence-stack")
+        let feedbackContainer = document.getElementById(`${isCorrect ? "correct" : "wrong"}-tap-feedback`)
+
+        if (repeatControl) {
+            repeatControl.classList.add("hidden")
+        }
+        if (feedbackContainer) {
+           feedbackContainer.classList.remove("hidden")
+        }
+        setTimeout(() => {
+            if (feedbackContainer) {
+                feedbackContainer.classList.add("hidden")
+            }
+            if (repeatControl) {
+                repeatControl.classList.remove("hidden")
+            }
+        }, 1500)
+    }
+
     /**
      * Toggle the highlighting of a senso action button.
      * @param button The senso's action button whose highlighting will be toggled
