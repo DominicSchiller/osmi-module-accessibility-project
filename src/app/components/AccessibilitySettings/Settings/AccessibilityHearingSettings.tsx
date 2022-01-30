@@ -160,7 +160,7 @@ const AccessibilityHearingSettings = withAccessibilityContext(
               </Box>
             </ListItemBox>
           </List>
-          <List subheader={<ListSubheader>Untertitel</ListSubheader>}>
+          <List subheader={<ListSubheader>Untertitel anzeigen</ListSubheader>}>
             <ListItem className={"setting-list-item"}>
               <ListItemIcon>
                 <Icon baseClassName="material-icons-round">subtitles</Icon>
