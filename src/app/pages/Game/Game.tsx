@@ -12,6 +12,7 @@ import {LevelCompletedDialog} from "./dialogs/LevelCompletedDialog";
 import {withTheme} from "@mui/styles";
 import {useDidMount} from "../../../utils/Hooks";
 import {ReactComponent as CoinIcon} from "../../../assets/images/icons/coin.svg";
+import {GameOverDialog} from "./dialogs/GameOverDialog";
 
 /**
  * The app's senso game page component.
@@ -107,6 +108,9 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                            <StartGameDialog ref={dialogRef} />
                            { gameplayContext.session.isLevelCompleted ?
                                <LevelCompletedDialog theme={theme} /> : <></>
+                           }
+                           { gameplayContext.session.isGameOver ?
+                               <GameOverDialog theme={theme} /> : <></>
                            }
                        </Grid>
                        { accessibilityContext.hearing.showSubtitles &&

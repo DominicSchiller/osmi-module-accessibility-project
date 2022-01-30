@@ -54,16 +54,19 @@ export default function TipsPopover() {
                              enterDelay={500}
                              leaveDelay={75}
                              enterNextDelay={500}>
-                        <Fab
-                            size="large"
-                            color="primary"
-                            disabled={gameplay.session.isPlayingSequence || gameplay.session.numberOfTips === 0}
-                            onClick={handleClick}
-                            aria-label="Einen Tip für den nächsten Spielzug erhalten">
+                        <span>
+                            <Fab
+                                size="large"
+                                color="primary"
+                                disabled={gameplay.session.isPlayingSequence || gameplay.session.numberOfTips === 0}
+                                onClick={handleClick}
+                                aria-disabled={gameplay.session.isPlayingSequence || gameplay.session.numberOfTips === 0}
+                                aria-label="Einen Tip für den nächsten Spielzug erhalten">
                             <Icon baseClassName="material-icons-round">
                                 tips_and_updates
                             </Icon>
                         </Fab>
+                        </span>
                     </Tooltip>
                     <Typography variant={"body1"}>Tipp</Typography>
                 </Stack>

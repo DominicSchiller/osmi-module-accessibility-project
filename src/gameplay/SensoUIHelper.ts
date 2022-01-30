@@ -11,6 +11,8 @@ export class SensoUIHelper {
      */
     private static readonly ShowButtonBreakInterval = 750 // in ms
 
+    private static currentTapFeedbackTimeout: any = undefined
+
     private constructor() {}
 
     /**
@@ -33,9 +35,13 @@ export class SensoUIHelper {
     }
 
     public static showSensoTapFeedback(isCorrect: boolean = true) {
+        if (this.currentTapFeedbackTimeout) {
+            window.clearTimeout(this.currentTapFeedbackTimeout)
+        }
         let repeatControl = document.getElementById("repeat-sequence-stack")
         document.getElementById("correct-tap-feedback")?.classList.add("hidden")
         document.getElementById("wrong-tap-feedback")?.classList.add("hidden")
+
         let feedbackContainer = document.getElementById(`${isCorrect ? "correct" : "wrong"}-tap-feedback`)
 
         if (repeatControl) {
@@ -44,7 +50,8 @@ export class SensoUIHelper {
         if (feedbackContainer) {
            feedbackContainer.classList.remove("hidden")
         }
-        setTimeout(() => {
+
+        this.currentTapFeedbackTimeout = setTimeout(() => {
             if (feedbackContainer) {
                 feedbackContainer.classList.add("hidden")
             }

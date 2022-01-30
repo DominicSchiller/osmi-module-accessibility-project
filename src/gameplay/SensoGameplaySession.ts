@@ -35,6 +35,13 @@ export class SensoGameplaySession {
     /**
      * Status whether the current level has been completed or not
      */
+    @computed public get isGameOver(): boolean {
+        return this.playerLife <= 0;
+    }
+
+    /**
+     * Status whether the current level has been completed or not
+     */
     @computed public get isLevelCompleted(): boolean {
         return this.isLevelStarted && this._refButtonIndex === this._randomSequence.length
     }
@@ -179,8 +186,17 @@ export class SensoGameplaySession {
     /**
      * Start new round.
      */
-    @action public async start() {
-        if (this.isLevelStarted) {
+    @action public async start(isReset: boolean = false) {
+
+        if (isReset) {
+            this._playerLife = Accessibility.cognitive.playerLives
+            this._level = 0
+            this.takenTips = 0
+            this.lostPlayerLives = 0
+            this._playerTotalScore = 0
+        }
+
+        if (this.isLevelStarted && !isReset) {
             this._playerTotalScore += this.levelScore
         }
         this.isCountingDown = true

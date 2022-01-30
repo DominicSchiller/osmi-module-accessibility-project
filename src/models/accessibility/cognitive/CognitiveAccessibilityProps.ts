@@ -1,6 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
 import {GameplaySession} from "../../../app/context/SensoGameplayContext";
-import {SensoUIHelper} from "../../../gameplay/SensoUIHelper";
 
 /**
  * Collection of motor cognitive related accessibility settings.

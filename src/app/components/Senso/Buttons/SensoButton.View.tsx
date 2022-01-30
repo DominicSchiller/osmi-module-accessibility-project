@@ -7,6 +7,7 @@ import {SensoButtonID} from "./SensoButton.Model";
 import {SensoGameplayContext} from "../../../context/SensoGameplayContext";
 
 import SVG from 'react-inlinesvg';
+import {Accessibility} from "../../../context/AccessibilityContext";
 
 /**
  * A Senso related action button's view
@@ -19,10 +20,18 @@ const SensoButtonView = (props: any) => {
     const context = useContext(SensoGameplayContext)
     const isSafariBrowser = navigator.vendor.startsWith('Apple')
 
+    var feedbackTimeout: any = undefined
+
     const handleOnClick = () => {
         const isCorrect = context.session.isCorrectSelection(props.id)
         if (!context.session.isLevelCompleted) {
             document.getElementById("subtitle")!.innerText = isCorrect ? "Richtig" : "Falsch"
+            if (feedbackTimeout) {
+                window.clearTimeout(feedbackTimeout)
+            }
+            feedbackTimeout = setTimeout(() => {
+                document.getElementById("subtitle")!.innerText = ""
+            }, Accessibility.cognitive.sensoButtonHighlightingDuration* 1000)
         }
     }
 

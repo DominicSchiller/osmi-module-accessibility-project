@@ -61,6 +61,20 @@
       }
     }
 
+    #game-results {
+
+      & > * {
+        padding-bottom: 8px;
+        border-bottom: 1px solid black;
+      }
+
+      .game-result-icon {
+        font-size: 56px;
+        width: 56px;
+        height: auto;
+      }
+    }
+
     #star-score {
       width: 100%;
 
