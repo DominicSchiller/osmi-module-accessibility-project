@@ -33,28 +33,28 @@ const sensoButtonHighlightDurationMarks = [
   },
 ];
 
-const playerAnswerTimeMarks = [
-  {
-    value: 2,
-    label: "2 sek",
-  },
-  {
-    value: 4,
-    label: "4 sek",
-  },
-  {
-    value: 6,
-    label: "6 sek",
-  },
-  {
-    value: 8,
-    label: "8 sek",
-  },
-  {
-    value: 10,
-    label: "ohne",
-  },
-];
+// const playerAnswerTimeMarks = [
+//   {
+//     value: 2,
+//     label: "2 sek",
+//   },
+//   {
+//     value: 4,
+//     label: "4 sek",
+//   },
+//   {
+//     value: 6,
+//     label: "6 sek",
+//   },
+//   {
+//     value: 8,
+//     label: "8 sek",
+//   },
+//   {
+//     value: 10,
+//     label: "ohne",
+//   },
+// ];
 
 const playerLivesMarks = [
   {
@@ -121,9 +121,9 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
         accessibilityContext.cognitive.sensoButtonHighlightingDuration
     )
 
-    const [playerAnswerTime, setPlayerAnswerTime] = React.useState(
-        accessibilityContext.cognitive.playerAnswerTime
-    )
+    // const [playerAnswerTime, setPlayerAnswerTime] = React.useState(
+    //     accessibilityContext.cognitive.playerAnswerTime
+    // )
 
     const [playerLives, setPlayerLives] = React.useState(
         accessibilityContext.cognitive.playerLives
@@ -144,10 +144,10 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
       setSensoButtonHighlightDuration(newValue)
     }
 
-    const onPlayerAnswerTimeChanged = (event: any, newValue: any) => {
-      accessibilityContext.cognitive.setPlayerAnswerTime(newValue)
-      setPlayerAnswerTime(newValue)
-    }
+    // const onPlayerAnswerTimeChanged = (event: any, newValue: any) => {
+    //   accessibilityContext.cognitive.setPlayerAnswerTime(newValue)
+    //   setPlayerAnswerTime(newValue)
+    // }
 
     const onPlayerLivesChanged = (event: any, newValue: any) => {
       accessibilityContext.cognitive.setPlayerLives(newValue)
@@ -163,7 +163,7 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
       accessibilityContext.cognitive.resetSettings()
       setExtremeMode(accessibilityContext.cognitive.isExtremeMode)
       setSensoButtonHighlightDuration(accessibilityContext.cognitive.sensoButtonHighlightingDuration)
-      setPlayerAnswerTime(accessibilityContext.cognitive.playerAnswerTime)
+      // setPlayerAnswerTime(accessibilityContext.cognitive.playerAnswerTime)
       setPlayerLives(accessibilityContext.cognitive.playerLives)
       setNumberOfTips(accessibilityContext.cognitive.numberOfTips)
     }

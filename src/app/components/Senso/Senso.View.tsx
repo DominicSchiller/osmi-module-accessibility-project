@@ -40,11 +40,44 @@ const SensoView = withTheme((props: any) => {
 
     return (
         <>
-            <Stack direction={"column"} alignItems={"center"} justifyContent={"center"} id={"senso-container"}>
+            <Stack
+                id={"senso-container"}
+                direction={"column"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                sx={{
+                    top: {
+                        xs: "-48px",
+                        sm: "inherit"
+                    },
+                }}>
                 <Stack
-                    direction={"column"}
+                    direction={{
+                        xs: "row",
+                        sm: "column"
+                    }}
                     rowGap={"16px"}
-                    sx={{position: "absolute", bottom: 0, right: "24px"}}>
+                    columnGap={"16px"}
+                    sx={{
+                        position: "absolute",
+                        zIndex: 2,
+                        left: {
+                            xs: "50%",
+                            sm: "inherit"
+                        },
+                        right: {
+                            xs: "inherit",
+                            sm: "24px"
+                        },
+                        bottom: {
+                            xs: "-24px",
+                            sm: 0
+                        },
+                        transform: {
+                            xs: "translateX(-50%)",
+                            sm: "inherit"
+                        }
+                }}>
                     <TipsPopover />
                     <ManualPopover />
                 </Stack>

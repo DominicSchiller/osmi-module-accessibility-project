@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {withAccessibilityContext} from "../../context/AccessibilityContext";
 import SensoView from "../../components/Senso/Senso.View";
 import "./Game.scss";
-import {CssBaseline, Grid, Icon, Stack, Tooltip, Typography} from "@mui/material";
+import {CssBaseline, Grid, Icon, Stack, Tooltip, Typography, useMediaQuery} from "@mui/material";
 import {StartGameDialog} from "./dialogs/StartGameDialog";
 import {
     GameplayContextConsumer,
@@ -24,6 +24,7 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
     const dialogRef = React.createRef<StartGameDialog>()
     const {theme, accessibilityContext} = props
 
+    const isSmartphone = useMediaQuery(theme.breakpoints.up('xs'));
 
     const StyledInfiniteIcon = styled(InfiniteIcon)`
       color: ${props => props.theme.palette.text.primary};
@@ -55,11 +56,17 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                id="hud"
                                direction={"row"}
                                alignItems={"start"}
-                               justifyContent={
-                                accessibilityContext.motor.showPlayerLives || accessibilityContext.motor.showNumberOfTips
-                                    ? "space-between"
-                                    : "end"
-                           }>
+                               rowGap={{
+                                   xs: "16px",
+                                   sm: 0
+                               }}
+                               flexWrap={"wrap"}
+                               justifyContent={{
+                                   xs: "center",
+                                   sm: accessibilityContext.motor.showPlayerLives || accessibilityContext.motor.showNumberOfTips
+                                       ? "space-between"
+                                       : "end"
+                               }}>
                                <Stack direction={"row"}
                                       rowGap={"8px"} columnGap={"16px"}>
                                    { accessibilityContext.motor.showPlayerLives &&
@@ -109,8 +116,18 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                             leaveDelay={75}
                                             enterNextDelay={500}>
                                        <Stack id="points" direction={"row"} alignItems={"center"} columnGap={"8px"}>
-                                           <Typography color={"textPrimary"} className={"hud-stats"}>{gameplayContext.session.playerTotalScore} Punkte</Typography>
-                                           <CoinIcon className={"hud-icon"} />
+                                           {isSmartphone &&
+                                              <>
+                                                  <CoinIcon className={"hud-icon"} />
+                                                  <Typography color={"textPrimary"} className={"hud-stats"}>{gameplayContext.session.playerTotalScore} Punkte</Typography>
+                                              </>
+                                           }
+                                           {!isSmartphone &&
+                                               <>
+                                                   <Typography color={"textPrimary"} className={"hud-stats"}>{gameplayContext.session.playerTotalScore} Punkte</Typography>
+                                                   <CoinIcon className={"hud-icon"} />
+                                               </>
+                                           }
                                        </Stack>
                                    </Tooltip>
                                }
