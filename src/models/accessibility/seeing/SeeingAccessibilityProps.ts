@@ -63,6 +63,7 @@ export class SeeingAccessibilityProps {
                 break
         }
         fixSensoAspectRatio()
+        localStorage.setItem("ui-color-mode", this.uiColorMode)
     }
 
     @action public setFontFamily(fontFamily: string) {
@@ -75,16 +76,17 @@ export class SeeingAccessibilityProps {
      */
     @action public setPrimaryColor(hexString: string) {
         this.primaryColor = hexString
+        localStorage.setItem("ui-primary-color", this.primaryColor)
     }
 
     /**
      * Update the UI contrast mode.
      * @param newContrastMode The new contrast mode to switch to
      */
-    @action public setUIContrastMode(newContrastMode: UIContrastMode) {
+    @action public setUIContrastMode(newContrastMode: UIContrastMode, skipSettingContrastValue: boolean = false) {
 
         this.uiContrastMode = newContrastMode
-
+        let contrastValue = 0
         switch (newContrastMode) {
             case UIContrastMode.HighContrast:
                 document.documentElement.classList.remove("high-saturation")
@@ -92,7 +94,7 @@ export class SeeingAccessibilityProps {
                 document.documentElement.classList.add("high-contrast")
                 this.minContrastValue = 130;
                 this.maxContrastValue = 200;
-                this.setContrastValue(135)
+                contrastValue = 135
                 break
             case UIContrastMode.HighSaturation:
                 document.documentElement.classList.remove("high-contrast")
@@ -100,7 +102,7 @@ export class SeeingAccessibilityProps {
                 document.documentElement.classList.add("high-saturation")
                 this.minContrastValue = 150;
                 this.maxContrastValue = 250;
-                this.setContrastValue(200)
+                contrastValue = 200
                 break
             case UIContrastMode.LowSaturation:
                 document.documentElement.classList.remove("high-contrast")
@@ -108,7 +110,7 @@ export class SeeingAccessibilityProps {
                 document.documentElement.classList.add("low-saturation")
                 this.minContrastValue = 40;
                 this.maxContrastValue = 75;
-                this.setContrastValue(60)
+                contrastValue = 60
                 break
             default:
                 document.documentElement.classList.remove("high-contrast")
@@ -119,6 +121,10 @@ export class SeeingAccessibilityProps {
                 this.setContrastValue(0)
         }
         fixSensoAspectRatio()
+        localStorage.setItem("ui-contrast-mode", this.uiContrastMode)
+        if (!skipSettingContrastValue) {
+            this.setContrastValue(contrastValue)
+        }
     }
 
     /**
@@ -128,6 +134,9 @@ export class SeeingAccessibilityProps {
     @action public setContrastValue(newContrastValue: number) {
         this.contrastValue = newContrastValue
         document.documentElement.style.setProperty("--contrastValue", `${newContrastValue}%`)
+        localStorage.setItem("ui-max-contrast-value", `${this.maxContrastValue}`)
+        localStorage.setItem("ui-min-contrast-value", `${this.minContrastValue}`)
+        localStorage.setItem("ui-contrast-value",`${this.contrastValue}`)
     }
 
     /**
@@ -136,6 +145,7 @@ export class SeeingAccessibilityProps {
      */
     @action public setShowAnimations(show: boolean) {
         this.showAnimations = show
+        localStorage.setItem("ui-show-animation", `${this.showAnimations}`)
     }
 
     /**
@@ -143,5 +153,55 @@ export class SeeingAccessibilityProps {
      */
     public constructor() {
         makeObservable(this);
+
+        let uiColorMode = localStorage.getItem("ui-color-mode") as UIColorMode
+        if (uiColorMode) {
+            this.setUIColorMode(uiColorMode)
+        } else {
+            localStorage.setItem("ui-color-mode", this.uiColorMode)
+        }
+
+        let uiContrastMode = localStorage.getItem("ui-contrast-mode") as UIContrastMode
+        if (uiContrastMode) {
+            this.setUIContrastMode(uiContrastMode, true)
+        } else {
+            localStorage.setItem("ui-contrast-mode", this.uiContrastMode)
+        }
+
+        let uiMinContrastValue = parseInt(localStorage.getItem("ui-min-contrast-value") ?? "0")
+        if (uiMinContrastValue) {
+            this.minContrastValue = uiMinContrastValue
+        } else {
+            localStorage.setItem("ui-min-contrast-value", `${this.minContrastValue}`)
+        }
+
+        let uiMaxContrastValue = parseInt(localStorage.getItem("ui-max-contrast-value") ?? "0")
+        if (uiMaxContrastValue) {
+            this.maxContrastValue = uiMaxContrastValue
+        } else {
+            localStorage.setItem("ui-max-contrast-value", `${this.maxContrastValue}`)
+        }
+
+        let uiContrastValue = parseInt(localStorage.getItem("ui-contrast-value") ?? "0")
+        if (uiContrastValue) {
+            this.setContrastValue(uiContrastValue)
+        } else {
+            localStorage.setItem("ui-contrast-value", `${this.contrastValue}`)
+        }
+
+        let uiPrimaryColor = localStorage.getItem("ui-primary-color")
+        if (uiPrimaryColor) {
+            this.setPrimaryColor(uiPrimaryColor)
+        } else {
+            localStorage.setItem("ui-primary-color", this.primaryColor)
+        }
+
+        let uiShowAnimations = localStorage.getItem("ui-show-animation")
+        if (uiShowAnimations) {
+            this.setShowAnimations(uiShowAnimations === "true")
+        } else {
+            localStorage.setItem("ui-show-animation", `${this.showAnimations}`)
+        }
+
     }
 }
