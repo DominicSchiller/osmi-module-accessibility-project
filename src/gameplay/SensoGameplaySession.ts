@@ -116,6 +116,12 @@ export class SensoGameplaySession {
     @observable private lostPlayerLives: number = 0
 
     /**
+     * Lost player lives during the current level
+     * @private
+     */
+    private levelLostPlayerLives: number = 0
+
+    /**
      * Sum of already taken tips
      * @private
      */
@@ -160,7 +166,7 @@ export class SensoGameplaySession {
      * The reached score of the currently completed level
      */
     public get levelScore(): number {
-        return this.scoreManager.calcScore(this._level)
+        return this.scoreManager.calcScore(this._level, this.levelLostPlayerLives)
     }
 
     /**
@@ -199,6 +205,7 @@ export class SensoGameplaySession {
         if (this.isLevelStarted && !isReset) {
             this._playerTotalScore += this.levelScore
         }
+        this.levelLostPlayerLives = 0
         this.isCountingDown = true
         this.isLevelStarted = false
         this._clickedSequence = []
@@ -355,6 +362,7 @@ export class SensoGameplaySession {
            this.decrementPlayerLife()
            this.lostPlayerLives++;
        }
+        this.levelLostPlayerLives++;
     }
 
     /**

@@ -68,17 +68,20 @@ class LevelScoreManager {
      * @param level The level for which to calculate the required score
      */
     public calcThreeStarScore(level: number): number {
-       return +(level * (this.defaultLevelPoints + this.defaultBonusPoints) * 0.5).toFixed(2)
+        return +(level * (this.defaultLevelPoints + this.defaultBonusPoints)).toFixed(2)
+       // return +(level * (this.defaultLevelPoints + this.defaultBonusPoints) * 0.5).toFixed(2)
     }
 
     /**
      * Calculate the score gained to complete the current level.
      * @param level
+     * @param lostPlayerLives
      */
-    public calcScore(level: number): number {
+    public calcScore(level: number, lostPlayerLives: number): number {
         // the current level works as points multiplier
         let levelPoints = Math.round(level * this.defaultLevelPoints)
-        let bonusPoints = Math.round((level * this.defaultBonusPoints) / this.timeNeeded)
+        // let bonusPoints = Math.round((level * this.defaultBonusPoints) / this.timeNeeded)
+        let bonusPoints = Math.round((level * this.defaultBonusPoints) / lostPlayerLives)
         return levelPoints + bonusPoints
     }
 
