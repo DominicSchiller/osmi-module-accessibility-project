@@ -41,25 +41,25 @@ export class SensoButtonContentRepository {
                 return {
                     title: "Wolke",
                     iconPath: `${gameMode}/cloud`,
-                    soundFXPath: `${gameMode}/simonSound1.mp3`,
+                    soundFXPath: `${gameMode}/simonSound1.m4a`,
                 }
             case SensoButtonID.TopRight:
                 return {
                     title: "Mond",
                     iconPath: `${gameMode}/moon`,
-                    soundFXPath: `${gameMode}/simonSound2.mp3`,
+                    soundFXPath: `${gameMode}/simonSound2.m4a`,
                 }
             case SensoButtonID.BottomLeft:
                 return {
                     title: "Stern",
                     iconPath: `${gameMode}/star`,
-                    soundFXPath: `${gameMode}/simonSound3.mp3`,
+                    soundFXPath: `${gameMode}/simonSound3.m4a`,
                 }
             case SensoButtonID.BottomRight:
                 return {
                     title: "Sonne",
                     iconPath: `${gameMode}/sun`,
-                    soundFXPath: `${gameMode}/simonSound4.mp3`,
+                    soundFXPath: `${gameMode}/simonSound4.m4a`,
                 }
         }
     }
@@ -75,25 +75,25 @@ export class SensoButtonContentRepository {
                 return {
                     title: "Huhn",
                     iconPath: `${gameMode}/chicken`,
-                    soundFXPath: `${gameMode}/chicken.mp3`,
+                    soundFXPath: `${gameMode}/chicken.m4a`,
                 }
             case SensoButtonID.TopRight:
                 return {
                     title: "Elefant",
                     iconPath: `${gameMode}/elephant`,
-                    soundFXPath: `${gameMode}/elephant.mp3`,
+                    soundFXPath: `${gameMode}/elephant.m4a`,
                 }
             case SensoButtonID.BottomLeft:
                 return {
                     title: "Frosch",
                     iconPath: `${gameMode}/frog`,
-                    soundFXPath: `${gameMode}/frog.mp3`,
+                    soundFXPath: `${gameMode}/frog.m4a`,
                 }
             case SensoButtonID.BottomRight:
                 return {
                     title: "Tiger",
                     iconPath: `${gameMode}/tiger`,
-                    soundFXPath: `${gameMode}/tiger.mp3`,
+                    soundFXPath: `${gameMode}/tiger.m4a`,
                 }
         }
     }

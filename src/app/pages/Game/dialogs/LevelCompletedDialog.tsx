@@ -97,6 +97,7 @@ export class LevelCompletedDialog extends Component<IGameDialogProps, ILevelComp
 
             const setStarReached = (starIcon: Element, waitIndex: number) => {
                 setTimeout(() => {
+                    if (!starIcon) { return }
                     if (starIcon.classList.contains('reached')) { return }
                     starIcon.classList.add('reached')
                     starIcon.classList.add('scaled')
