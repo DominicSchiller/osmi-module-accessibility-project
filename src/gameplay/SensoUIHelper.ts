@@ -2,13 +2,9 @@
  * Utility class to manage UI related components and actions of a senso game.
  */
 import {SensoAudioPlayer} from "./SensoAudioPlayer";
+import {Accessibility} from "../app/context/AccessibilityContext";
 
 export class SensoUIHelper {
-    /**
-     * Duration constant how long a randomly selected button is displayed to the user
-     * @private
-     */
-    private static readonly ShowButtonDuration = 1500 // in ms
     /**
      * Pause duration between showing randomly selected buttons to the user
      * @private
@@ -32,7 +28,7 @@ export class SensoUIHelper {
                 setTimeout(() => {
                     resolve();
                 }, SensoUIHelper.ShowButtonBreakInterval)
-            }, SensoUIHelper.ShowButtonDuration)
+            }, this.getSensoButtonHighlightDuration())
         });
     }
 
@@ -71,5 +67,10 @@ export class SensoUIHelper {
         if (subtitleLabel) {
             subtitleLabel!.innerHTML = button.ariaLabel
         }
+    }
+
+    private static getSensoButtonHighlightDuration(): number {
+        let duration = Accessibility.cognitive.sensoButtonHighlightingDuration
+        return duration * 1000
     }
 }

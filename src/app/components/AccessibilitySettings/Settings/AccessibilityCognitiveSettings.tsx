@@ -225,13 +225,13 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
                   </Icon>
                 </ListItemIcon>
                 <Box sx={{ typography: "body1", ml: 1 }}>
-                  Zeitdauer der Abspielung in Sekunden
+                  Anzeigedauer Senso Taste
                 </Box>
               </Box>
               <Box sx={{ px: 2, pt: 1 }}>
                 <Slider
                   sx={{ width: 1 }}
-                  aria-label="Zeitdauer der Abspielung ändern"
+                  aria-label="Anzeigedauer eines Senso-Taste beim Abspielen der Sequenz ändern"
                   value={sensoButtonHighlightDuration}
                   onChange={onSensoButtonHighlightingDurationChanged}
                   valueLabelDisplay="auto"
