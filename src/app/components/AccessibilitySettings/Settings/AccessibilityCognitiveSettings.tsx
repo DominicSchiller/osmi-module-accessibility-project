@@ -159,6 +159,15 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
       setNumberOfTips(newValue)
     }
 
+    const onResetCognitiveSettings = () => {
+      accessibilityContext.cognitive.resetSettings()
+      setExtremeMode(accessibilityContext.cognitive.isExtremeMode)
+      setSensoButtonHighlightDuration(accessibilityContext.cognitive.sensoButtonHighlightingDuration)
+      setPlayerAnswerTime(accessibilityContext.cognitive.playerAnswerTime)
+      setPlayerLives(accessibilityContext.cognitive.playerLives)
+      setNumberOfTips(accessibilityContext.cognitive.numberOfTips)
+    }
+
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
         <header>
@@ -342,6 +351,12 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
               </Box>
             </ListItemBox>
           </List>
+          <Stack direction={"column"}>
+            <Button
+                aria-label={"Alle Einstellungen auf ihre Standardwerte zurücksetzen"}
+                variant={"outlined"}
+                onClick={onResetCognitiveSettings}>Alle Einstellungen zurücksetzen</Button>
+          </Stack>
         </main>
       </Stack>
     );

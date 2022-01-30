@@ -99,6 +99,14 @@ const AccessibilityHearingSettings = withAccessibilityContext(
       setSubtitleFontSize(newValue);
     }
 
+    const onResetHearingSettings = () => {
+      accessibilityContext.hearing.resetSettings()
+      setSoundEffectsVolume(accessibilityContext.hearing.soundEffectsVolume)
+      setShowSubtitles(accessibilityContext.hearing.showSubtitles)
+      setShowSubtitles(accessibilityContext.hearing.subtitleFontSize)
+
+    }
+
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
         <header>
@@ -208,6 +216,12 @@ const AccessibilityHearingSettings = withAccessibilityContext(
               </Box>
             </ListItemBox>
           </List>
+          <Stack direction={"column"}>
+            <Button
+                aria-label={"Alle Einstellungen auf ihre Standardwerte zurücksetzen"}
+                variant={"outlined"}
+                onClick={onResetHearingSettings}>Alle Einstellungen zurücksetzen</Button>
+          </Stack>
         </main>
       </Stack>
     );

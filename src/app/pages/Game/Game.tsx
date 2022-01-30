@@ -104,6 +104,7 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                            <SensoView gameMode={accessibilityContext.motor.gameMode}
                                       colorMode={accessibilityContext.seeing.uiColorMode}
                                       showAnimations={accessibilityContext.seeing.showAnimations}
+                                      hearingSettings={accessibilityContext.hearing}
                                       disabled={gameplayContext.session.isPlayingSequence || gameplayContext.session.isRoundFinished} />
                            <StartGameDialog ref={dialogRef} />
                            { gameplayContext.session.isLevelCompleted ?

@@ -135,6 +135,15 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
             setlevelCountdownDuration(newValue)
         }
 
+        const onResetMotorSettings = () => {
+            accessibilityContext.motor.resetSettings()
+            setGameMode(accessibilityContext.motor.gameMode)
+            setlevelCountdownDuration(accessibilityContext.motor.levelCountdownDuration)
+            setShowPlayerLives(accessibilityContext.motor.showPlayerLives)
+            setShowTotalScore(accessibilityContext.motor.showTotalScore)
+            setShowNumberOfTips(accessibilityContext.motor.showNumberOfTips)
+        }
+
         return (
             <Stack direction={"column"} className={"seeing-contentContainer"}>
                 <header>
@@ -301,6 +310,12 @@ const AccessibilityMotorActivitySettings = withAccessibilityContext(
                             </Box>
                         </ListItemBox>
                     </List>
+                    <Stack direction={"column"}>
+                        <Button
+                            aria-label={"Alle Einstellungen auf ihre Standardwerte zurücksetzen"}
+                            variant={"outlined"}
+                            onClick={onResetMotorSettings}>Alle Einstellungen zurücksetzen</Button>
+                    </Stack>
                 </main>
             </Stack>
         );

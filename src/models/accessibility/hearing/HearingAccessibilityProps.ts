@@ -1,6 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
 import {SensoAudioPlayer} from "../../../gameplay/SensoAudioPlayer";
-import {UIColorMode} from "../seeing/UIColorMode";
 
 /**
  * Collection of hearing related accessibility settings.
@@ -56,14 +55,14 @@ export class HearingAccessibilityProps {
         makeObservable(this);
 
         let soundEffectsVolume = parseInt(localStorage.getItem("hearing-sound-fx-volume") ?? "50")
-        if (soundEffectsVolume) {
+        if (soundEffectsVolume !== undefined) {
             this.setSoundEffectsVolume(soundEffectsVolume)
         } else {
             localStorage.setItem("hearing-sound-fx-volume", `${this.soundEffectsVolume}`)
         }
 
         let subtitleFontSize = parseInt(localStorage.getItem("hearing-subtitle-font-size") ?? "36")
-        if (subtitleFontSize) {
+        if (subtitleFontSize !== undefined) {
             this.setSubtitleFontSize(subtitleFontSize)
         } else {
             localStorage.setItem("hearing-subtitle-font-size", `${this.subtitleFontSize}`)
@@ -75,5 +74,11 @@ export class HearingAccessibilityProps {
         } else {
             localStorage.setItem("hearing-show-subtitles", `${this.showSubtitles}`)
         }
+    }
+
+    public resetSettings() {
+        this.setSoundEffectsVolume(50)
+        this.setShowSubtitles(true)
+        this.setSubtitleFontSize(36)
     }
 }

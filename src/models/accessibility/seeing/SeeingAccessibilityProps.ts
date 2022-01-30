@@ -169,21 +169,21 @@ export class SeeingAccessibilityProps {
         }
 
         let uiMinContrastValue = parseInt(localStorage.getItem("ui-min-contrast-value") ?? "0")
-        if (uiMinContrastValue) {
+        if (uiMinContrastValue !== undefined) {
             this.minContrastValue = uiMinContrastValue
         } else {
             localStorage.setItem("ui-min-contrast-value", `${this.minContrastValue}`)
         }
 
         let uiMaxContrastValue = parseInt(localStorage.getItem("ui-max-contrast-value") ?? "0")
-        if (uiMaxContrastValue) {
+        if (uiMaxContrastValue !== undefined) {
             this.maxContrastValue = uiMaxContrastValue
         } else {
             localStorage.setItem("ui-max-contrast-value", `${this.maxContrastValue}`)
         }
 
         let uiContrastValue = parseInt(localStorage.getItem("ui-contrast-value") ?? "0")
-        if (uiContrastValue) {
+        if (uiContrastValue !== undefined) {
             this.setContrastValue(uiContrastValue)
         } else {
             localStorage.setItem("ui-contrast-value", `${this.contrastValue}`)
@@ -202,6 +202,12 @@ export class SeeingAccessibilityProps {
         } else {
             localStorage.setItem("ui-show-animation", `${this.showAnimations}`)
         }
+    }
 
+    public resetSettings() {
+        this.setUIColorMode(UIColorMode.Light)
+        this.setUIContrastMode(UIContrastMode.Normal)
+        this.setShowAnimations(true)
+        this.setPrimaryColor("#e31e60")
     }
 }

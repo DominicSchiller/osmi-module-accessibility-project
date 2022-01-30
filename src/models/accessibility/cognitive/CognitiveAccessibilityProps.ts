@@ -83,28 +83,28 @@ export class CognitiveAccessibilityProps {
         makeObservable(this);
 
         let sensoButtonHighlightingDuration = parseInt(localStorage.getItem("cognitive-senso-button-highlight-duration") ?? "1")
-        if (sensoButtonHighlightingDuration) {
+        if (sensoButtonHighlightingDuration !== undefined) {
             this.setSensoButtonHighlightingDuration(sensoButtonHighlightingDuration)
         } else {
             localStorage.setItem("cognitive-senso-button-highlight-duration", `${this.sensoButtonHighlightingDuration}`)
         }
 
         let playerAnswerTime = parseInt(localStorage.getItem("cognitive-player-answer-time") ?? "10")
-        if (playerAnswerTime) {
+        if (playerAnswerTime !== undefined) {
             this.setPlayerAnswerTime(playerAnswerTime)
         } else {
             localStorage.setItem("cognitive-player-answer-time", `${this.playerAnswerTime}`)
         }
 
         let playerLives = parseInt(localStorage.getItem("cognitive-player-lives") ?? "7")
-        if (playerLives) {
+        if (playerLives !== undefined) {
             this.setPlayerLives(playerLives)
         } else {
             localStorage.setItem("cognitive-player-lives", `${this.playerLives}`)
         }
 
         let numberOfTips = parseInt(localStorage.getItem("cognitive-number-of-tips") ?? "7")
-        if (numberOfTips) {
+        if (numberOfTips !== undefined) {
             this.setNumberOfTips(numberOfTips)
         } else {
             localStorage.setItem("cognitive-number-of-tips", `${this.numberOfTips}`)
@@ -116,5 +116,13 @@ export class CognitiveAccessibilityProps {
         } else {
             localStorage.setItem("cognitive-is-extreme-mode", `${this.isExtremeMode}`)
         }
+    }
+
+    public resetSettings() {
+        this.setSensoButtonHighlightingDuration(1)
+        this.setPlayerAnswerTime(10)
+        this.setPlayerLives(7)
+        this.setNumberOfTips(7)
+        this.setExtremeMode(false)
     }
 }

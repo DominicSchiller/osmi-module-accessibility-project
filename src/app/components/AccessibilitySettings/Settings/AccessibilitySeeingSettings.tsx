@@ -115,6 +115,15 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
           setShowAnimations(isEnabled)
       };
 
+      const onResetSeeingSettings = () => {
+          accessibilityContext.seeing.resetSettings()
+          setCurrentColorMode(accessibilityContext.seeing.uiColorMode)
+          setPrimaryColor(accessibilityContext.seeing.primaryColor)
+          setCurrentContrastMode(accessibilityContext.seeing.uiContrastMode)
+          setContrastValue(accessibilityContext.seeing.contrastValue)
+          setShowAnimations(accessibilityContext.seeing.showAnimations)
+      }
+
     return (
       <Stack direction={"column"} className={"seeing-contentContainer"}>
         <header>
@@ -392,6 +401,13 @@ const AccessibilitySeeingSettings = withAccessibilityContext(
 
                 <Box sx={{ mt: "16px" }} />
             </List>
+            <Stack direction={"column"}>
+                <Button
+                    aria-label={"Alle Einstellungen auf ihre Standardwerte zurücksetzen"}
+                    variant={"outlined"}
+                    onClick={onResetSeeingSettings}>Alle Einstellungen zurücksetzen
+                </Button>
+            </Stack>
         </main>
       </Stack>
     );

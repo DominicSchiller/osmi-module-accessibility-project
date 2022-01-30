@@ -1,6 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
 import {GameMode} from "./GameMode";
-import {UIColorMode} from "../seeing/UIColorMode";
 
 /**
  * Collection of motor activity related accessibility settings.
@@ -112,11 +111,19 @@ export class MotorActivityAccessibilityProps {
         }
 
         let levelCountdownDuration = parseInt(localStorage.getItem("motor-level-countdown-duration") ?? "3")
-        if (levelCountdownDuration) {
+        if (levelCountdownDuration !== undefined) {
             this.setLevelCountdownDuration(levelCountdownDuration)
         } else {
             localStorage.setItem("motor-level-countdown-duration", `${this.levelCountdownDuration}`)
         }
+    }
+
+    public resetSettings() {
+        this.setGameMode(GameMode.Animals)
+        this.setShowNumberOfTips(true)
+        this.setShowPlayerLives(true)
+        this.setShowTotalScore(true)
+        this.setLevelCountdownDuration(3)
     }
 
 }
