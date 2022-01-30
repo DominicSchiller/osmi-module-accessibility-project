@@ -12,7 +12,9 @@ import {LevelCompletedDialog} from "./dialogs/LevelCompletedDialog";
 import {withTheme} from "@mui/styles";
 import {useDidMount} from "../../../utils/Hooks";
 import {ReactComponent as CoinIcon} from "../../../assets/images/icons/coin.svg";
+import {ReactComponent as InfiniteIcon} from "../../../assets/images/icons/infinite.svg";
 import {GameOverDialog} from "./dialogs/GameOverDialog";
+import {styled} from "@mui/system";
 
 /**
  * The app's senso game page component.
@@ -21,6 +23,12 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
     const didMount = useDidMount()
     const dialogRef = React.createRef<StartGameDialog>()
     const {theme, accessibilityContext} = props
+
+
+    const StyledInfiniteIcon = styled(InfiniteIcon)`
+      color: ${props => props.theme.palette.text.primary};
+    `
+
 
     useEffect(() => {
         if (didMount()) { return }
@@ -52,8 +60,8 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                     ? "space-between"
                                     : "end"
                            }>
-                               <Stack direction={"column"}
-                                      rowGap={"8px"}>
+                               <Stack direction={"row"}
+                                      rowGap={"8px"} columnGap={"16px"}>
                                    { accessibilityContext.motor.showPlayerLives &&
                                        <Tooltip arrow
                                                 title={"Anzeige wie viele Leben du noch hast"}
@@ -64,8 +72,11 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                                <Icon baseClassName="material-icons-round" className={"hud-icon"}>
                                                    favorite
                                                </Icon>
+                                               {accessibilityContext.cognitive.playerLives === 7 &&
+                                                   <StyledInfiniteIcon className={"infinite-value-icon"} />
+                                               }
                                                <Typography color={"textPrimary"} className={"hud-stats"}>
-                                                   {accessibilityContext.cognitive.playerLives === 7 ? "unendlich Leben" : `${gameplayContext.session.playerLife} Leben`}
+                                                   {accessibilityContext.cognitive.playerLives === 7 ? "Leben" : `${gameplayContext.session.playerLife} Leben`}
                                                </Typography>
                                            </Stack>
                                        </Tooltip>
@@ -80,8 +91,11 @@ const GamePage = withTheme(withAccessibilityContext((props: any) => {
                                                <Icon baseClassName="material-icons-round" className={"hud-icon"}>
                                                    lightbulb
                                                </Icon>
+                                               {accessibilityContext.cognitive.numberOfTips === 7 &&
+                                                   <StyledInfiniteIcon className={"infinite-value-icon"} />
+                                               }
                                                <Typography color={"textPrimary"} className={"hud-stats"}>
-                                                   {accessibilityContext.cognitive.numberOfTips === 7 ? "unendlich Tipps" : `${gameplayContext.session.numberOfTips} Tipps`}
+                                                   {accessibilityContext.cognitive.numberOfTips === 7 ? "Tipps" : `${gameplayContext.session.numberOfTips} Tipps`}
                                                </Typography>
                                            </Stack>
                                        </Tooltip>

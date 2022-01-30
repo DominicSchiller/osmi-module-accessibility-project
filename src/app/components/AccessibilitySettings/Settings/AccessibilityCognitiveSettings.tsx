@@ -250,39 +250,39 @@ const AccessibilityCognitiveSettings = withAccessibilityContext(
                 />
               </Box>
             </ListItemBox>
-            <ListItemBox>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                }}
-              >
-                <ListItemIcon>
-                  <Icon
-                    baseClassName="material-icons-round"
-                    sx={{ fontSize: 36 }}
-                  >
-                    av_timer
-                  </Icon>
-                </ListItemIcon>
-                <Box sx={{ typography: "body1", ml: 1 }}>
-                  Zeitlimit für Eingaben
-                </Box>
-              </Box>
-              <Box sx={{ px: 2, pt: 1 }}>
-                <Slider
-                  aria-label="Zeitlimit für Eingaben ändern"
-                  value={playerAnswerTime}
-                  onChange={onPlayerAnswerTimeChanged}
-                  valueLabelDisplay="auto"
-                  step={2}
-                  marks={playerAnswerTimeMarks}
-                  min={2}
-                  max={10}
-                />
-              </Box>
-            </ListItemBox>
+            {/*<ListItemBox>*/}
+            {/*  <Box*/}
+            {/*    sx={{*/}
+            {/*      display: "flex",*/}
+            {/*      justifyContent: "flex-start",*/}
+            {/*      alignItems: "center",*/}
+            {/*    }}*/}
+            {/*  >*/}
+            {/*    <ListItemIcon>*/}
+            {/*      <Icon*/}
+            {/*        baseClassName="material-icons-round"*/}
+            {/*        sx={{ fontSize: 36 }}*/}
+            {/*      >*/}
+            {/*        timer*/}
+            {/*      </Icon>*/}
+            {/*    </ListItemIcon>*/}
+            {/*    <Box sx={{ typography: "body1", ml: 1 }}>*/}
+            {/*      Zeitlimit für Eingaben*/}
+            {/*    </Box>*/}
+            {/*  </Box>*/}
+            {/*  <Box sx={{ px: 2, pt: 1 }}>*/}
+            {/*    <Slider*/}
+            {/*      aria-label="Zeitlimit für Eingaben ändern"*/}
+            {/*      value={playerAnswerTime}*/}
+            {/*      onChange={onPlayerAnswerTimeChanged}*/}
+            {/*      valueLabelDisplay="auto"*/}
+            {/*      step={2}*/}
+            {/*      marks={playerAnswerTimeMarks}*/}
+            {/*      min={2}*/}
+            {/*      max={10}*/}
+            {/*    />*/}
+            {/*  </Box>*/}
+            {/*</ListItemBox>*/}
           </List>
 
           <List
