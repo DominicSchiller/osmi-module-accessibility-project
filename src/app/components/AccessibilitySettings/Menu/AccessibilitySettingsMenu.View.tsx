@@ -1,6 +1,6 @@
-import {Backdrop, Box, Drawer} from "@mui/material";
+import {Backdrop, Box, Button, Drawer, Stack} from "@mui/material";
 import AccessibilityCategoriesOverview from "../Settings/AccessibilityCategoriesOverview";
-import React, {forwardRef, useEffect, useImperativeHandle} from "react";
+import React, {forwardRef, useContext, useEffect, useImperativeHandle} from "react";
 import AccessibilitySettingsMenuViewModel from "./AccessibilitySettingsMenu.ViewModel";
 import {observer} from "mobx-react";
 import "./AccessibilitySettingsMenu.scss"
@@ -10,6 +10,7 @@ import AccessibilitySeeingSettings from "../Settings/AccessibilitySeeingSettings
 import AccessibilityMotorActivitySettings from "../Settings/AccessibilityMotorActivitySettings";
 import AccessibilityCognitiveSettings from "../Settings/AccessibilityCognitiveSettings";
 import {AccessibilityMenuContextProvider} from "../../../context/AccessibilityMenuContext";
+import {AccessibilityContext} from "../../../context/AccessibilityContext";
 
 /**
  * Collection of props used by the accessibility menu component.
@@ -37,6 +38,12 @@ const AccessibilitySettingsMenuView = forwardRef(({viewModel}: AccessibilitySett
             window.document.removeEventListener('keyup', handleKeyUp);
         }
     });
+
+    const accessibilityContext = useContext(AccessibilityContext)
+
+    const resetAllSettings = () => {
+       accessibilityContext.resetAllSettings()
+    }
 
     return(
         <aside>
@@ -79,6 +86,16 @@ const AccessibilitySettingsMenuView = forwardRef(({viewModel}: AccessibilitySett
                                     return <AccessibilityCategoriesOverview />
                             }
                         })()}
+                        {viewModel.selectedCategory === undefined &&
+                            <Stack direction={"column"} sx={{padding: "24px", marginTop: "-48px"}}>
+                                <Button
+                                    aria-label={"Alle Einstellungen auf ihre Standardwerte zurücksetzen"}
+                                    variant={"outlined"}
+                                    onClick={resetAllSettings}
+                                >Alle Einstellungen zurücksetzen
+                                </Button>
+                            </Stack>
+                        }
                     </AccessibilityMenuContextProvider>
                 </Box>
             </Drawer>

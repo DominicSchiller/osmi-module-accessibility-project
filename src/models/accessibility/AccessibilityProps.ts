@@ -45,5 +45,12 @@ export class AccessibilityProps implements AccessibilityProps {
     constructor() {
         makeObservable(this);
     }
+
+    public resetAllSettings() {
+        this.seeing.resetSettings()
+        this.hearing.resetSettings()
+        this.motor.resetSettings()
+        this.cognitive.resetSettings()
+    }
 }
 
