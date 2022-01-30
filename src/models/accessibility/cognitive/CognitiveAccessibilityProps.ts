@@ -36,6 +36,7 @@ export class CognitiveAccessibilityProps {
      */
     @action public setSensoButtonHighlightingDuration(newDuration: number) {
         this.sensoButtonHighlightingDuration = newDuration
+        localStorage.setItem("cognitive-senso-button-highlight-duration", `${this.sensoButtonHighlightingDuration}`)
     }
 
     /**
@@ -44,6 +45,7 @@ export class CognitiveAccessibilityProps {
      */
     @action setPlayerAnswerTime(newAnswerTime: number) {
         this.playerAnswerTime = newAnswerTime
+        localStorage.setItem("cognitive-player-answer-time", `${this.playerAnswerTime}`)
     }
 
     /**
@@ -53,6 +55,7 @@ export class CognitiveAccessibilityProps {
     @action setPlayerLives(newPlayerLives: number) {
         this.playerLives = newPlayerLives
         GameplaySession.updatePlayerLives(newPlayerLives)
+        localStorage.setItem("cognitive-player-lives", `${this.playerLives}`)
     }
 
     /**
@@ -61,6 +64,7 @@ export class CognitiveAccessibilityProps {
      */
     @action public setNumberOfTips(newNumberOfTips: number) {
         this.numberOfTips = newNumberOfTips
+        localStorage.setItem("cognitive-number-of-tips", `${this.numberOfTips}`)
     }
 
     /**
@@ -69,6 +73,7 @@ export class CognitiveAccessibilityProps {
      */
     @action public setExtremeMode(isEnabled: boolean) {
         this.isExtremeMode = isEnabled
+        localStorage.setItem("cognitive-is-extreme-mode", `${this.isExtremeMode}`)
     }
 
     /**
@@ -76,5 +81,40 @@ export class CognitiveAccessibilityProps {
      */
     public constructor() {
         makeObservable(this);
+
+        let sensoButtonHighlightingDuration = parseInt(localStorage.getItem("cognitive-senso-button-highlight-duration") ?? "1")
+        if (sensoButtonHighlightingDuration) {
+            this.setSensoButtonHighlightingDuration(sensoButtonHighlightingDuration)
+        } else {
+            localStorage.setItem("cognitive-senso-button-highlight-duration", `${this.sensoButtonHighlightingDuration}`)
+        }
+
+        let playerAnswerTime = parseInt(localStorage.getItem("cognitive-player-answer-time") ?? "10")
+        if (playerAnswerTime) {
+            this.setPlayerAnswerTime(playerAnswerTime)
+        } else {
+            localStorage.setItem("cognitive-player-answer-time", `${this.playerAnswerTime}`)
+        }
+
+        let playerLives = parseInt(localStorage.getItem("cognitive-player-lives") ?? "7")
+        if (playerLives) {
+            this.setPlayerLives(playerLives)
+        } else {
+            localStorage.setItem("cognitive-player-lives", `${this.playerLives}`)
+        }
+
+        let numberOfTips = parseInt(localStorage.getItem("cognitive-number-of-tips") ?? "7")
+        if (numberOfTips) {
+            this.setNumberOfTips(numberOfTips)
+        } else {
+            localStorage.setItem("cognitive-number-of-tips", `${this.numberOfTips}`)
+        }
+
+        let isExtremeMode = localStorage.getItem("cognitive-is-extreme-mode")
+        if (isExtremeMode) {
+            this.setExtremeMode(isExtremeMode === "true")
+        } else {
+            localStorage.setItem("cognitive-is-extreme-mode", `${this.isExtremeMode}`)
+        }
     }
 }
