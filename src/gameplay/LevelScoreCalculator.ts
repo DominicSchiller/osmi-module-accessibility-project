@@ -78,10 +78,11 @@ class LevelScoreManager {
      * @param lostPlayerLives
      */
     public calcScore(level: number, lostPlayerLives: number): number {
+        let lostLives = lostPlayerLives === 0 ? 1 : lostPlayerLives
         // the current level works as points multiplier
         let levelPoints = Math.round(level * this.defaultLevelPoints)
         // let bonusPoints = Math.round((level * this.defaultBonusPoints) / this.timeNeeded)
-        let bonusPoints = Math.round((level * this.defaultBonusPoints) / lostPlayerLives)
+        let bonusPoints = Math.round((level * this.defaultBonusPoints) / lostLives)
         return levelPoints + bonusPoints
     }
 
