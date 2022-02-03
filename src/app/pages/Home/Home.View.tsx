@@ -10,6 +10,7 @@ import "@fontsource/inter/700.css";
 import { useGlobalStyles } from "../../../styles/tsx/styles.global";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
+import "./Home.scss"
 
 const PrimaryButton = styled(MUIButton)`
   height: 64px;
@@ -30,10 +31,10 @@ const HomePageView = () => {
             flexGrow={"1"}
             rowGap={{ xs: 6, sm: 3 }}
             sx={{
-              paddingTop: {
-                xs: "24px",
-                md: "32px",
-                xl: "40px"
+              padding: {
+                xs: "24px 8px 0 8px",
+                md: "32px 8px 0 8px",
+                xl: "40px 8px 0 8px"
               }
             }}>
           <Typography
@@ -58,11 +59,21 @@ const HomePageView = () => {
               findest du oben rechts Deine Einstellungsmöglichkeiten.
           </Typography>
           <Grid container
+                id={"video-container"}
                 spacing={2}
+                flexDirection={{
+                    xs: "column",
+                    lg: "row"
+                }}
                 justifyContent={"center"}
-                alignItems={"end"}
+                alignContent={"center"}
+                alignItems={{
+                    xs: "center",
+                    md: "center",
+                    lg: "end"
+                }}
                 columnGap={"24px"}
-          sx={{marginBottom: "32px"}}>
+                sx={{marginBottom: "32px"}}>
               <iframe width="640" height="360"
                       src="https://www.youtube.com/embed/57RP_ztLU68?rel=0&showinfo=0&autoplay=1&controls=1"
                       title="Tutorial-Video: So spielst du Senso"

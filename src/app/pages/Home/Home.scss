@@ -1,0 +1,9 @@
+#video-container {
+  @media screen and (max-width: 600px) {
+    iframe {
+      width: calc(100% - 16px) !important;
+      left: 8px;
+      position: relative;
+    }
+  }
+}
